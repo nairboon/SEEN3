@@ -23,7 +23,7 @@ public class ApplicationStartup implements ServletContextListener {
         System.out.println("initialize servlet");
 
         // open a file from the web/ folder
-        InputStream input = event.getServletContext().getResourceAsStream("/MyClimate.css");
+        InputStream input = event.getServletContext().getResourceAsStream("/data.csv");
         DataStore.getInstance().loadCSVFile(input);
 
     }
