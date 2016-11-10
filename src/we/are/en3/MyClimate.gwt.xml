@@ -8,6 +8,7 @@
     <!-- Specify the app entry point class.                   -->
     <entry-point class='we.are.en3.client.MyClimate'/>
 
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
 
     <!-- Specify the app servlets.                   -->
     <servlet path='/MyClimateService' class='we.are.en3.server.MyClimateServiceImpl'/>
