@@ -29,8 +29,15 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
     @Override
     public Integer getResultsCount(String area, String meta, Date start, Date end) {
+        Integer size_;
 
-        return null;
+        //toDo: start end Datum in Logik einbauen
+        if (meta.equals("city")){
+            size_ = DataStore.getInstance().cityMap.get(area).size();
+        }else{
+            size_ = DataStore.getInstance().countryMap.get(area).size();
+        }
+        return size_;
     }
 
     @Override

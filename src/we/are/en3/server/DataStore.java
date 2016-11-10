@@ -11,8 +11,8 @@ import we.are.en3.client.model.DataPoint;
 
 public class DataStore {
 
-    ArrayList<String> ls = new ArrayList<String>();
-    HashMap<String,DataPoint> cityMap = new HashMap<String, DataPoint>();
+    HashMap<String,ArrayList<DataPoint>> cityMap = new HashMap<String, ArrayList<DataPoint>>();
+    HashMap<String,ArrayList<DataPoint>> countryMap = new HashMap<String, ArrayList<DataPoint>>();
 
     public void loadCSVFile(InputStream input) {
         System.out.println("loadCSVFile...");
@@ -43,16 +43,25 @@ public class DataStore {
                         Country,
                         Latitude,
                         Longitude);
-                cityMap.put(arr[3], dp);
+                String countryKey;
+                String cityKey;
+                countryKey=Country;
+                cityKey=City;
+                if (!cityMap.containsKey(cityKey)){
+                    ArrayList<DataPoint> arrList = new ArrayList<DataPoint>();
+                    cityMap.put(cityKey, arrList);
+                }
+                cityMap.get(cityKey).add(dp);
             }
-            System.out.println(cityMap);
+            //System.out.println(cityMap);
         } catch (Throwable ignore) {}
 
 
-        //ls.add("foo");
-        //ls.add("bar");
-        //ls.add("er");
-        //ls.add("yo");
+    }
+
+    public ArrayList<DataPoint>  getData(String city, String dateFrom, String dateTo){
+
+        return null;
     }
 
 
