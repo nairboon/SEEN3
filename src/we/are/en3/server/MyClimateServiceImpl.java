@@ -24,7 +24,6 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
     @Override
     public ArrayList<String> getMinMaxYear(String area) {
-        // to implement
         // returns the lowest and highest year in our dataset
         ArrayList<String> returnList = new ArrayList<String>();
         String minYear = new String();
@@ -41,7 +40,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
             ArrayList<DataPoint> resList = DataStore.getInstance().countryMap.get(area);
             //Todo
         }
-        
+
         returnList.add(minYear);
         returnList.add(maxYear);
         return returnList;

@@ -76,7 +76,6 @@ public class TablePresenter implements Presenter{
         rpcService.getList(new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
-
                 display.setData(result);
             }
 

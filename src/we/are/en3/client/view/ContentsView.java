@@ -1,9 +1,8 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.*;
 import we.are.en3.client.presenter.Presenter;
 
 /**
@@ -12,28 +11,38 @@ import we.are.en3.client.presenter.Presenter;
  */
 public class ContentsView extends Composite {
 	
-	TabPanel tabPanelView = new TabPanel();
+	//Main Content Panel
+    public TabLayoutPanel tabPanelView = new TabLayoutPanel(1.5, Style.Unit.EM);
 	
-	HomeContentsView homeContentsView = new HomeContentsView();
+	//Home Tab Panel
+    HomeContentsView homeContentsView = new HomeContentsView();
+
+    //Table Tab Panel
+    TableContentsView tableContentsView = new TableContentsView();
+    public ScrollPanel tableContentsPanel = new ScrollPanel();
+
+    //Map Tab Panel
 	MapContentsView mapContentsView = new MapContentsView();
-	IMapContentsView iMapContentsView = new IMapContentsView();
-	TableContentsView tableContentsView = new TableContentsView();	
+
+    //Chart Tab Panel
+	ChartContentsView chartContentsView = new ChartContentsView();
+
+	//TabPanel Titles
+	public String[] tabTitles = {"Home", "Table", "Map", "Chart"};
 	
 	public ContentsView() {	
 		
 		//Initialize parent widget
-		initWidget(this.tabPanelView);
+		//initWidget(this.tabPanelView);
 				
 		//TabPanel settings 
-		tabPanelView.getElement().getStyle().setMarginBottom(0.0, Unit.EM);
-		tabPanelView.setPixelSize(650, 270);
-		
-		//TabPanel Titles
-		String[] tabTitles = {"Home", "Table", "Map", "IMap"};
+		//tabPanelView.getElement().getStyle().setMarginBottom(0.0, Unit.EM);
+		//tabPanelView.setPixelSize(650, 270);
+
 		tabPanelView.add(homeContentsView, tabTitles[0]);
-	    tabPanelView.add(tableContentsView, tabTitles[1]);
+	    tabPanelView.add(tableContentsPanel, tabTitles[1]);
 	    tabPanelView.add(mapContentsView, tabTitles[2]);
-	    tabPanelView.add(iMapContentsView, tabTitles[3]);
+	    tabPanelView.add(chartContentsView, tabTitles[3]);
 	    
 	    //Give focus to first tab
 	    tabPanelView.selectTab(0);

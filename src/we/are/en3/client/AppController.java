@@ -14,41 +14,41 @@ import we.are.en3.client.presenter.TablePresenter;
 import we.are.en3.client.view.*;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
-    private final HandlerManager eventBus;
-    private final MyClimateServiceAsync rpcService;
+
+    // HTML-Host-File Body fetched with RootLayoutPanel.get()
     private HasWidgets container;
 
+    //ApplicationView has a MainPanel which contains a ContentsView
+    AppView appView = new AppView(container);
+    DockLayoutPanel mainLayoutPanel = appView.mainLayoutPanel;
+    ContentsView contentsView = appView.contentsView;
+
+    //TablePresenter and its Input
     private TablePresenter tablePresenter = null;
+    private final HandlerManager eventBus;
+    private final MyClimateServiceAsync rpcService;
+    private final TableContentsView tableContentsView =  new TableContentsView();
 
-    TabLayoutPanel tabPanelView = new TabLayoutPanel(1.5, Style.Unit.EM);
-    HomeContentsView homeContentsView = new HomeContentsView();
-    MapContentsView mapContentsView = new MapContentsView();
-    IMapContentsView iMapContentsView = new IMapContentsView();
-    ScrollPanel tableContentsView = new ScrollPanel();
-
-
+    //Constructor
     public AppController(MyClimateServiceAsync rpcService, HandlerManager eventBus) {
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
-
-
     }
 
+    //
     private void bind() {
         History.addValueChangeHandler(this);
-
     }
 
-
+    //
     public void go(final HasWidgets container) {
+
+        // HTML-Host-File Body fetched with RootLayoutPanel.get()
         this.container = container;
 
-        // Main layout + panels
-        setupLayout();
-
-
-
+        // Container the Body of the HTML-Host-File set with RootLayoutPanel.get()
+        container.add(mainLayoutPanel);
 
         if ("".equals(History.getToken())) {
             History.newItem("Home");
@@ -58,52 +58,19 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         }
     }
 
-    private  void setupLayout() {
-
-        // replace dockpanel with View.java content
-        DockLayoutPanel p = new DockLayoutPanel(Style.Unit.EM);
-        p.addNorth(new HTML("header"), 2);
-        p.addSouth(new HTML("footer"), 2);
-
-        ContentsView contentsView = new ContentsView();
-
-
-
-        String[] tabTitles = {"Home", "Table", "Map", "IMap"};
-        tabPanelView.add(homeContentsView, tabTitles[0]);
-        tabPanelView.add(tableContentsView, tabTitles[1]);
-        tabPanelView.add(mapContentsView, tabTitles[2]);
-        tabPanelView.add(iMapContentsView, tabTitles[3]);
-
-        tabPanelView.addSelectionHandler(new SelectionHandler<Integer>(){
-            public void onSelection(SelectionEvent<Integer> event) {
-                //GWT.log("Easy to find: "+ event.getSelectedItem());
-                History.newItem(tabTitles[event.getSelectedItem()]);
-            }
-        });
-
-
-        p.add(tabPanelView);
-
-        // container = RootLayoutPanel.get()
-        container.add(p);
-    }
-
+    //
     public void onValueChange(ValueChangeEvent<String> event) {
         String token = event.getValue();
-
         if (token != null) {
             Presenter presenter = null;
-
             if (token.equals("Table")) {
                 if(tablePresenter == null) {
-                    tablePresenter = new TablePresenter(rpcService, eventBus, new TableContentsView());
+                    tablePresenter = new TablePresenter(rpcService, eventBus, tableContentsView);
                 }
-                tablePresenter.go(tableContentsView);
+                tablePresenter.go(contentsView.tableContentsPanel);
                 //tabPanelView.selectTab(1);
                 return;
             }
-
             if (presenter != null) {
                 presenter.go(container);
             }

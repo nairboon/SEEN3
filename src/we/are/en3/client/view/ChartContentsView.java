@@ -4,11 +4,11 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 
-public class IMapContentsView extends Composite{
+public class ChartContentsView extends Composite{
 
 	ScrollPanel scrollPanel = new ScrollPanel();
 
-	public IMapContentsView(){
+	public ChartContentsView(){
 		
 		//Initialize parent widget to be wrapped
 		initWidget(this.scrollPanel);

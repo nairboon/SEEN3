@@ -26,10 +26,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	final CellTable<DataPoint> table = new CellTable<DataPoint>();
 
 
-
-
-
-
 	public TableContentsView(){
 
 		//Initialize parent widget to be wrapped
@@ -50,7 +46,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		selectionPanel.add(cityDB);
 		selectionPanel.add(loadTableButton);
-
 
 
 		// Create a CellTable.
@@ -107,9 +102,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		table.setVisibleRange(0, 10);
 
 
-
-
-
 		// Add a ColumnSortEvent.AsyncHandler to connect sorting to the
 		// AsyncDataPRrovider.
 		ColumnSortEvent.AsyncHandler columnSortHandler = new ColumnSortEvent.AsyncHandler(table);
@@ -117,8 +109,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		// We know that the data is sorted alphabetically by default.
 		//table.getColumnSortList().push(nameColumn);
-
-
 
 
 		SimplePager pager = new SimplePager();
