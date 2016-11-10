@@ -4,8 +4,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import we.are.en3.client.MyClimateService;
 import we.are.en3.client.model.DataPoint;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClimateService {
 
@@ -42,6 +44,15 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
     @Override
     public ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd) {
-        return null;
+        List<DataPoint> returnList;
+        //toDo: start end Datum in Logik einbauen
+        if (meta.equals("city")){
+            returnList = DataStore.getInstance().cityMap.get(area).subList(seqStart, seqEnd);
+
+        }else{
+            returnList = DataStore.getInstance().countryMap.get(area).subList(seqStart, seqEnd);
+        }
+
+        return new ArrayList<DataPoint>(returnList);
     }
 }
