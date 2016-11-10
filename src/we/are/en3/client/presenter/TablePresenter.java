@@ -19,6 +19,7 @@ import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,37 +51,7 @@ public class TablePresenter implements Presenter{
         this.display = view;
 
 
-        // Create a data provider.
-        AsyncDataProvider<DataPoint> dataProvider = new AsyncDataProvider<DataPoint>() {
-            @Override
-            protected void onRangeChanged(HasData<DataPoint> display) {
-                final Range range = display.getVisibleRange();
 
-                // Get the ColumnSortInfo from the table.
-                //final ColumnSortList sortList = view.getCellTableDisplay().getColumnSortList();
-
-                // This timer is here to illustrate the asynchronous nature of this data
-                // provider. In practice, you would use an asynchronous RPC call to
-                // request data in the specified range.
-                new Timer() {
-                    @Override
-                    public void run() {
-                        int start = range.getStart();
-                        int end = start + range.getLength();
-                        // This sorting code is here so the example works. In practice, you
-                        // would sort on the server.
-
-                        List<DataPoint> dataInRange = DATA.subList(start, end);
-
-                        // Push the data back into the list.
-                        view.getCellTableDisplay().setRowData(start, dataInRange);
-                    }
-                }.schedule(2000);
-            }
-        };
-
-        // Connect the list to the data provider.
-       // dataProvider.addDataDisplay(display.getCellTableDisplay());
 
         init();
     }
@@ -119,7 +90,83 @@ public class TablePresenter implements Presenter{
 
     private void fetchTable() {
         currentCountry = display.getSelectedCountry();
+
         GWT.log("fetch table for: " + currentCountry);
+
+
+        rpcService.getResultsCount(currentCountry,"city", new Date(), new Date(), new AsyncCallback<Integer>() {
+            public void onSuccess(Integer result) {
+
+                GWT.log("table size: " + result);
+                display.getCellTableDisplay().setRowCount(result, true);
+            }
+
+            public void onFailure(Throwable caught) {
+                Window.alert("Error fetching contact details");
+            }
+        });
+
+        Display view = display;
+
+        // Create a data provider.
+        AsyncDataProvider<DataPoint> dataProvider = new AsyncDataProvider<DataPoint>() {
+            @Override
+            protected void onRangeChanged(HasData<DataPoint> display) {
+                final Range range = display.getVisibleRange();
+
+                int start = range.getStart();
+                int end = start + range.getLength();
+
+                GWT.log("fetch table chunk...");
+
+
+                rpcService.getResults(view.getSelectedCountry(), "city", new Date(), new Date(), start, end, new AsyncCallback<ArrayList<DataPoint>>() {
+                    public void onSuccess(ArrayList<DataPoint> result) {
+
+                        if (result != null) {
+                            GWT.log("table chunk size: " + result.size());
+
+                            GWT.log("fill:" + result.get(0).getAverageTemperature() );
+
+                            view.getCellTableDisplay().setRowData(start, result);
+                        }
+                    }
+
+                    public void onFailure(Throwable caught) {
+                        Window.alert("Error fetching contact details");
+                    }
+                });
+
+
+
+
+                // Get the ColumnSortInfo from the table.
+                //final ColumnSortList sortList = view.getCellTableDisplay().getColumnSortList();
+
+                // This timer is here to illustrate the asynchronous nature of this data
+                // provider. In practice, you would use an asynchronous RPC call to
+                // request data in the specified range.
+                /*
+                new Timer() {
+                    @Override
+                    public void run() {
+                        int start = range.getStart();
+                        int end = start + range.getLength();
+                        // This sorting code is here so the example works. In practice, you
+                        // would sort on the server.
+
+                        List<DataPoint> dataInRange = DATA.subList(start, end);
+
+                        // Push the data back into the list.
+                        view.getCellTableDisplay().setRowData(start, dataInRange);
+                    }
+                }.schedule(2000);
+                */
+            }
+        };
+
+        // Connect the list to the data provider.
+        dataProvider.addDataDisplay(display.getCellTableDisplay());
 
         display.getTableView().setVisible(true);
 
