@@ -106,6 +106,19 @@ public class TablePresenter implements Presenter{
             }
         });
 
+
+        rpcService.getMinMaxYear(currentCountry, new AsyncCallback<ArrayList<String>>() {
+            public void onSuccess(ArrayList<String> result) {
+
+                GWT.log("min/max: " + result.get(0) + " " + result.get(1));
+            }
+
+            public void onFailure(Throwable caught) {
+                Window.alert("Error fetching contact details");
+            }
+        });
+
+
         Display view = display;
 
         // Create a data provider.
