@@ -1,109 +1,170 @@
 package we.are.en3.client.view;
 
 import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.cellview.client.*;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
+import we.are.en3.client.model.DataPoint;
 import we.are.en3.client.presenter.TablePresenter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
 public class TableContentsView extends Composite implements TablePresenter.Display{
-	
-	ScrollPanel scrollPanel = new ScrollPanel();
-	ListBox lb = new ListBox();
+	VerticalPanel vPanel = new VerticalPanel();
 
-	private static final List<String> DAYS = Arrays.asList("Sunday", "Monday",
-			"Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+	FlowPanel selectionPanel = new FlowPanel();
+
+
+	VerticalPanel vtablePanel = new VerticalPanel();
+	ScrollPanel scrollPanel = new ScrollPanel();
+
+	ListBox countryDB = new ListBox();
+	ListBox cityDB = new ListBox();
+	Button loadTableButton = new Button("Load Table");
+
+	final CellTable<DataPoint> table = new CellTable<DataPoint>();
+
+
+
+
+
 
 	public TableContentsView(){
-		/* lb.addItem("foo");
-		lb.addItem("bar");
-		lb.addItem("baz");
-		lb.addItem("toto");
-		lb.addItem("tintin"); */
 
 		//Initialize parent widget to be wrapped
-		initWidget(this.scrollPanel);
-		
-		scrollPanel.setHeight("225px");
+		initWidget(this.vPanel);
+
+		vPanel.add(selectionPanel);
+		vPanel.add(scrollPanel);
+
+
+		//scrollPanel.setHeight("225px");
 		Image img = new Image("Table.png");
 		img.asWidget().setPixelSize(630,220);
 		//scrollPanel.add(img);
 
-		scrollPanel.add(lb);
 
 
-/*
-		TextCell textCell = new TextCell();
+		selectionPanel.add(countryDB);
 
-		// Create a CellList that uses the cell.
-		final CellList<String> cellList = new CellList<String>(textCell);
+		selectionPanel.add(cityDB);
+		selectionPanel.add(loadTableButton);
 
-		// Set the total row count. You might send an RPC request to determine the
-		// total row count.
-		cellList.setRowCount(DAYS.size(), true);
 
-		// Set the range to display. In this case, our visible range is smaller than
-		// the data set.
-		cellList.setVisibleRange(1, 3);
 
-		// Create a data provider.
-		AsyncDataProvider<String> dataProvider = new AsyncDataProvider<String>() {
+		// Create a CellTable.
+
+
+		// Create name column.
+		TextColumn<DataPoint> countryColumn = new TextColumn<DataPoint>() {
 			@Override
-			protected void onRangeChanged(HasData<String> display) {
-				final Range range = display.getVisibleRange();
-
-				// This timer is here to illustrate the asynchronous nature of this data
-				// provider. In practice, you would use an asynchronous RPC call to
-				// request data in the specified range.
-				new Timer() {
-					@Override
-					public void run() {
-						int start = range.getStart();
-						int end = start + range.getLength();
-						List<String> dataInRange = DAYS.subList(start, end);
-
-						// Push the data back into the list.
-						cellList.setRowData(start, dataInRange);
-					}
-				}.schedule(2000);
+			public String getValue(DataPoint dp) {
+				return dp.getCountry();
 			}
 		};
 
-		// Connect the list to the data provider.
-		dataProvider.addDataDisplay(cellList);
+
+		// Make the name column sortable.
+		countryColumn.setSortable(true);
+
+		// Create address column.
+		TextColumn<DataPoint> cityColumn = new TextColumn<DataPoint>() {
+			@Override
+			public String getValue(DataPoint dp) {
+				return dp.getCity();
+			}
+		};
+
+		// Add the columns.
+		table.addColumn(countryColumn, "Country");
+		table.addColumn(cityColumn, "City");
+
+		// Set the total row count. You might send an RPC request to determine the
+		// total row count.
+		// table.setRowCount(DATA.size(), true);
+
+		// Set the range to display. In this case, our visible range is smaller than
+		// the data set.
+		table.setVisibleRange(0, 1);
+
+
+
+
+
+		// Add a ColumnSortEvent.AsyncHandler to connect sorting to the
+		// AsyncDataPRrovider.
+		ColumnSortEvent.AsyncHandler columnSortHandler = new ColumnSortEvent.AsyncHandler(table);
+		table.addColumnSortHandler(columnSortHandler);
+
+		// We know that the data is sorted alphabetically by default.
+		//table.getColumnSortList().push(nameColumn);
+
+
+
 
 		SimplePager pager = new SimplePager();
 
 		// Set the cellList as the display.
-		pager.setDisplay(cellList);
+		pager.setDisplay(table);
 
-		// Add the pager and list to the page.
-		VerticalPanel vPanel = new VerticalPanel();
-		vPanel.add(pager);
-		vPanel.add(cellList);
 
-		scrollPanel.add(vPanel);
-		*/
+		vtablePanel.add(table);
+		vtablePanel.add(pager);
+
+		scrollPanel.add(vtablePanel);
+
+		vtablePanel.setVisible(false);
+
+	}
+
+	@Override
+	public HasClickHandlers getLoadTableButton() {
+		return loadTableButton;
 	}
 
 	public void setData(List<String> data) {
-		lb.clear();
 
-		for (int i = 0; i < data.size(); ++i) {
-			lb.addItem(data.get(i));
+	}
+
+	@Override
+	public void setInitData(List<String> countries, List<String> cities) {
+		countryDB.clear();
+		cityDB.clear();
+
+		for (int i = 0; i < countries.size(); ++i) {
+			countryDB.addItem(countries.get(i));
 		}
+
+		for (int i = 0; i < cities.size(); ++i) {
+			cityDB.addItem(cities.get(i));
+		}
+	}
+
+	@Override
+	public String getSelectedCountry() {
+		return countryDB.getSelectedItemText();
 	}
 
 	public Widget asWidget() {
 		return this;
+	}
+
+	@Override
+	public Widget getTableView() {
+		return vtablePanel;
+	}
+
+	@Override
+	public HasData getCellTableDisplay() {
+		return table;
 	}
 }
 

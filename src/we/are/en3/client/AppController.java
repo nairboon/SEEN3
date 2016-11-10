@@ -31,6 +31,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
+
+
     }
 
     private void bind() {
@@ -38,22 +40,27 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
     }
 
-    private void doAddNewContact() {
-        History.newItem("add");
-    }
-
-
-    private void doEditContactCancelled() {
-        History.newItem("list");
-    }
-
-    private void doContactUpdated() {
-        History.newItem("list");
-    }
 
     public void go(final HasWidgets container) {
         this.container = container;
 
+        // Main layout + panels
+        setupLayout();
+
+
+
+
+        if ("".equals(History.getToken())) {
+            History.newItem("Home");
+        }
+        else {
+            History.fireCurrentHistoryState();
+        }
+    }
+
+    private  void setupLayout() {
+
+        // replace dockpanel with View.java content
         DockLayoutPanel p = new DockLayoutPanel(Style.Unit.EM);
         p.addNorth(new HTML("header"), 2);
         p.addSouth(new HTML("footer"), 2);
@@ -73,18 +80,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
                 //GWT.log("Easy to find: "+ event.getSelectedItem());
                 History.newItem(tabTitles[event.getSelectedItem()]);
             }
-                                         });
+        });
+
 
         p.add(tabPanelView);
 
+        // container = RootLayoutPanel.get()
         container.add(p);
-
-        if ("".equals(History.getToken())) {
-            History.newItem("Home");
-        }
-        else {
-            History.fireCurrentHistoryState();
-        }
     }
 
     public void onValueChange(ValueChangeEvent<String> event) {

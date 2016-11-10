@@ -7,8 +7,14 @@ import java.util.ArrayList;
 
 public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClimateService {
 
-    public ArrayList<String> getList() {
-        return DataStore.getInstance().ls;
 
+    public ArrayList<String> getList() {
+        ArrayList<String> cities = new ArrayList<String>();
+
+
+       for(String key: DataStore.getInstance().cityMap.keySet()) {
+           cities.add(key);
+       }
+       return cities;
     }
 }
