@@ -2,8 +2,10 @@ package we.are.en3.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import we.are.en3.client.MyClimateService;
+import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClimateService {
 
@@ -16,5 +18,23 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
            cities.add(key);
        }
        return cities;
+    }
+
+    @Override
+    public ArrayList<String> getMinMaxYear() {
+        // to implement
+        // returns the lowest and highest year in our dataset
+        return null;
+    }
+
+    @Override
+    public Integer getResultsCount(String area, String meta, Date start, Date end) {
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd) {
+        return null;
     }
 }
