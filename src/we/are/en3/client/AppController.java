@@ -21,9 +21,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     private TablePresenter tablePresenter = null;
 
     TabLayoutPanel tabPanelView = new TabLayoutPanel(1.5, Style.Unit.EM);
-    HomeContentsView homeContentsView = new HomeContentsView();
-    MapContentsView mapContentsView = new MapContentsView();
-    IMapContentsView iMapContentsView = new IMapContentsView();
+//    HomeContentsView homeContentsView = new HomeContentsView();
+//    MapContentsView mapContentsView = new MapContentsView();
+//    IMapContentsView iMapContentsView = new IMapContentsView();
     ScrollPanel tableContentsView = new ScrollPanel();
 
 
@@ -31,7 +31,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
-
 
     }
 
@@ -48,8 +47,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         setupLayout();
 
 
-
-
         if ("".equals(History.getToken())) {
             History.newItem("Home");
         }
@@ -62,28 +59,29 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
         // replace dockpanel with View.java content
         DockLayoutPanel p = new DockLayoutPanel(Style.Unit.EM);
-        p.addNorth(new HTML("header"), 2);
-        p.addSouth(new HTML("footer"), 2);
+        p.addNorth(new HTML("MyClimate"), 2);
+        p.addSouth(new HTML("Data Source: K. Meier, Data Supplier"), 2);
 
         ContentsView contentsView = new ContentsView();
+        tabPanelView = contentsView.tabPanelView;
 
 
 
         String[] tabTitles = {"Home", "Table", "Map", "IMap"};
-        tabPanelView.add(homeContentsView, tabTitles[0]);
-        tabPanelView.add(tableContentsView, tabTitles[1]);
-        tabPanelView.add(mapContentsView, tabTitles[2]);
-        tabPanelView.add(iMapContentsView, tabTitles[3]);
+//        tabPanelView.add(homeContentsView, tabTitles[0]);
+//        tabPanelView.add(tableContentsView, tabTitles[1]);
+//        tabPanelView.add(mapContentsView, tabTitles[2]);
+//        tabPanelView.add(iMapContentsView, tabTitles[3]);
 
         tabPanelView.addSelectionHandler(new SelectionHandler<Integer>(){
             public void onSelection(SelectionEvent<Integer> event) {
                 //GWT.log("Easy to find: "+ event.getSelectedItem());
-                History.newItem(tabTitles[event.getSelectedItem()]);
+                History.newItem(contentsView.tabTitles[event.getSelectedItem()]);
             }
         });
 
 
-        p.add(tabPanelView);
+        //p.add(contentsView);
 
         // container = RootLayoutPanel.get()
         container.add(p);
