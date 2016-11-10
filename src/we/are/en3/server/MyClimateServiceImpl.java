@@ -23,10 +23,28 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
     }
 
     @Override
-    public ArrayList<String> getMinMaxYear() {
+    public ArrayList<String> getMinMaxYear(String area) {
         // to implement
         // returns the lowest and highest year in our dataset
-        return null;
+        ArrayList<String> returnList = new ArrayList<String>();
+        String minYear = new String();
+        String maxYear = new String();
+
+        //Todo:
+        String meta="city";
+
+        if (meta.equals("city")){
+            ArrayList<DataPoint> resList = DataStore.getInstance().cityMap.get(area);
+            minYear=resList.get(0).getDate();
+            maxYear=resList.get(resList.size()-1).getDate();
+        }else {
+            ArrayList<DataPoint> resList = DataStore.getInstance().countryMap.get(area);
+            //Todo
+        }
+        
+        returnList.add(minYear);
+        returnList.add(maxYear);
+        return returnList;
     }
 
     @Override
@@ -46,6 +64,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
     public ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd) {
         List<DataPoint> returnList;
         //toDo: start end Datum in Logik einbauen
+        if (area==null) return null;
         if (meta.equals("city")){
             returnList = DataStore.getInstance().cityMap.get(area).subList(seqStart, seqEnd);
 

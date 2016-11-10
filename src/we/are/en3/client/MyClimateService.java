@@ -13,7 +13,7 @@ public interface MyClimateService extends RemoteService {
     // Sample interface method of remote interface
     ArrayList<String> getList();
 
-    ArrayList<String> getMinMaxYear();
+    ArrayList<String> getMinMaxYear(String area);
     Integer getResultsCount(String area, String meta, Date start, Date end);
 
     ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd);

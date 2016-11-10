@@ -11,7 +11,7 @@ public interface MyClimateServiceAsync {
 
     void getResultsCount(String area, String meta, Date start, Date end, AsyncCallback<Integer> async);
 
-    void getMinMaxYear(AsyncCallback<ArrayList<String>> async);
+    void getMinMaxYear(String area, AsyncCallback<ArrayList<String>> async);
 
     void getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd, AsyncCallback<ArrayList<DataPoint>> async);
 }
