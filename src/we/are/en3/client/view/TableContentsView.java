@@ -1,19 +1,12 @@
 package we.are.en3.client.view;
 
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.cellview.client.*;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
-import com.google.gwt.view.client.Range;
 import we.are.en3.client.model.DataPoint;
 import we.are.en3.client.presenter.TablePresenter;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -83,9 +76,27 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 			}
 		};
 
+		TextColumn<DataPoint> dateColumn = new TextColumn<DataPoint>() {
+			@Override
+			public String getValue(DataPoint dp) {
+				return dp.getDate();
+			}
+		};
+
+
+		TextColumn<DataPoint> tempColumn = new TextColumn<DataPoint>() {
+			@Override
+			public String getValue(DataPoint dp) {
+				return String.valueOf(dp.getAverageTemperature());
+			}
+		};
+
+
 		// Add the columns.
 		table.addColumn(countryColumn, "Country");
 		table.addColumn(cityColumn, "City");
+		table.addColumn(tempColumn, "Temp");
+		table.addColumn(dateColumn, "Date");
 
 		// Set the total row count. You might send an RPC request to determine the
 		// total row count.
@@ -93,7 +104,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		// Set the range to display. In this case, our visible range is smaller than
 		// the data set.
-		table.setVisibleRange(0, 1);
+		table.setVisibleRange(0, 10);
 
 
 

@@ -34,13 +34,14 @@ public class DataPoint implements IsSerializable{
 		this.setCountry(Country);
 		this.setLatitude(Latitude);
 		this.setLongitude(Longitude);
+		this.setDate(dt);
 	}
 	
 	//getters and setters
 	public String getDate() {
 		return this.date;
 	}	
-	public void setAverageTemperature(String dt) {
+	public void setDate(String dt) {
 		this.date = dt;
 	}
 	
