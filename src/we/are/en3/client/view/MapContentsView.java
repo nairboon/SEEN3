@@ -1,26 +1,40 @@
 package we.are.en3.client.view;
 
 import com.google.gwt.user.client.ui.*;
-import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
-//
-//import com.google.gwt.visualization.client.AbstractDataTable.ColumnType;
-//import com.google.gwt.visualization.client.DataTable;
-//import com.google.gwt.visualization.client.VisualizationUtils;
+
+//two possible slider packages
+//import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
+//import com.google.gwt.widgetideas.client.SliderBar;
+
+//a possible map package
 //import com.google.gwt.visualization.client.visualizations.GeoMap;
 
+/**
+ * This class has the GUI Elements (Widgets)
+ * to be rendered for the Map Tab
+ * of the Tab Panel (in class ContentsView).
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class MapContentsView extends Composite{
 
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
-	//Filter Panel
+	//Filter Panel with slider
 	FlowPanel selectionPanel = new FlowPanel();
+
+	//ToDo: Choose a Slider Type (Whatever works best)
 	//SliderBarHorizontal slider = new SliderBarHorizontal();
+	//OR
+	//SliderBar slider = new SliderBar(1750,2016);
 
 	//Content Panel
 	VerticalPanel vchartPanel = new VerticalPanel();
 	ScrollPanel scrollPanel = new ScrollPanel();
 
+	//Constructor: Sets up the Map Tab's panels, filtering widgets and static elements
 	public MapContentsView(){
 
 		//Initialize parent widget to be wrapped
@@ -34,6 +48,11 @@ public class MapContentsView extends Composite{
 
 		//Center: Filter
 		vPanel.add(selectionPanel);
+		//ToDo: Implement slider widget
+//		slider.setStepSize(1.0);
+//		slider.setCurrentValue(2000.0);
+//		slider.setNumTicks(28);
+//		slider.setNumLabels(14);
 		//selectionPanel.add(slider);
 
 		//Bottom: Content

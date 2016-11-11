@@ -2,15 +2,23 @@ package we.are.en3.client.view;
 
 import com.google.gwt.user.client.ui.*;
 
+/**
+ * This class has the GUI Elements (Widgets)
+ * to be rendered for the Home Tab
+ * of the Tab Panel (in class ContentsView).
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class HomeContentsView extends Composite {
 
-	//Main Panel
+	//Main Contents View Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
 	//Content Panel
-	VerticalPanel vchartPanel = new VerticalPanel();
 	ScrollPanel scrollPanel = new ScrollPanel();
 
+	//Constructor: Sets up the Home Tab's panels and static elements
 	public HomeContentsView(){
 
 		//Initialize parent widget to be wrapped
@@ -26,11 +34,11 @@ public class HomeContentsView extends Composite {
 
 		vPanel.add(text);
 
-		//Center: Filter
+		//Center: Image
 		vPanel.add(scrollPanel);
 		scrollPanel.setHeight("225px");
 		Image img = new Image("climate-change.jpg");
-		img.asWidget().setPixelSize(630,220);
+		img.asWidget().setPixelSize(657,220);
 		scrollPanel.add(img);
 
 	}

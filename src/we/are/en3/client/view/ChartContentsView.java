@@ -6,6 +6,14 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
 
+/**
+ * This class has the GUI Elements (Widgets)
+ * to be rendered for the Chart Tab
+ * of the Tab Panel (in class ContentsView).
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class ChartContentsView extends Composite{
 
 	//Main Panel
@@ -21,6 +29,7 @@ public class ChartContentsView extends Composite{
 	VerticalPanel vchartPanel = new VerticalPanel();
 	ScrollPanel scrollPanel = new ScrollPanel();
 
+	//Constructor: Sets up the Chart Tab's panels, filtering widgets and static elements
 	public ChartContentsView(){
 
 		//Initialize parent widget to be wrapped

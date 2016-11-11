@@ -9,7 +9,14 @@ import we.are.en3.client.presenter.TablePresenter;
 
 import java.util.List;
 
-
+/**
+ * This class has the GUI Elements (Widgets)
+ * to be rendered for the Table Tab
+ * of the Tab Panel (in class ContentsView).
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class TableContentsView extends Composite implements TablePresenter.Display{
 
 	//Main Panel
@@ -28,17 +35,17 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	ScrollPanel scrollPanel = new ScrollPanel();
 	final CellTable<DataPoint> table = new CellTable<DataPoint>();
 
-
+	//Constructor: Sets up the Table Tab's panels, filtering widgets and static elements
 	public TableContentsView(){
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
 
-		//
+		//Add Panels for Filtering and Results Table
 		vPanel.add(selectionPanel);
 		vPanel.add(scrollPanel);
 
-		//
+		//Add Filtering Elements
 		selectionPanel.add(countryDB);
 		selectionPanel.add(cityDB);
 		selectionPanel.add(dateFromDB);
@@ -52,7 +59,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 				return dp.getCountry();
 			}
 		};
-
 
 		// Make the name column sortable.
 		countryColumn.setSortable(true);

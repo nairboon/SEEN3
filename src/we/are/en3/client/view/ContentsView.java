@@ -6,8 +6,12 @@ import com.google.gwt.user.client.ui.*;
 import we.are.en3.client.presenter.Presenter;
 
 /**
- * The Navigation as a GWT-TabPanel-Composite
- * 
+ * This class has the GUI Elements (Widgets)
+ * to be rendered for the Tab Panel
+ * within the Dock Panel (in class AppView).
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
  */
 public class ContentsView extends Composite {
 	
@@ -29,10 +33,11 @@ public class ContentsView extends Composite {
 
 	//TabPanel Titles
 	public String[] tabTitles = {"Home", "Table", "Map", "Chart"};
-	
+
+	//Constructor: Sets up the (outer) Tab Panel
 	public ContentsView() {
 
-        //assemble tabPanel
+        //Assemble tabPanel
 		tabPanelView.add(homeContentsView, tabTitles[0]);
 	    tabPanelView.add(tableContentsPanel, tabTitles[1]);
 	    tabPanelView.add(mapContentsView, tabTitles[2]);

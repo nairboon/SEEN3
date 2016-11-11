@@ -22,7 +22,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * This class handles the data flow
+ * between the Sever
+ * and the Table View (of Class TableContentsView)
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class TablePresenter implements Presenter{
 
     public interface Display {
@@ -49,10 +56,6 @@ public class TablePresenter implements Presenter{
         this.rpcService = rpcService;
         this.eventBus = eventBus;
         this.display = view;
-
-
-
-
         init();
     }
 
@@ -83,7 +86,6 @@ public class TablePresenter implements Presenter{
                 Window.alert("Error fetching contact details");
             }
         });
-
 
     }
 
