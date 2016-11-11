@@ -23,10 +23,15 @@ public class AppView {
     public AppView(HasWidgets container) {
 
         //Header
-        mainLayoutPanel.addNorth(new HTML("MyClimate"), 2);
+        HTML text;
+        text = new HTML("<div style='color:green;text-align:center;padding:10px;'>" +
+                "<b>MyClimate.com<b> </div>" );
+        mainLayoutPanel.addNorth(text, 2);
 
         //Footer
-        mainLayoutPanel.addSouth(new HTML("Data Source: K. Meier, Data Supplier"), 2);
+        text = new HTML("<div style='color:black;text-align:center;padding:10px;'>" +
+                "Data Source: K. Meier, Data Supplier. </div>" );
+        mainLayoutPanel.addSouth(text, 2);
 
         //Content
         contentsView.tabPanelView.addSelectionHandler(new SelectionHandler<Integer>(){

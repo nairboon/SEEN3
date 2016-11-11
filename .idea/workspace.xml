@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42ec3e48-0cc9-4361-9203-17f6b0b8ca2d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/View.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/IMapContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/MyClimate_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/MyClimate_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyClimate.iml" afterPath="$PROJECT_DIR$/MyClimate.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/AppController.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/AppController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/MyClimate.gwt.xml" afterPath="$PROJECT_DIR$/src/we/are/en3/MyClimate.gwt.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java" afterPath="$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java" />
     </list>
     <ignored path="MyClimate.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +37,7 @@
       <file leaf-file-name="DataStore.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/DataStore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
+            <state relative-caret-position="369">
               <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -47,38 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyClimateServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java">
+      <file leaf-file-name="MapContentsView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#798#806#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/AppController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1517#1518#0" expanded="true" />
-                <element signature="e#1568#1569#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppView.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="46" column="64" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+            <state relative-caret-position="612">
+              <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,54 +61,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyClimate.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/MyClimate.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContentsView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TableContentsView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TableContentsView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="1049">
+              <caret line="81" column="43" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
               <folding>
-                <element signature="e#783#794#0" expanded="true" />
+                <element signature="e#915#926#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TablePresenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChartContentsView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -167,12 +102,15 @@
         <option value="$PROJECT_DIR$/src/we/are/en3/client/MyClimateService.java" />
         <option value="$PROJECT_DIR$/src/we/are/en3/client/MyClimateServiceAsync.java" />
         <option value="$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" />
         <option value="$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java" />
-        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" />
         <option value="$PROJECT_DIR$/src/we/are/en3/client/AppController.java" />
         <option value="$PROJECT_DIR$/web/MyClimate.css" />
+        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" />
+        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java" />
+        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java" />
         <option value="$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java" />
+        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" />
+        <option value="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" />
       </list>
     </option>
   </component>
@@ -222,6 +160,50 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="MyClimate" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyClimate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-slider-bar-1.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-slider-bar-1.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyClimate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-slider-bar-1.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-slider-bar-1.0.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sliderbar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -369,11 +351,11 @@
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jars_and_zips/gwt-visualization.jar!/" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="GWT Configuration.MyClimate">
@@ -818,7 +800,7 @@
       <updated>1478783762902</updated>
       <workItem from="1478783765236" duration="606000" />
       <workItem from="1478785281681" duration="332000" />
-      <workItem from="1478785647860" duration="29821000" />
+      <workItem from="1478785647860" duration="42275000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of getResultCount and cityMap and countyMap loaded">
       <created>1478788812172</created>
@@ -852,7 +834,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30759000" />
+    <option name="totallyTimeSpent" value="43213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-1" width="1368" height="751" extended-state="1" />
@@ -868,7 +850,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4067227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42857143" sideWeight="0.49545455" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20075758" sideWeight="0.4969697" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4227273" sideWeight="0.4969697" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25984848" sideWeight="0.7309091" order="3" side_tool="false" content_ui="combo" />
@@ -923,19 +905,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/DataStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#308#338#0" expanded="true" />
-            <element signature="e#407#437#0" expanded="true" />
-            <element signature="e#1761#1772#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/data.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-30">
@@ -968,25 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#798#806#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1003,35 +953,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java">
+    <entry file="file://$PROJECT_DIR$/web/MyClimate.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#783#794#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+        <state relative-caret-position="187">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/AppController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="357">
           <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1041,20 +973,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/MyClimate.css">
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="267">
+          <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/DataStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#308#338#0" expanded="true" />
+            <element signature="e#407#437#0" expanded="true" />
+            <element signature="e#1761#1772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#798#806#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="46" column="64" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+        <state relative-caret-position="34">
+          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1049">
+          <caret line="81" column="43" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
+          <folding>
+            <element signature="e#915#926#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1118,7 +1120,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1126,7 +1127,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>gwt-user</last-edited>
+          <last-edited>gwt-charts-0.9.9</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

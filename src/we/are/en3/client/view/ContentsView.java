@@ -30,15 +30,9 @@ public class ContentsView extends Composite {
 	//TabPanel Titles
 	public String[] tabTitles = {"Home", "Table", "Map", "Chart"};
 	
-	public ContentsView() {	
-		
-		//Initialize parent widget
-		//initWidget(this.tabPanelView);
-				
-		//TabPanel settings 
-		//tabPanelView.getElement().getStyle().setMarginBottom(0.0, Unit.EM);
-		//tabPanelView.setPixelSize(650, 270);
+	public ContentsView() {
 
+        //assemble tabPanel
 		tabPanelView.add(homeContentsView, tabTitles[0]);
 	    tabPanelView.add(tableContentsPanel, tabTitles[1]);
 	    tabPanelView.add(mapContentsView, tabTitles[2]);
@@ -46,6 +40,7 @@ public class ContentsView extends Composite {
 	    
 	    //Give focus to first tab
 	    tabPanelView.selectTab(0);
+
 	    //tabPanelView.ensureDebugId("cwTabPanel");
 	}
 

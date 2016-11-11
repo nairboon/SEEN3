@@ -11,18 +11,21 @@ import java.util.List;
 
 
 public class TableContentsView extends Composite implements TablePresenter.Display{
+
+	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
+	//Filter Panel
 	FlowPanel selectionPanel = new FlowPanel();
-
-
-	VerticalPanel vtablePanel = new VerticalPanel();
-	ScrollPanel scrollPanel = new ScrollPanel();
-
 	ListBox countryDB = new ListBox();
 	ListBox cityDB = new ListBox();
+	ListBox dateFromDB = new ListBox();
+	ListBox dateToDB = new ListBox();
 	Button loadTableButton = new Button("Load Table");
 
+	//Content Panel with CellTable
+	VerticalPanel vtablePanel = new VerticalPanel();
+	ScrollPanel scrollPanel = new ScrollPanel();
 	final CellTable<DataPoint> table = new CellTable<DataPoint>();
 
 
@@ -31,25 +34,16 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
 
+		//
 		vPanel.add(selectionPanel);
 		vPanel.add(scrollPanel);
 
-
-		//scrollPanel.setHeight("225px");
-		Image img = new Image("Table.png");
-		img.asWidget().setPixelSize(630,220);
-		//scrollPanel.add(img);
-
-
-
+		//
 		selectionPanel.add(countryDB);
-
 		selectionPanel.add(cityDB);
+		selectionPanel.add(dateFromDB);
+		selectionPanel.add(dateToDB);
 		selectionPanel.add(loadTableButton);
-
-
-		// Create a CellTable.
-
 
 		// Create name column.
 		TextColumn<DataPoint> countryColumn = new TextColumn<DataPoint>() {
@@ -78,7 +72,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 			}
 		};
 
-
 		TextColumn<DataPoint> tempColumn = new TextColumn<DataPoint>() {
 			@Override
 			public String getValue(DataPoint dp) {
@@ -86,8 +79,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 			}
 		};
 
-
-		// Add the columns.
+		// Add the columns to the CellTable
 		table.addColumn(countryColumn, "Country");
 		table.addColumn(cityColumn, "City");
 		table.addColumn(tempColumn, "Temp");
