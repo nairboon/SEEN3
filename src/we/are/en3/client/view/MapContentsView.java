@@ -34,7 +34,10 @@ public class MapContentsView extends Composite{
 	VerticalPanel vchartPanel = new VerticalPanel();
 	ScrollPanel scrollPanel = new ScrollPanel();
 
-	//Constructor: Sets up the Map Tab's panels, filtering widgets and static elements
+	/**
+	 * Constructor: Sets up the Map Tab's panels, filtering widgets and static elements
+	 *
+	 */
 	public MapContentsView(){
 
 		//Initialize parent widget to be wrapped

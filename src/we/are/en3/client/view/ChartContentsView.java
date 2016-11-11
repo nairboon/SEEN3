@@ -29,7 +29,10 @@ public class ChartContentsView extends Composite{
 	VerticalPanel vchartPanel = new VerticalPanel();
 	ScrollPanel scrollPanel = new ScrollPanel();
 
-	//Constructor: Sets up the Chart Tab's panels, filtering widgets and static elements
+	/**
+	 * Constructor: Sets up the Chart Tab's panels, filtering widgets and static elements
+	 *
+	 */
 	public ChartContentsView(){
 
 		//Initialize parent widget to be wrapped

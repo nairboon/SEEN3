@@ -13,6 +13,12 @@ import we.are.en3.client.presenter.Presenter;
 import we.are.en3.client.presenter.TablePresenter;
 import we.are.en3.client.view.*;
 
+/**
+ * This class handles the Presenter Classes
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class AppController implements Presenter, ValueChangeHandler<String> {
 
     // HTML-Host-File Body fetched with RootLayoutPanel.get()
@@ -29,25 +35,39 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     private final MyClimateServiceAsync rpcService;
     private final TableContentsView tableContentsView =  new TableContentsView();
 
-    //Constructor
+    /**
+     * Constructor method
+     */
     public AppController(MyClimateServiceAsync rpcService, HandlerManager eventBus) {
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
     }
 
-    //
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     private void bind() {
         History.addValueChangeHandler(this);
     }
 
-    //
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public void go(final HasWidgets container) {
 
         // HTML-Host-File Body fetched with RootLayoutPanel.get()
         this.container = container;
 
-        // Container the Body of the HTML-Host-File set with RootLayoutPanel.get()
+        // Container: Represents the body of the HTML-Host-File, set with RootLayoutPanel.get()
         container.add(mainLayoutPanel);
 
         if ("".equals(History.getToken())) {
@@ -58,7 +78,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         }
     }
 
-    //
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public void onValueChange(ValueChangeEvent<String> event) {
         String token = event.getValue();
         if (token != null) {

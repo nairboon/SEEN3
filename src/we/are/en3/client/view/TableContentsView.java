@@ -35,17 +35,19 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	ScrollPanel scrollPanel = new ScrollPanel();
 	final CellTable<DataPoint> table = new CellTable<DataPoint>();
 
-	//Constructor: Sets up the Table Tab's panels, filtering widgets and static elements
+	/**
+	 * Constructor: Sets up the Table Tab's panels, filtering widgets and static elements
+	 */
 	public TableContentsView(){
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
 
-		//Add Panels for Filtering and Results Table
+		//Add panels for filtering and results table
 		vPanel.add(selectionPanel);
 		vPanel.add(scrollPanel);
 
-		//Add Filtering Elements
+		//Add filtering elements
 		selectionPanel.add(countryDB);
 		selectionPanel.add(cityDB);
 		selectionPanel.add(dateFromDB);
@@ -109,30 +111,50 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		//table.getColumnSortList().push(nameColumn);
 
 
+		//Pager Widget
 		SimplePager pager = new SimplePager();
 
 		// Set the cellList as the display.
 		pager.setDisplay(table);
 
-
+		//Add table and pager to panels
 		vtablePanel.add(table);
 		vtablePanel.add(pager);
-
 		scrollPanel.add(vtablePanel);
-
 		vtablePanel.setVisible(false);
 
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	@Override
 	public HasClickHandlers getLoadTableButton() {
 		return loadTableButton;
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	public void setData(List<String> data) {
 
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	@Override
 	public void setInitData(List<String> countries, List<String> cities) {
 		countryDB.clear();
@@ -147,20 +169,48 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		}
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	@Override
 	public String getSelectedCountry() {
 		return countryDB.getSelectedItemText();
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	public Widget asWidget() {
 		return this;
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	@Override
 	public Widget getTableView() {
 		return vtablePanel;
 	}
 
+	/**
+	 * ToDo: What is this code doing
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
 	@Override
 	public HasData getCellTableDisplay() {
 		return table;

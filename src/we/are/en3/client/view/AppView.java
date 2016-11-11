@@ -28,7 +28,10 @@ public class AppView {
     //Content Panel is a TabPanel
     public ContentsView contentsView = new ContentsView();
 
-    //Constructor: Sets up the (outer) App-Layout
+    /**
+     * Constructor: Sets up the (outer) App-Layout
+     *
+     */
     public AppView(HasWidgets container) {
 
         //Header
@@ -42,8 +45,10 @@ public class AppView {
                 "Data Source: K. Meier, Data Supplier. </div>" );
         mainLayoutPanel.addSouth(text, 2);
 
-        //ToDo: Method should probably be put into a separate AppPresenter or the AppController
-        //Selection handler for the AppView
+        /**
+         * Selection handler for the AppView
+         * ToDo: Method should probably be put into a separate AppPresenter or the AppController
+         */
         contentsView.tabPanelView.addSelectionHandler(new SelectionHandler<Integer>(){
             public void onSelection(SelectionEvent<Integer> event) {
                 //GWT.log("Easy to find: "+ event.getSelectedItem());
@@ -62,7 +67,6 @@ public class AppView {
         this.mainLayoutPanel.getElement().getStyle().setWidth(42,Style.Unit.EM);
         this.mainLayoutPanel.getElement().getStyle().setMarginLeft(10,Style.Unit.EM);
         this.mainLayoutPanel.getElement().getStyle().setMarginTop(1,Style.Unit.EM);
-
     }
 
 }

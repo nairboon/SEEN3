@@ -1,5 +1,7 @@
 package we.are.en3.client.presenter;
 
+import com.google.gwt.user.client.ui.HasWidgets;
+
 /**
  * This class handles the data flow
  * between the Sever
@@ -8,8 +10,20 @@ package we.are.en3.client.presenter;
  * @version 0.02
  *
  */
-public class ChartPresenter {
+public class ChartPresenter implements Presenter{
 
-    //ToDo:
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public void go(HasWidgets container) {
+
+        //Todo
+
+    }
 
 }

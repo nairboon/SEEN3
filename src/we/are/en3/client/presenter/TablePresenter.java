@@ -32,6 +32,9 @@ import java.util.List;
  */
 public class TablePresenter implements Presenter{
 
+    /**
+     * ToDo: What is this code doing
+     */
     public interface Display {
         HasClickHandlers getLoadTableButton();
         void setData(List<String> data);
@@ -42,6 +45,7 @@ public class TablePresenter implements Presenter{
         HasData getCellTableDisplay();
     }
 
+    //instance variables
     private final MyClimateServiceAsync rpcService;
     private final HandlerManager eventBus;
     private final Display display;
@@ -52,6 +56,13 @@ public class TablePresenter implements Presenter{
 
     private static List<DataPoint> DATA = Arrays.asList(new DataPoint("John", 0.0,0.0,"a", "b", "123 Fourth Road","y"));
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public TablePresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, Display view) {
         this.rpcService = rpcService;
         this.eventBus = eventBus;
@@ -59,9 +70,14 @@ public class TablePresenter implements Presenter{
         init();
     }
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public void bind() {
-
-
         display.getLoadTableButton().addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 fetchTable();
@@ -69,6 +85,13 @@ public class TablePresenter implements Presenter{
         });
     }
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     @Override
     public void go(HasWidgets container) {
         bind();
@@ -89,12 +112,22 @@ public class TablePresenter implements Presenter{
 
     }
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     private void fetchTable() {
+
         currentCountry = display.getSelectedCountry();
 
         GWT.log("fetch table for: " + currentCountry);
 
+        Display view = display;
 
+        //
         rpcService.getResultsCount(currentCountry,"city", new Date(), new Date(), new AsyncCallback<Integer>() {
             public void onSuccess(Integer result) {
 
@@ -107,7 +140,7 @@ public class TablePresenter implements Presenter{
             }
         });
 
-
+        //
         rpcService.getMinMaxYear(currentCountry, new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
@@ -120,8 +153,6 @@ public class TablePresenter implements Presenter{
         });
 
 
-        Display view = display;
-
         // Create a data provider.
         AsyncDataProvider<DataPoint> dataProvider = new AsyncDataProvider<DataPoint>() {
             @Override
@@ -133,7 +164,7 @@ public class TablePresenter implements Presenter{
 
                 GWT.log("fetch table chunk...");
 
-
+                //
                 rpcService.getResults(view.getSelectedCountry(), "city", new Date(), new Date(), start, end, new AsyncCallback<ArrayList<DataPoint>>() {
                     public void onSuccess(ArrayList<DataPoint> result) {
 
@@ -150,9 +181,6 @@ public class TablePresenter implements Presenter{
                         Window.alert("Error fetching contact details");
                     }
                 });
-
-
-
 
                 // Get the ColumnSortInfo from the table.
                 //final ColumnSortList sortList = view.getCellTableDisplay().getColumnSortList();
@@ -182,12 +210,18 @@ public class TablePresenter implements Presenter{
         // Connect the list to the data provider.
         dataProvider.addDataDisplay(display.getCellTableDisplay());
 
+        //
         display.getTableView().setVisible(true);
-
-
 
     }
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     private void init() {
 
         rpcService.getList(new AsyncCallback<ArrayList<String>>() {

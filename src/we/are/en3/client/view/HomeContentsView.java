@@ -18,7 +18,10 @@ public class HomeContentsView extends Composite {
 	//Content Panel
 	ScrollPanel scrollPanel = new ScrollPanel();
 
-	//Constructor: Sets up the Home Tab's panels and static elements
+	/**
+	 * Constructor: Sets up the Home Tab's panels and static elements
+	 *
+	 */
 	public HomeContentsView(){
 
 		//Initialize parent widget to be wrapped

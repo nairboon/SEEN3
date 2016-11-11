@@ -12,12 +12,21 @@ import java.io.InputStreamReader;
 
 /**
  * Servlet to initialize the DataStore on application startup
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
  *
  */
 
 @WebListener
 public class ApplicationStartup implements ServletContextListener {
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     @Override
     public void contextInitialized(ServletContextEvent event) {
         System.out.println("initialize servlet");
@@ -28,6 +37,13 @@ public class ApplicationStartup implements ServletContextListener {
 
     }
 
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         System.out.println("destroy servlet");

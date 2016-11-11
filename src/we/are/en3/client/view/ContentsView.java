@@ -34,7 +34,10 @@ public class ContentsView extends Composite {
 	//TabPanel Titles
 	public String[] tabTitles = {"Home", "Table", "Map", "Chart"};
 
-	//Constructor: Sets up the (outer) Tab Panel
+	/**
+	 * Constructor: Sets up the (outer) Tab Panel
+	 *
+	 */
 	public ContentsView() {
 
         //Assemble tabPanel
