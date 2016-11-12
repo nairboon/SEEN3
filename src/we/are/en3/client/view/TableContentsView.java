@@ -24,6 +24,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 	//Filter Panel
 	FlowPanel selectionPanel = new FlowPanel();
+	ListBox areaDB = new ListBox();
 	ListBox countryDB = new ListBox();
 	ListBox cityDB = new ListBox();
 	ListBox dateFromDB = new ListBox();
@@ -48,6 +49,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		vPanel.add(scrollPanel);
 
 		//Add filtering elements
+		selectionPanel.add(areaDB);
 		selectionPanel.add(countryDB);
 		selectionPanel.add(cityDB);
 		selectionPanel.add(dateFromDB);
@@ -161,7 +163,26 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	}
 
 	/**
-	 * his method is filling the TextBox's countries dropdown lists in the filter panel.
+	 * his method is filling the TextBox's areas dropdown lists in the filter panel.
+	 * It is called from class TablePresenter.
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public void setInitAreas(List<String> areas) {
+		areaDB.clear();
+
+		for (int i = 0; i < areas.size(); ++i) {
+			countryDB.addItem(areas.get(i));
+		}
+
+	}
+
+	/**
+	 * This method is filling the TextBox's countries dropdown lists in the filter panel.
 	 * It is called from class TablePresenter.
 	 * 
 	 * @pre
@@ -170,7 +191,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 * @return
 	 */
 	@Override
-	public void setInitCounties(List<String> countries) {
+	public void setInitCountries(List<String> countries) {
 		countryDB.clear();
 
 		for (int i = 0; i < countries.size(); ++i) {
@@ -179,9 +200,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 	}
 
-
 	/**
-	 * his method is filling the TextBox's cities dropdown lists in the filter panel.
+	 * This method is filling the TextBox's cities dropdown lists in the filter panel.
 	 * It is called from class TablePresenter.
 	 *
 	 * @pre
@@ -238,6 +258,20 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 			countryDB.addItem(dateTo.get(i));
 		}
 
+	}
+
+	/**
+	 * This method returns the selected city from ListBox cityDB.
+	 * It is called from class TablePresenter.
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public String getSelectedArea() {
+		return areaDB.getSelectedItemText();
 	}
 
 	/**

@@ -46,6 +46,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
     /**
      * ToDo: What is this code doing
+     *
      * @pre
      * @post
      * @param
@@ -57,6 +58,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
     /**
      * ToDo: What is this code doing
+     *
      * @pre
      * @post
      * @param
@@ -70,6 +72,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         // Container: Represents the body of the HTML-Host-File, set with RootLayoutPanel.get()
         container.add(mainLayoutPanel);
 
+        //ToDo: What is this code doing
         if ("".equals(History.getToken())) {
             History.newItem("Home");
         }
@@ -80,24 +83,43 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
     /**
      * ToDo: What is this code doing
+     *
      * @pre
      * @post
      * @param
      * @return
      */
     public void onValueChange(ValueChangeEvent<String> event) {
+
+        //returns the TabPanel names defined in class ContentsView
         String token = event.getValue();
+
+        //no empty string
         if (token != null) {
+
+            //
             Presenter presenter = null;
+
+            //
             if (token.equals("Table")) {
+
+                //
                 if(tablePresenter == null) {
                     tablePresenter = new TablePresenter(rpcService, eventBus, tableContentsView);
                 }
+
+                //
                 tablePresenter.go(contentsView.tableContentsPanel);
                 //tabPanelView.selectTab(1);
+
+                //
                 return;
             }
+
+            //
             if (presenter != null) {
+
+                //
                 presenter.go(container);
             }
         }

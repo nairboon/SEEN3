@@ -28,8 +28,8 @@ public class DataStore {
     HashMap<String,ArrayList<DataPoint>> areaMap = new HashMap<String, ArrayList<DataPoint>>();
 
     //Data Structures for Dropdown Lists
-    ArrayList citySortedList;
-    ArrayList countrySortedList;
+    ArrayList<String> citySortedList;
+    ArrayList<String> countrySortedList;
     HashMap<String,ArrayList<String>> areaToYearMap = new HashMap<String,ArrayList<String>>();
 
     /**
@@ -76,6 +76,11 @@ public class DataStore {
                 String Country=arr[4];
                 String Latitude=arr[5];
                 String Longitude=arr[6];
+
+                //change "Congo (Democratic Republic Of The)" to DR Congo
+                if (Country.equals("Congo (Democratic Republic Of The)")){
+                    Country="DR Congo";
+                }
 
                 //extract year
                 String dateSplitArr[] = dt.split("-");
@@ -171,7 +176,7 @@ public class DataStore {
         catch (Throwable ignore) {}
         finally {
             //Information for Database Administrator
-            System.out.println("loadCSVFile...print areaToYearMap");
+            System.out.println("loadCSVFile...print areaToYearMap for London");
             System.out.println(Arrays.toString(areaToYearMap.get("London").toArray()));
             System.out.println("loadCSVFile...print citySortedList");
             System.out.println(Arrays.toString(this.citySortedList.toArray()));

@@ -24,7 +24,34 @@ public interface MyClimateService extends RemoteService {
      * @param
      * @return
      */
-    ArrayList<String> getList();
+    ArrayList<String> getCountryList();
+
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    ArrayList<String> getCityList();
+
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    ArrayList<String> getAreaList();
+
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    ArrayList<String> getDatesList(String area);
 
     /**
      * ToDo: What is this code doing
@@ -53,6 +80,7 @@ public interface MyClimateService extends RemoteService {
      *
      */
     ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd);
+
 
     /**
      * Utility/Convenience class.

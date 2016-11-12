@@ -10,41 +10,26 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * ToDo: What is this code doing
+ * This class extends a RemoteServiceServlet that implements the MyClimateService interface.
+ * It is the server side service point for RPC requests from the client side.
+ * It offers services in connection with the DataStore.
+ *
  * @author Team SE_EN3, University of Zurich
  * @version 0.02
  *
  */
 public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClimateService {
 
+
     /**
-     * ToDo: What is this code doing
+     * Method returns for a given area the lowest and highest year.
+     * This method is called
+     *
      * @pre
      * @post
      * @param
      * @return
-     * ToDo: Problem after change to areaMap!!!
-     */
-    public ArrayList<String> getList() {
-
-        //
-        ArrayList<String> cities = new ArrayList<String>();
-
-        //
-       for(String key: DataStore.getInstance().areaMap.keySet()) {
-           cities.add(key);
-       }
-       return cities;
-    }
-
-
-    /**
-     * Method returns for a given area the lowest and highest year
-     * @pre
-     * @post
-     * @param
-     * @return
-     * ToDo: String meta is superfluous
+     * ToDo: String meta is superfluous?
      */
     @Override
     public ArrayList<String> getMinMaxYear(String area) {
@@ -78,11 +63,12 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
     /**
      * Method returns for a given area the number of data points stored in the areaMap
+     *
      * @pre
      * @post
      * @param
      * @return
-     * ToDo: String meta is superfluous
+     * ToDo: String meta is superfluous?
      */
     @Override
     public Integer getResultsCount(String area, String meta, Date start, Date end) {
@@ -105,12 +91,14 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
 
     /**
-     * Method returns for a given area an ArrayList of DataPoints
+     * Method returns for a given area an ArrayList of DataPoints.
+     * It is called from TablePresenter
+     *
      * @pre
      * @post
      * @param
      * @return
-     * ToDo: String meta is superfluous
+     * ToDo: String meta is superfluous?
      */
     @Override
     public ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd) {
@@ -133,5 +121,74 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
         //Cast List to ArrayList of DataPoints
         return new ArrayList<DataPoint>(returnList);
+    }
+
+    /**
+     * This method returns the sorted list of countries taken from the DataStore
+     * It is used to initialize the dropdown list of the TextBoxes.
+     * It is called with RpcService from TablePresenter
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public ArrayList<String> getCountryList() {
+
+        return DataStore.getInstance().countrySortedList;
+    }
+
+    /**
+     * This method returns the sorted list of cities taken from the DataStore
+     * It is used to initialize the dropdown list of the TextBoxes.
+     * It is called with RpcService from TablePresenter
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public ArrayList<String> getCityList() {
+        return DataStore.getInstance().citySortedList;
+    }
+
+    /**
+     * This method returns the sorted list of cities taken from the DataStore
+     * It is used to initialize the dropdown list of the TextBoxes.
+     * It is called with RpcService from TablePresenter
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public ArrayList<String> getAreaList() {
+        //
+        ArrayList<String> cities = new ArrayList<String>();
+
+        //
+        for(String key: DataStore.getInstance().areaMap.keySet()) {
+            cities.add(key);
+        }
+        return cities;
+    }
+
+    /**
+     * This method returns the list of dates taken from the DataStore
+     * It is used to initialize the dropdown list of the TextBoxes.
+     * It is called with RpcService from TablePresenter
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public ArrayList<String> getDatesList(String area) {
+        //
+        return DataStore.getInstance().areaToYearMap.get(area);
     }
 }
