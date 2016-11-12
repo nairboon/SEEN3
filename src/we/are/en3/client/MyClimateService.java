@@ -64,23 +64,23 @@ public interface MyClimateService extends RemoteService {
 
     /**
      * ToDo: What is this code doing
-     * @pre
-     * @post
+     *
      * @param
      * @return
+     * @pre
+     * @post
      */
-    Integer getResultsCount(String area, String meta, Date start, Date end);
+    Integer getResultsCount(String area, String meta, String dateFrom, String dateTo);
 
     /**
      * ToDo: What is this code doing
-     * @pre
-     * @post
+     *
      * @param
      * @return
-     *
+     * @pre
+     * @post
      */
-    ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd);
-
+    ArrayList<DataPoint> getResults(String area, String meta, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd);
 
     /**
      * Utility/Convenience class.

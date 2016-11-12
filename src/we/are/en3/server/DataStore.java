@@ -99,6 +99,7 @@ public class DataStore {
                 * */
 
                 //construct a data point: one line/record of the csv-file
+                //ToDo: Remo, why do we have access form Model DataPoint, which is only defined on client side?
                 DataPoint dp = new DataPoint(
                         dt,
                         AverageTemperature,

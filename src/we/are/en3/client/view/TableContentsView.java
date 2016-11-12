@@ -115,12 +115,12 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		table.addColumn(tempColumn, "Average Temperature");
 		table.addColumn(dateColumn, "Measurement Date");
 
-		// Set the total row count. You might send an RPC request to determine the
-		// total row count.
+
+		// Set the total row count. This is done from within fetch table.
 		// table.setRowCount(DATA.size(), true);
 
 		// Set the range to display. In this case, our visible range is smaller than
-		// the data set.
+		// the data set. This is a functionality of CellTable<DataPoint> Widget.
 		table.setVisibleRange(0, 10);
 
 		//ToDo: what is this code doing

@@ -69,17 +69,41 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      * @return
      * ToDo: String meta is superfluous?
      */
+    @SuppressWarnings("Duplicates")
     @Override
-    public Integer getResultsCount(String area, String meta, Date start, Date end) {
+    public Integer getResultsCount(String area, String meta, String dateFrom, String dateTo) {
 
         //return variable
         Integer size_;
 
         //toDo: start end Datum in Logik einbauen
+        Integer firstIndex=0;
+        Integer lastIndex=0;
 
         //returns for an area: the size of the array, i.e. the number of data points
         if (meta.equals("city")){
-            size_ = DataStore.getInstance().areaMap.get(area).size();
+            ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
+            //find first index
+            for (DataPoint dp : areaArray) {
+                String dateFrom_ = dateFrom + "-01-01";
+                Boolean found = dp.getDate().equals(dateFrom_);
+                if (found) {
+                    firstIndex = areaArray.indexOf(dp);
+                    break;
+                }
+            }
+            //find last index
+            for (DataPoint dp : areaArray) {
+                String dateTo_ = dateTo + "-12-01";
+                Boolean found = dp.getDate().equals(dateTo_);
+                if (found) {
+                    lastIndex = areaArray.indexOf(dp);
+                    break;
+                }
+            }
+
+            size_ = lastIndex-firstIndex;
+
         }else{
             size_ = DataStore.getInstance().areaMap.get(area).size();
         }
@@ -99,11 +123,12 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      * @return
      * ToDo: String meta is superfluous?
      */
+    @SuppressWarnings("Duplicates")
     @Override
-    public ArrayList<DataPoint> getResults(String area, String meta, Date start, Date end, Integer seqStart, Integer seqEnd) {
+    public ArrayList<DataPoint> getResults(String area, String meta, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd) {
 
         //Of type list since sublist() call below returns a List
-        List<DataPoint> returnList;
+        ArrayList<DataPoint> returnArrayList = null;
 
         //toDo: start end Datum in Logik einbauen
 
@@ -112,14 +137,44 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
         //Read out the data store
         if (meta.equals("city")){
-            returnList = DataStore.getInstance().areaMap.get(area).subList(seqStart, seqEnd);
+
+            Integer firstIndex=0;
+            Integer lastIndex=0;
+
+            //returns for an area: the size of the array, i.e. the number of data points
+            if (meta.equals("city")) {
+                ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
+                //find first index
+                for (DataPoint dp : areaArray) {
+                    String dateFrom_ = dateFrom + "-01-01";
+                    Boolean found = dp.getDate().equals(dateFrom_);
+                    if (found) {
+                        firstIndex = areaArray.indexOf(dp);
+                        break;
+                    }
+                }
+                //find last index
+                for (DataPoint dp : areaArray) {
+                    String dateTo_ = dateTo + "-12-01";
+                    Boolean found = dp.getDate().equals(dateTo_);
+                    if (found) {
+                        lastIndex = areaArray.indexOf(dp);
+                        break;
+                    }
+                }
+
+                List<DataPoint> resList = areaArray.subList(firstIndex, lastIndex);
+                List<DataPoint> returnList = resList.subList(seqStart, seqEnd);
+                returnArrayList = new ArrayList<DataPoint>(returnList);
+
+            }
 
         }else{
-            returnList = DataStore.getInstance().areaMap.get(area).subList(seqStart, seqEnd);
+            returnArrayList = null;
         }
 
         //Cast List to ArrayList of DataPoints
-        return new ArrayList<DataPoint>(returnList);
+        return returnArrayList;
     }
 
     /**

@@ -253,6 +253,8 @@ public class TablePresenter implements Presenter{
 
         //gets the selected Area from the TextBox
         currentArea = display.getSelectedArea();
+        currentDateFrom=display.getSelectedDateFrom();
+        currentDateTo=display.getSelectedDateTo();
 
         //Information for Developer
         GWT.log("fetch table for: " + currentArea);
@@ -261,14 +263,18 @@ public class TablePresenter implements Presenter{
         Display view = display;
 
         //ToDo remove "city" from all methods in classes and interfaces
-        //
-        rpcService.getResultsCount(currentArea,"city", new Date(), new Date(), new AsyncCallback<Integer>() {
+        // Rpc request to fetch number of DataPoints after applying the filters
+        // and set the return value "result" in table footer
+        rpcService.getResultsCount(currentArea,"city", currentDateFrom, currentDateTo, new AsyncCallback<Integer>() {
             public void onSuccess(Integer result) {
 
                 //Information for Developer
                 GWT.log("table size: " + result);
 
-                //
+                //getCellTableDisplay() returns the table,
+                // setRowCount is a CellTable method to display the total number of rows in table footer
+                // if not set the table can request DataPoints that are not available in DataStore and
+                // crash the request.
                 display.getCellTableDisplay().setRowCount(result, true);
             }
 
@@ -277,10 +283,11 @@ public class TablePresenter implements Presenter{
             }
         });
 
-        //
+        //ToDo: what is this code doing
         rpcService.getMinMaxYear(currentArea, new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
+                //Information for Developer
                 GWT.log("min/max: " + result.get(0) + " " + result.get(1));
             }
 
@@ -290,26 +297,44 @@ public class TablePresenter implements Presenter{
         });
 
 
-        // Create a data provider.
+        //Create a data provider: fetch only part of the table requested in filter panel
+        // based on the number fields displayed in the table footer (display.getVisibleRange())
         AsyncDataProvider<DataPoint> dataProvider = new AsyncDataProvider<DataPoint>() {
+
+            //Event Listener: onRangeChanged
             @Override
             protected void onRangeChanged(HasData<DataPoint> display) {
+
+                //The visible range was set in constructor of class TableContentsView
+                // This is a functionality of CellTable<DataPoint> Widget.
+                // ToDo: Remo, why is this method accessible (where defined in interface)?
                 final Range range = display.getVisibleRange();
 
+                //determine the selected/changed new range of the CellTable
                 int start = range.getStart();
                 int end = start + range.getLength();
 
+                //Information for Developer
                 GWT.log("fetch table chunk...");
 
-                //
-                rpcService.getResults(view.getSelectedArea(), "city", new Date(), new Date(), start, end, new AsyncCallback<ArrayList<DataPoint>>() {
+                //ToDo remove "city" from all methods in classes and interfaces
+                //Rpc request to fetch number of DataPoints after applying the filters
+                // and the range (start,end)
+                rpcService.getResults(view.getSelectedArea(), "city", currentDateFrom, currentDateTo,
+                        start, end, new AsyncCallback<ArrayList<DataPoint>>() {
                     public void onSuccess(ArrayList<DataPoint> result) {
 
                         if (result != null) {
-                            GWT.log("table chunk size: " + result.size());
 
+                            //Information for Developer
+                            GWT.log("table chunk size: " + result.size());
                             GWT.log("fill:" + result.get(0).getAverageTemperature() );
 
+                            //view is an instance of Display interface
+                            //getCellTableDisplay() returns the CellTable
+                            //setRowData() is a functionality of CellTable
+                            // and populates it with DataPoints
+                            //ToDo: Remo, what is start used for in setRowData()?
                             view.getCellTableDisplay().setRowData(start, result);
                         }
                     }
