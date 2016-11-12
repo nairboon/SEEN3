@@ -41,6 +41,10 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	public TableContentsView(){
 
+		/**
+		 * Add Panels and Buttons
+		 */
+
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
 
@@ -50,11 +54,15 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		//Add filtering elements
 		selectionPanel.add(areaDB);
-		selectionPanel.add(countryDB);
-		selectionPanel.add(cityDB);
+		//selectionPanel.add(countryDB);
+		//selectionPanel.add(cityDB);
 		selectionPanel.add(dateFromDB);
 		selectionPanel.add(dateToDB);
 		selectionPanel.add(loadTableButton);
+
+		/**
+		 * Table: Define Columns and Methods used to populate the table
+		 */
 
 		//ToDo: what is this code doing
 		TextColumn<DataPoint> countryColumn = new TextColumn<DataPoint>() {
@@ -124,6 +132,10 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		// We know that the data is sorted alphabetically by default.
 		//table.getColumnSortList().push(nameColumn);
 
+		/**
+		 * Table: add Pager and Table to ScrollPanel
+		 */
+
 		//Pager Widget
 		SimplePager pager = new SimplePager();
 
@@ -176,7 +188,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		areaDB.clear();
 
 		for (int i = 0; i < areas.size(); ++i) {
-			countryDB.addItem(areas.get(i));
+			areaDB.addItem(areas.get(i));
 		}
 
 	}
@@ -235,7 +247,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		dateFromDB.clear();
 
 		for (int i = 0; i < dateFrom.size(); ++i) {
-			countryDB.addItem(dateFrom.get(i));
+			dateFromDB.addItem(dateFrom.get(i));
 		}
 
 	}
@@ -255,7 +267,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		dateToDB.clear();
 
 		for (int i = 0; i < dateTo.size(); ++i) {
-			countryDB.addItem(dateTo.get(i));
+			dateToDB.addItem(dateTo.get(i));
 		}
 
 	}

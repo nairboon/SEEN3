@@ -166,7 +166,8 @@ public class TablePresenter implements Presenter{
 
         //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
         //and populates the Textbox's dropdown list
-        rpcService.getCountryList(new AsyncCallback<ArrayList<String>>() {
+        String area="Abidjan";
+        rpcService.getDatesList(area, new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
                 dates = result;
@@ -182,7 +183,6 @@ public class TablePresenter implements Presenter{
         });
 
     }
-
 
     /**
      * This method adds click event to button which fetches table,
@@ -251,17 +251,24 @@ public class TablePresenter implements Presenter{
      */
     private void fetchTable() {
 
-        currentCountry = display.getSelectedCountry();
+        //gets the selected Area from the TextBox
+        currentArea = display.getSelectedArea();
 
-        GWT.log("fetch table for: " + currentCountry);
+        //Information for Developer
+        GWT.log("fetch table for: " + currentArea);
 
+        //Variable to access only functionality of TableContentsView defined in Interface Display
         Display view = display;
 
+        //ToDo remove "city" from all methods in classes and interfaces
         //
-        rpcService.getResultsCount(currentCountry,"city", new Date(), new Date(), new AsyncCallback<Integer>() {
+        rpcService.getResultsCount(currentArea,"city", new Date(), new Date(), new AsyncCallback<Integer>() {
             public void onSuccess(Integer result) {
 
+                //Information for Developer
                 GWT.log("table size: " + result);
+
+                //
                 display.getCellTableDisplay().setRowCount(result, true);
             }
 
@@ -271,7 +278,7 @@ public class TablePresenter implements Presenter{
         });
 
         //
-        rpcService.getMinMaxYear(currentCountry, new AsyncCallback<ArrayList<String>>() {
+        rpcService.getMinMaxYear(currentArea, new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
                 GWT.log("min/max: " + result.get(0) + " " + result.get(1));
@@ -295,7 +302,7 @@ public class TablePresenter implements Presenter{
                 GWT.log("fetch table chunk...");
 
                 //
-                rpcService.getResults(view.getSelectedCountry(), "city", new Date(), new Date(), start, end, new AsyncCallback<ArrayList<DataPoint>>() {
+                rpcService.getResults(view.getSelectedArea(), "city", new Date(), new Date(), start, end, new AsyncCallback<ArrayList<DataPoint>>() {
                     public void onSuccess(ArrayList<DataPoint> result) {
 
                         if (result != null) {

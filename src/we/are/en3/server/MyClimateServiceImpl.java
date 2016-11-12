@@ -23,7 +23,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
     /**
      * Method returns for a given area the lowest and highest year.
-     * This method is called
+     * This method is called from method fetchTable() in class TablePresenter
      *
      * @pre
      * @post
@@ -39,10 +39,10 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         String minYear = new String();
         String maxYear = new String();
 
-        //Todo:
+        //Todo: remove meta from all methods in classes and interfaces
         String meta="city";
 
-        //
+        //extracts first and last year in DataStore for chosen area
         if (meta.equals("city")){
             ArrayList<DataPoint> resList = DataStore.getInstance().areaMap.get(area);
             minYear=resList.get(0).getDate();
@@ -52,17 +52,16 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
             //Todo
         }
 
-        //
+        //add first and last year to the data structure and return
         returnList.add(minYear);
         returnList.add(maxYear);
-
-        //
         return returnList;
     }
 
 
     /**
-     * Method returns for a given area the number of data points stored in the areaMap
+     * Method returns the number of DataPoints stored in DataStore's areaMap
+     * dependent on the values Area, StartDate, EndDate
      *
      * @pre
      * @post
@@ -91,7 +90,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
 
     /**
-     * Method returns for a given area an ArrayList of DataPoints.
+     * Method returns an ArrayList of DataPoints stored in DataStore's areaMap
      * It is called from TablePresenter
      *
      * @pre
