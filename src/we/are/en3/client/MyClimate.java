@@ -11,36 +11,89 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import we.are.en3.client.view.*;
 
 /**
+ * This is the entry point class on the client side.
  * Entry point classes define <code>onModuleLoad()</code>
+ * With the RootLayoutPanel class they interact with the
+ * Html-Host-file containers.
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
  */
 public class MyClimate implements EntryPoint {
 
     /**
      * This is the entry point method.
+     * @pre
+     * @post
+     * @param
+     * @return
      */
     public void onModuleLoad() {
+        //Information for Developer
+        GWT.log("MyClimate: onModuleLoad()");
+
+        //load rpcService
         MyClimateServiceAsync rpcService = GWT.create(MyClimateService.class);
+
+        //load eventBus
         HandlerManager eventBus = new HandlerManager(null);
-        AppController appViewer = new AppController(rpcService, eventBus);
-        appViewer.go(RootLayoutPanel.get());
 
+        //load AppController
+        AppController appController = new AppController(rpcService, eventBus);
 
-        //appViewer.go(tableContentsView);
+        //Reference whole body-tag (or special div-tag-id) in Html-host-file
+        appController.go(RootLayoutPanel.get());
 
     }
 
+    /**
+     * ToDo: What is this code doing
+     */
     private static class MyAsyncCallback implements AsyncCallback<String> {
+
+        /**
+         * ToDo: What is this code doing
+         */
         private Label label;
 
+        /**
+         * ToDo: What is this code doing
+         * @pre
+         * @post
+         * @param
+         * @return
+         */
         public MyAsyncCallback(Label label) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  MyAsyncCallback()");
+
             this.label = label;
         }
 
+        /**
+         * ToDo: What is this code doing
+         * @pre
+         * @post
+         * @param
+         * @return
+         */
         public void onSuccess(String result) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  onSuccess()");
+
             label.getElement().setInnerHTML(result);
         }
 
+        /**
+         * ToDo: What is this code doing
+         * @pre
+         * @post
+         * @param
+         * @return
+         */
         public void onFailure(Throwable throwable) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  onFailure()");
+
             label.setText("Failed to receive answer from server!");
         }
     }

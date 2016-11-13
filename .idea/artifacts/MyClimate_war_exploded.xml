@@ -9,6 +9,11 @@
         </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/sdk/gwt-2.8.0/gwt-servlet.jar" />
+          <element id="library" level="project" name="gwt-user" />
+          <element id="library" level="module" name="JUnit4" module-name="MyClimate" />
+          <element id="library" level="project" name="gwt-slider-bar-1.0" />
+          <element id="library" level="project" name="gwt-charts-0.9.9" />
+          <element id="library" level="project" name="gwt-visualization" />
         </element>
       </element>
       <element id="gwt-compiler-output" facet="MyClimate/gwt/GWT" />

@@ -3,13 +3,16 @@ package we.are.en3.client.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
- * The Data DataPoint: class represents a data store
- * (e.g. database table or csv-file)  
+ * The Data Model DataPoint:
+ * this class represents a data store
+ * (e.g. database table or csv-file)
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
  *
  */
 public class DataPoint implements IsSerializable{
 	
-	//instance variable (data store fields)
+	//instance variables (data store fields)
 	private String date;
 	private double averageTemperature;
 	private double averageTemperatureUncertainty;
@@ -18,7 +21,9 @@ public class DataPoint implements IsSerializable{
 	private String latitude;
 	private String longitude;
 
-	//constructors
+	/**
+	 * Constructors
+	 */
 	public DataPoint() {}
 	public DataPoint(
 			String dt, 
@@ -36,8 +41,11 @@ public class DataPoint implements IsSerializable{
 		this.setLongitude(Longitude);
 		this.setDate(dt);
 	}
-	
-	//getters and setters
+
+	/**
+	 * Getter and Setter Methods
+	 *
+	 */
 	public String getDate() {
 		return this.date;
 	}	
@@ -56,8 +64,7 @@ public class DataPoint implements IsSerializable{
 		return this.averageTemperatureUncertainty;
 	}	
 	public void setAverageTemperatureUncertainty(double AverageTemperatureUncertainty) {
-		this.averageTemperatureUncertainty = AverageTemperatureUncertainty;
-	}
+		this.averageTemperatureUncertainty = AverageTemperatureUncertainty;}
 	
 	public String getCity() {
 		return this.city;

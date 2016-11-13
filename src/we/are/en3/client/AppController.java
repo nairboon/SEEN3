@@ -13,43 +13,77 @@ import we.are.en3.client.presenter.Presenter;
 import we.are.en3.client.presenter.TablePresenter;
 import we.are.en3.client.view.*;
 
+/**
+ * This class handles the Presenter Classes
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
+ */
 public class AppController implements Presenter, ValueChangeHandler<String> {
-    private final HandlerManager eventBus;
-    private final MyClimateServiceAsync rpcService;
+
+    // HTML-Host-File Body fetched with RootLayoutPanel.get()
     private HasWidgets container;
 
+    //ApplicationView has a MainPanel which contains a ContentsView
+    AppView appView = new AppView(container);
+    DockLayoutPanel mainLayoutPanel = appView.mainLayoutPanel;
+    ContentsView contentsView = appView.contentsView;
+
+    //TablePresenter and its Input
     private TablePresenter tablePresenter = null;
+    private final HandlerManager eventBus;
+    private final MyClimateServiceAsync rpcService;
+    private final TableContentsView tableContentsView =  new TableContentsView();
 
-    TabLayoutPanel tabPanelView = new TabLayoutPanel(1.5, Style.Unit.EM);
-    HomeContentsView homeContentsView = new HomeContentsView();
-    MapContentsView mapContentsView = new MapContentsView();
-    IMapContentsView iMapContentsView = new IMapContentsView();
-    ScrollPanel tableContentsView = new ScrollPanel();
-
-
+    /**
+     * Constructor method
+     */
     public AppController(MyClimateServiceAsync rpcService, HandlerManager eventBus) {
+        //Information for Developer
+        GWT.log("AppController: AppController()");
+
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
 
-
     }
 
+    /**
+     * ToDo: What is this code doing
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     private void bind() {
+        //Information for Developer
+        GWT.log("AppController: bind()");
+
+        //ToDo: What is this code doing
         History.addValueChangeHandler(this);
 
     }
 
-
+    /**
+     * ToDo: What is this code doing
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public void go(final HasWidgets container) {
+        //Information for Developer
+        GWT.log("AppController: go()");
+
+        // HTML-Host-File Body fetched with RootLayoutPanel.get()
         this.container = container;
 
-        // Main layout + panels
-        setupLayout();
+        // Container: Represents the body of the HTML-Host-File, set with RootLayoutPanel.get()
+        container.add(mainLayoutPanel);
 
-
-
-
+        //ToDo: What is this code doing
         if ("".equals(History.getToken())) {
             History.newItem("Home");
         }
@@ -58,53 +92,48 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         }
     }
 
-    private  void setupLayout() {
-
-        // replace dockpanel with View.java content
-        DockLayoutPanel p = new DockLayoutPanel(Style.Unit.EM);
-        p.addNorth(new HTML("header"), 2);
-        p.addSouth(new HTML("footer"), 2);
-
-        ContentsView contentsView = new ContentsView();
-
-
-
-        String[] tabTitles = {"Home", "Table", "Map", "IMap"};
-        tabPanelView.add(homeContentsView, tabTitles[0]);
-        tabPanelView.add(tableContentsView, tabTitles[1]);
-        tabPanelView.add(mapContentsView, tabTitles[2]);
-        tabPanelView.add(iMapContentsView, tabTitles[3]);
-
-        tabPanelView.addSelectionHandler(new SelectionHandler<Integer>(){
-            public void onSelection(SelectionEvent<Integer> event) {
-                //GWT.log("Easy to find: "+ event.getSelectedItem());
-                History.newItem(tabTitles[event.getSelectedItem()]);
-            }
-        });
-
-
-        p.add(tabPanelView);
-
-        // container = RootLayoutPanel.get()
-        container.add(p);
-    }
-
+    /**
+     * ToDo: What is this code doing
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     public void onValueChange(ValueChangeEvent<String> event) {
+        //Information for Developer
+        GWT.log("AppController: onValueChange()");
+
+        //returns the TabPanel names defined in class ContentsView
         String token = event.getValue();
 
+        //no empty string
         if (token != null) {
+
+            //Presenter interface
             Presenter presenter = null;
 
+            //fired event token is TableTab
             if (token.equals("Table")) {
+
+                //create tablePresenter if non-existent,
+                // this starts rpc.requests and populates the dropdown lists of the TextBoxes
                 if(tablePresenter == null) {
-                    tablePresenter = new TablePresenter(rpcService, eventBus, new TableContentsView());
+                    tablePresenter = new TablePresenter(rpcService, eventBus, tableContentsView);
                 }
-                tablePresenter.go(tableContentsView);
+
+                //execute
+                tablePresenter.go(contentsView.tableContentsPanel);
                 //tabPanelView.selectTab(1);
+
+                //
                 return;
             }
 
+            //ToDo: why should presenter be not null?
             if (presenter != null) {
+
+                //ToDo: can that be called?
                 presenter.go(container);
             }
         }

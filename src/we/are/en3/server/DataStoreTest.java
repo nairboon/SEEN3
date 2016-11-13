@@ -9,23 +9,33 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * Created by dominik on 10/11/16.
+ * JUnit test cases for the class DataSore
+ * @author Team SE_EN3, University of Zurich
+ * @version 0.02
+ *
  */
 public class DataStoreTest {
 
-
+    /**
+     * test method loads csv-file and lists JUnit-assert statements
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
     @org.junit.Test
     public void loadCSVFile() throws Exception {
+
+        //load csv-file
         DataStore testStore = DataStore.getInstance();
         File file = new File("web/data.csv");
         InputStream input = new FileInputStream(file);
         testStore.loadCSVFile(input);
 
-        assertTrue(!testStore.cityMap.isEmpty());
-        assertNotNull(DataStore.getInstance().countryMap.isEmpty());
-        assertEquals("Côte D'Ivoire", testStore.cityMap.get("Abidjan").get(0).getCountry());
-
-
+        //JUnit-assert statements
+        assertTrue(!testStore.areaMap.isEmpty());
+        assertNotNull(DataStore.getInstance().areaMap.isEmpty());
+        assertEquals("Côte D'Ivoire", testStore.areaMap.get("Abidjan").get(0).getCountry());
 
     }
 
