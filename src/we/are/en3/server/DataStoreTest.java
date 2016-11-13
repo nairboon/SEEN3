@@ -28,7 +28,7 @@ public class DataStoreTest {
 
         //load csv-file
         DataStore testStore = DataStore.getInstance();
-        File file = new File("web/data.csv");
+        File file = new File("web/WEB-INF/data.csv");
         InputStream input = new FileInputStream(file);
         testStore.loadCSVFile(input);
 

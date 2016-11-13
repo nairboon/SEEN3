@@ -28,10 +28,11 @@ public class ApplicationStartup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         System.out.println("initialize servlet");
 
-        InputStream input = event.getServletContext().getResourceAsStream("web/data.csv");
+        InputStream input = event.getServletContext().getResourceAsStream("/WEB-INF/data.csv");
 
         // for junit
         if(input == null) {
+            System.out.println("Could not read data.csv, are we in testing environment?");
              input = this.getClass().getClassLoader().getResourceAsStream("data.csv");
         }
 

@@ -15,4 +15,7 @@
         <listener-class>we.are.en3.server.ApplicationStartup</listener-class>
     </listener>
 
+    <welcome-file-list>
+        <welcome-file>MyClimate.html</welcome-file>
+    </welcome-file-list>
 </web-app>

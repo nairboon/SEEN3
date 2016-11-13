@@ -1,9 +1,7 @@
 package we.are.en3.server;
 
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -46,7 +44,12 @@ public class DataStore {
         System.out.println("loadCSVFile...");
 
         //Line reader that connects to the csv-file.
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         //Line returned by the BufferedReader
         String line;

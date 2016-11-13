@@ -303,7 +303,7 @@ public class TablePresenter implements Presenter{
         GWT.log("fetch table for: " + currentArea);
 
         //Variable to access only functionality of TableContentsView defined in Interface Display
-        Display view = display;
+        final Display view = display;
 
         //ToDo remove "city" from all methods in classes and interfaces
         // Rpc request to fetch number of DataPoints after applying the filters
@@ -354,8 +354,8 @@ public class TablePresenter implements Presenter{
                 final Range range = display.getVisibleRange();
 
                 //determine the selected/changed new range of the CellTable
-                int start = range.getStart();
-                int end = start + range.getLength();
+                final int start = range.getStart();
+                final int end = start + range.getLength();
 
                 //Information for Developer
                 GWT.log("fetch table chunk...");
