@@ -1,0 +1,10 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
+        "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
+<module rename-to="MainTests">
+
+    <inherits name='we.are.en3.MyClimate'/>
+    <inherits name="com.google.gwt.junit.JUnit"/>
+
+    <source path="client" />
+
+</module>
