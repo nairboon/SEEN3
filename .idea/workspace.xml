@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42ec3e48-0cc9-4361-9203-17f6b0b8ca2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/AppController.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/AppController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/MyClimate.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/MyClimate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/presenter/ChartPresenter.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/presenter/ChartPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/presenter/MapPresenter.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/presenter/MapPresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/presenter/TablePresenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/AppView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/ChartContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/ContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/HomeContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/MapContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" afterPath="$PROJECT_DIR$/src/we/are/en3/client/view/TableContentsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java" afterPath="$PROJECT_DIR$/src/we/are/en3/server/MyClimateServiceImpl.java" />
-    </list>
+    <list default="true" id="42ec3e48-0cc9-4361-9203-17f6b0b8ca2d" name="Default" comment="" />
     <ignored path="MyClimate.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/sdk/" />
@@ -828,7 +815,7 @@
       <updated>1478783762902</updated>
       <workItem from="1478783765236" duration="606000" />
       <workItem from="1478785281681" duration="332000" />
-      <workItem from="1478785647860" duration="146958000" />
+      <workItem from="1478785647860" duration="147802000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of getResultCount and cityMap and countyMap loaded">
       <created>1478788812172</created>
@@ -862,10 +849,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147896000" />
+    <option name="totallyTimeSpent" value="148740000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-1" width="1368" height="751" extended-state="1" />
+    <frame x="-1" y="-1" width="1368" height="751" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
