@@ -11,4 +11,8 @@
         <servlet-name>se.en3.myClimate.MyClimate MyClimateService</servlet-name>
         <url-pattern>/MyClimate/MyClimateService</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>we.are.en3.server.ApplicationStartup</listener-class>
+    </listener>
+
 </web-app>

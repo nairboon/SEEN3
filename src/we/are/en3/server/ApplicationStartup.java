@@ -5,10 +5,7 @@ import we.are.en3.server.DataStore;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Servlet to initialize the DataStore on application startup
@@ -17,7 +14,7 @@ import java.io.InputStreamReader;
  *
  */
 
-@WebListener
+//@WebListener
 public class ApplicationStartup implements ServletContextListener {
 
     /**
@@ -31,8 +28,14 @@ public class ApplicationStartup implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         System.out.println("initialize servlet");
 
+        InputStream input = event.getServletContext().getResourceAsStream("web/data.csv");
+
+        // for junit
+        if(input == null) {
+             input = this.getClass().getClassLoader().getResourceAsStream("data.csv");
+        }
+
         // open a file from the web/ folder
-        InputStream input = event.getServletContext().getResourceAsStream("/data.csv");
         DataStore.getInstance().loadCSVFile(input);
 
     }
