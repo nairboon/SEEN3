@@ -80,7 +80,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		};
 
 		// Make the name column sortable.
-		countryColumn.setSortable(true);
+		//countryColumn.setSortable(true);
 
 		//ToDo: what is this code doing
 		TextColumn<DataPoint> cityColumn = new TextColumn<DataPoint>() {
