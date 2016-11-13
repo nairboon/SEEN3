@@ -40,7 +40,7 @@ public interface MyClimateServiceAsync {
      * @param
      * @return
      */
-    void getResultsCount(String area, String meta, String dateFrom, String dateTo, AsyncCallback<Integer> async);
+    void getResultsCount(String area,  String dateFrom, String dateTo, AsyncCallback<Integer> async);
 
     /**
      * ToDo: What is this code doing
@@ -58,7 +58,7 @@ public interface MyClimateServiceAsync {
      * @param
      * @return
      */
-    void getResults(String area, String meta, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd, AsyncCallback<ArrayList<DataPoint>> async);
+    void getResults(String area, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd, AsyncCallback<ArrayList<DataPoint>> async);
 
     /**
      * ToDo: What is this code doing

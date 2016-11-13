@@ -67,11 +67,10 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      * @post
      * @param
      * @return
-     * ToDo: String meta is superfluous?
      */
     @SuppressWarnings("Duplicates")
     @Override
-    public Integer getResultsCount(String area, String meta, String dateFrom, String dateTo) {
+    public Integer getResultsCount(String area, String dateFrom, String dateTo) {
 
         //return variable
         Integer size_;
@@ -81,7 +80,6 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         Integer lastIndex=0;
 
         //returns for an area: the size of the array, i.e. the number of data points
-        if (meta.equals("city")){
             ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
 
             //find first index
@@ -114,9 +112,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
             //size=1 if lastIndex=firstIndex
             size_ = lastIndex-firstIndex+1;
 
-        }else{
-            size_ = DataStore.getInstance().areaMap.get(area).size();
-        }
+
 
         //return number of data points
         return size_;
@@ -134,7 +130,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      */
     @SuppressWarnings("Duplicates")
     @Override
-    public ArrayList<DataPoint> getResults(String area, String meta, String dateFrom, String dateTo,
+    public ArrayList<DataPoint> getResults(String area, String dateFrom, String dateTo,
                                            Integer seqStart, Integer seqEnd) {
 
         //Of type list since sublist() call below returns a List
@@ -144,14 +140,13 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         if (area==null) return null;
 
         //Read out the data store
-        if (meta.equals("city")){
+
 
             //indexes to be determined and used to provide the requested DataPoints
             Integer firstIndex=0;
             Integer lastIndex=0;
 
             //returns for an area: the size of the array, i.e. the number of data points
-            if (meta.equals("city")) {
                 ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
 
                 //find first index
@@ -190,11 +185,8 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
                 //cast to ArrayList
                 returnArrayList = new ArrayList<DataPoint>(returnList);
 
-            }
 
-        }else{
-            returnArrayList = null;
-        }
+
 
         //Cast List to ArrayList of DataPoints
         return returnArrayList;

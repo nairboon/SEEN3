@@ -127,7 +127,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		// Set the range to display. In this case, our visible range is smaller than
 		// the data set. This is a functionality of CellTable<DataPoint> Widget.
-		table.setVisibleRange(0, 8);
+		table.setVisibleRange(0, 10);
 
 		//ToDo: what is this code doing
 		// Add a ColumnSortEvent.AsyncHandler to connect sorting to the
@@ -221,18 +221,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		return  dateToDB;
 	}
 
-	/**
-	 * ToDo: What is this code doing (not implemented)
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	public void setData(List<String> data) {
-		//Information for Developer
-		GWT.log("TableContentsView: setData()");
-
-	}
 
 	/**
 	 * his method is filling the TextBox's areas dropdown lists in the filter panel.
@@ -256,49 +244,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 	}
 
-	/**
-	 * This method is filling the TextBox's countries dropdown lists in the filter panel.
-	 * It is called from class TablePresenter.
-	 * 
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public void setInitCountries(List<String> countries) {
-		//Information for Developer
-		GWT.log("TableContentsView: setInitCountries()");
 
-		countryDB.clear();
-
-		for (int i = 0; i < countries.size(); ++i) {
-			countryDB.addItem(countries.get(i));
-		}
-
-	}
-
-	/**
-	 * This method is filling the TextBox's cities dropdown lists in the filter panel.
-	 * It is called from class TablePresenter.
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public void setInitCities(List<String> cities) {
-		//Information for Developer
-		GWT.log("TableContentsView: setInitCities()");
-
-		cityDB.clear();
-
-		for (int i = 0; i < cities.size(); ++i) {
-			cityDB.addItem(cities.get(i));
-		}
-
-	}
 
 	/**
 	 * This method is filling the TextBox's dateFrom dropdown lists in the filter panel.
@@ -342,6 +288,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 			dateToDB.addItem(dateTo.get(i));
 		}
 
+		dateToDB.setSelectedIndex(dateTo.size()-1);
+
 	}
 
 	/**
@@ -361,39 +309,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		return areaDB.getSelectedItemText();
 	}
 
-	/**
-	 * This method returns the selected country from ListBox countryDB.
-	 * It is called from class TablePresenter.
-	 * 
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public String getSelectedCountry() {
-		//Information for Developer
-		GWT.log("TableContentsView: getSelectedCountry()");
 
-		return countryDB.getSelectedItemText();
-	}
 
-	/**
-	 * This method returns the selected city from ListBox cityDB.
-	 * It is called from class TablePresenter.
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public String getSelectedCity() {
-		//Information for Developer
-		GWT.log("TableContentsView: getSelectedCity()");
-
-		return cityDB.getSelectedItemText();
-	}
 
 	/**
 	 * This method returns the selected dateFrom from ListBox dateFromDB.

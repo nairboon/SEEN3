@@ -50,21 +50,14 @@ public class TablePresenter implements Presenter{
         HasChangeHandlers getDateFromListBox();
         HasChangeHandlers getDateToListBox();
 
-        //ToDo: what is this code doing (not implemented)
-        void setData(List<String> data);
-
         //Fills the dropdown lists of the filter panel.
         void setInitAreas(List<String> areas);
-        void setInitCountries(List<String> countries);
-        void setInitCities(List<String> cities);
         void setInitDatesFrom(List<String> dateFrom);
         void setInitDatesTo(List<String> dateTo);
 
         //get the country, city, dateFrom or dateTo respectively
         // which are selected in TextBoxes
         String getSelectedArea();
-        String getSelectedCountry();
-        String getSelectedCity();
         String getSelectedDateFrom();
         String getSelectedDateTo();
 
@@ -89,19 +82,12 @@ public class TablePresenter implements Presenter{
 
     //lists fetched by RPC from server side MyClimateServiceImpl
     private List<String> areas;
-    private List<String> countries;
-    private List<String> cities;
     private List<String> dates;
 
     String currentArea;
-    String currentCountry;
-    String currentCity;
     String currentDateFrom;
     String currentDateTo;
 
-    //Test data
-    private static List<DataPoint> DATA = Arrays.asList(
-            new DataPoint("John", 0.0,0.0,"a", "b", "123 Fourth Road","y"));
 
     /**
      * Constructor: sets instance variables rpcService, eventBus and view
@@ -223,22 +209,8 @@ public class TablePresenter implements Presenter{
         //clears body-tag of Html-Host-file
         container.clear();
 
-        //adds TableContentsView to the body of the Html-host-file
-        //ToDo: what is this code doing
+        //adds TableContentsView to the tableContentsPanel
         container.add(display.asWidget());
-
-        //fetches the countryList from servers class MyClimateServiceImpl
-        rpcService.getCountryList(new AsyncCallback<ArrayList<String>>() {
-            public void onSuccess(ArrayList<String> result) {
-
-                //ToDo: what is this code doing (not implemented)
-                display.setData(result);
-            }
-
-            public void onFailure(Throwable caught) {
-                Window.alert("Error fetching contact details");
-            }
-        });
 
     }
 
@@ -266,6 +238,7 @@ public class TablePresenter implements Presenter{
         display.getAreaListBox().addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
+                GWT.log("AreaListBox:onChange");
                 currentArea = display.getSelectedArea();
                 rpcService_getDateList(currentArea);
             }
@@ -335,7 +308,7 @@ public class TablePresenter implements Presenter{
         //ToDo remove "city" from all methods in classes and interfaces
         // Rpc request to fetch number of DataPoints after applying the filters
         // and set the return value "result" in table footer
-        rpcService.getResultsCount(currentArea,"city", currentDateFrom, currentDateTo, new AsyncCallback<Integer>() {
+        rpcService.getResultsCount(currentArea, currentDateFrom, currentDateTo, new AsyncCallback<Integer>() {
             public void onSuccess(Integer result) {
 
                 //Information for Developer
@@ -390,7 +363,7 @@ public class TablePresenter implements Presenter{
                 //ToDo remove "city" from all methods in classes and interfaces
                 //Rpc request to fetch number of DataPoints after applying the filters
                 // and the range (start,end)
-                rpcService.getResults(view.getSelectedArea(), "city", currentDateFrom, currentDateTo,
+                rpcService.getResults(view.getSelectedArea(),  currentDateFrom, currentDateTo,
                         start, end, new AsyncCallback<ArrayList<DataPoint>>() {
                     public void onSuccess(ArrayList<DataPoint> result) {
 
@@ -414,28 +387,7 @@ public class TablePresenter implements Presenter{
                     }
                 });
 
-                // Get the ColumnSortInfo from the table.
-                //final ColumnSortList sortList = view.getCellTableDisplay().getColumnSortList();
 
-                // This timer is here to illustrate the asynchronous nature of this data
-                // provider. In practice, you would use an asynchronous RPC call to
-                // request data in the specified range.
-                /*
-                new Timer() {
-                    @Override
-                    public void run() {
-                        int start = range.getStart();
-                        int end = start + range.getLength();
-                        // This sorting code is here so the example works. In practice, you
-                        // would sort on the server.
-
-                        List<DataPoint> dataInRange = DATA.subList(start, end);
-
-                        // Push the data back into the list.
-                        view.getCellTableDisplay().setRowData(start, dataInRange);
-                    }
-                }.schedule(2000);
-                */
             }
         };
 

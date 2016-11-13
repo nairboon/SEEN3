@@ -66,8 +66,8 @@ public class AppView {
         this.mainLayoutPanel.getElement().getStyle().setVerticalAlign(2,Style.Unit.EM);
         this.mainLayoutPanel.getElement().getStyle().setBackgroundColor("rgb(240,240,240)");
         this.mainLayoutPanel.getElement().getStyle().setProperty("border","ridge gray 12px");
-        this.mainLayoutPanel.getElement().getStyle().setHeight(24,Style.Unit.EM);
-        this.mainLayoutPanel.getElement().getStyle().setWidth(42,Style.Unit.EM);
+        this.mainLayoutPanel.getElement().getStyle().setHeight(31,Style.Unit.EM);
+        this.mainLayoutPanel.getElement().getStyle().setWidth(45,Style.Unit.EM);
         this.mainLayoutPanel.getElement().getStyle().setMarginLeft(10,Style.Unit.EM);
         this.mainLayoutPanel.getElement().getStyle().setMarginTop(1,Style.Unit.EM);
     }
