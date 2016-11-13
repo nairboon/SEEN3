@@ -1,5 +1,6 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -23,6 +24,8 @@ public class HomeContentsView extends Composite {
 	 *
 	 */
 	public HomeContentsView(){
+		//Information for Developer
+		GWT.log("HomeContentsView:  HomeContentsView()");
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);

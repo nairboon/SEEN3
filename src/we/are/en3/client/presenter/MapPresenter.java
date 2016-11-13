@@ -1,5 +1,6 @@
 package we.are.en3.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 /**
@@ -12,6 +13,13 @@ import com.google.gwt.user.client.ui.HasWidgets;
  */
 public class MapPresenter implements Presenter{
 
+
+    public MapPresenter(){
+        //Information for Developer
+        GWT.log("MapPresenter: MapPresenter()");
+
+    }
+
     /**
      * ToDo: What is this code doing
      * @pre
@@ -21,6 +29,8 @@ public class MapPresenter implements Presenter{
      */
     @Override
     public void go(HasWidgets container) {
+        //Information for Developer
+        GWT.log("MapPresenter: go()");
 
         //ToDo
 

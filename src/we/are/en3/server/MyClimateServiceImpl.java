@@ -34,7 +34,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
     @Override
     public ArrayList<String> getMinMaxYear(String area) {
 
-        //
+        //This list will be returned
         ArrayList<String> returnList = new ArrayList<String>();
         String minYear = new String();
         String maxYear = new String();
@@ -76,33 +76,43 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         //return variable
         Integer size_;
 
-        //toDo: start end Datum in Logik einbauen
+        //indexes to be determined and used to calculate the number of DataPoints (=size_)
         Integer firstIndex=0;
         Integer lastIndex=0;
 
         //returns for an area: the size of the array, i.e. the number of data points
         if (meta.equals("city")){
             ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
+
             //find first index
             for (DataPoint dp : areaArray) {
-                String dateFrom_ = dateFrom + "-01-01";
-                Boolean found = dp.getDate().equals(dateFrom_);
+
+                //find year and exit loop
+                //dp.getDate() has format xxxx-xx-xx
+                Boolean found = dateFrom.equals(dp.getDate().split("-")[0]);
                 if (found) {
+
+                    //Take whatever you found first and exit loop. (January if it exists)
                     firstIndex = areaArray.indexOf(dp);
                     break;
                 }
             }
+
             //find last index
             for (DataPoint dp : areaArray) {
-                String dateTo_ = dateTo + "-12-01";
-                Boolean found = dp.getDate().equals(dateTo_);
+
+                //find year and continue looping
+                //dp.getDate() has format xxxx-xx-xx
+                Boolean found = dateTo.equals(dp.getDate().split("-")[0]);
                 if (found) {
+
+                    //Take whatever you found last. (December if it exists)
                     lastIndex = areaArray.indexOf(dp);
-                    break;
                 }
             }
 
-            size_ = lastIndex-firstIndex;
+            //size=1 if lastIndex=firstIndex
+            size_ = lastIndex-firstIndex+1;
 
         }else{
             size_ = DataStore.getInstance().areaMap.get(area).size();
@@ -111,7 +121,6 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         //return number of data points
         return size_;
     }
-
 
     /**
      * Method returns an ArrayList of DataPoints stored in DataStore's areaMap
@@ -125,12 +134,11 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      */
     @SuppressWarnings("Duplicates")
     @Override
-    public ArrayList<DataPoint> getResults(String area, String meta, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd) {
+    public ArrayList<DataPoint> getResults(String area, String meta, String dateFrom, String dateTo,
+                                           Integer seqStart, Integer seqEnd) {
 
         //Of type list since sublist() call below returns a List
         ArrayList<DataPoint> returnArrayList = null;
-
-        //toDo: start end Datum in Logik einbauen
 
         //exception handling: if area is null
         if (area==null) return null;
@@ -138,33 +146,48 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         //Read out the data store
         if (meta.equals("city")){
 
+            //indexes to be determined and used to provide the requested DataPoints
             Integer firstIndex=0;
             Integer lastIndex=0;
 
             //returns for an area: the size of the array, i.e. the number of data points
             if (meta.equals("city")) {
                 ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(area);
+
                 //find first index
                 for (DataPoint dp : areaArray) {
-                    String dateFrom_ = dateFrom + "-01-01";
-                    Boolean found = dp.getDate().equals(dateFrom_);
+
+                    //find year and exit loop
+                    //dp.getDate() has format xxxx-xx-xx
+                    Boolean found = dateFrom.equals(dp.getDate().split("-")[0]);
                     if (found) {
+
+                        //Take whatever you found first and exit loop. (January if it exists)
                         firstIndex = areaArray.indexOf(dp);
                         break;
                     }
                 }
+
                 //find last index
                 for (DataPoint dp : areaArray) {
-                    String dateTo_ = dateTo + "-12-01";
-                    Boolean found = dp.getDate().equals(dateTo_);
+
+                    //find year and continue looping
+                    //dp.getDate() has format xxxx-xx-xx
+                    Boolean found = dateTo.equals(dp.getDate().split("-")[0]);
                     if (found) {
+
+                        //Take whatever you found last. (December if it exists)
                         lastIndex = areaArray.indexOf(dp);
-                        break;
                     }
                 }
 
-                List<DataPoint> resList = areaArray.subList(firstIndex, lastIndex);
+                //Extract requested sub list, x=[a,b,c,d,e] x.sublist(1,4)->b,c,d, without last!
+                List<DataPoint> resList = areaArray.subList(firstIndex, lastIndex+1);
+
+                //seqEnd is already 1 higher (+1 not necessary)
                 List<DataPoint> returnList = resList.subList(seqStart, seqEnd);
+
+                //cast to ArrayList
                 returnArrayList = new ArrayList<DataPoint>(returnList);
 
             }
@@ -209,7 +232,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
     }
 
     /**
-     * This method returns the sorted list of cities taken from the DataStore
+     * This method returns the sorted list of areas (cities+countries) taken from the DataStore
      * It is used to initialize the dropdown list of the TextBoxes.
      * It is called with RpcService from TablePresenter
      *
@@ -220,14 +243,19 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      */
     @Override
     public ArrayList<String> getAreaList() {
-        //
-        ArrayList<String> cities = new ArrayList<String>();
 
-        //
-        for(String key: DataStore.getInstance().areaMap.keySet()) {
-            cities.add(key);
-        }
-        return cities;
+        //populates cities
+        ArrayList<String> areas = new ArrayList<String>(getCityList());
+
+        //populates countries
+        areas.addAll(getCountryList());
+
+        //ToDo: no longer needed since it remains unsorted
+        //for(String key: DataStore.getInstance().areaMap.keySet()) {
+        //    cities.add(key);
+        //}
+
+        return areas;
     }
 
     /**

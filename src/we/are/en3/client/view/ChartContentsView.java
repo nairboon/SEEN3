@@ -1,5 +1,6 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -34,6 +35,8 @@ public class ChartContentsView extends Composite{
 	 *
 	 */
 	public ChartContentsView(){
+		//Information for Developer
+		GWT.log("ChartContentsView: ChartContentsView()");
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);

@@ -28,6 +28,8 @@ public class MyClimate implements EntryPoint {
      * @return
      */
     public void onModuleLoad() {
+        //Information for Developer
+        GWT.log("MyClimate: onModuleLoad()");
 
         //load rpcService
         MyClimateServiceAsync rpcService = GWT.create(MyClimateService.class);
@@ -61,6 +63,9 @@ public class MyClimate implements EntryPoint {
          * @return
          */
         public MyAsyncCallback(Label label) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  MyAsyncCallback()");
+
             this.label = label;
         }
 
@@ -72,6 +77,9 @@ public class MyClimate implements EntryPoint {
          * @return
          */
         public void onSuccess(String result) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  onSuccess()");
+
             label.getElement().setInnerHTML(result);
         }
 
@@ -83,6 +91,9 @@ public class MyClimate implements EntryPoint {
          * @return
          */
         public void onFailure(Throwable throwable) {
+            //Information for Developer
+            GWT.log("MyClimate:MyAsyncCallback:  onFailure()");
+
             label.setText("Failed to receive answer from server!");
         }
     }

@@ -1,9 +1,10 @@
 package we.are.en3.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.cellview.client.ColumnSortList;
 import com.google.gwt.user.client.Timer;
@@ -44,6 +45,11 @@ public class TablePresenter implements Presenter{
         //returns the button from TableContentsView
         HasClickHandlers getLoadTableButton();
 
+        //returns the TextBoxes from TableContentsView
+        HasChangeHandlers getAreaListBox();
+        HasChangeHandlers getDateFromListBox();
+        HasChangeHandlers getDateToListBox();
+
         //ToDo: what is this code doing (not implemented)
         void setData(List<String> data);
 
@@ -61,6 +67,10 @@ public class TablePresenter implements Presenter{
         String getSelectedCity();
         String getSelectedDateFrom();
         String getSelectedDateTo();
+
+        //Set new visible/selected dates
+        void setSelectedDateTo(String dateTo);
+        void setSelectedDateFrom(String dateFrom);
 
         //Returns View as Widget
         Widget asWidget();
@@ -98,6 +108,9 @@ public class TablePresenter implements Presenter{
      * and calls init()
      */
     public TablePresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, Display view) {
+        //Information for Developer
+        GWT.log("TablePresenter: TablePresenter()");
+
         this.rpcService = rpcService;
         this.eventBus = eventBus;
         this.display = view;
@@ -115,9 +128,27 @@ public class TablePresenter implements Presenter{
      * @return
      */
     private void init() {
+        //Information for Developer
+        GWT.log("TablePresenter:init()");
 
-        //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
-        //and populates the Textbox's dropdown list
+        //Two rpc requests are called in sequence
+        rpcService_getAreaList_getDateList();
+    }
+
+
+    /**
+     * Two RpcServices in sequence fetch ArrayLists from Server side class MyClimateServiceImpl
+     * and populate the Textbox's dropdown lists
+     * The first RPC call fetches the areas,
+     * the second call fetches the dates conditional on the first area (the one shown in TextBox)
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    void rpcService_getAreaList_getDateList(){
+
         rpcService.getAreaList(new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
@@ -126,47 +157,32 @@ public class TablePresenter implements Presenter{
                 //method from display interface, implemented in TableContentsView
                 display.setInitAreas(areas);
 
-            }
-            public void onFailure(Throwable caught) {
-                Window.alert("Error fetching contact details");
-            }
-        });
-
-        //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
-        //and populates the Textbox's dropdown list
-        rpcService.getCountryList(new AsyncCallback<ArrayList<String>>() {
-            public void onSuccess(ArrayList<String> result) {
-
-                countries = result;
-
-                //method from display interface, implemented in TableContentsView
-                display.setInitCountries(countries);
+                //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
+                //and populates the Textbox's dropdown list
+                //This rpc-call needs to wait for onSuccess of areas list.
+                String area= areas.get(0);
+                GWT.log("----area----- "+area);
+                rpcService_getDateList(area);
 
             }
             public void onFailure(Throwable caught) {
                 Window.alert("Error fetching contact details");
             }
         });
+    }
 
-        //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
-        //and populates the Textbox's dropdown list
-        rpcService.getCityList(new AsyncCallback<ArrayList<String>>() {
-            public void onSuccess(ArrayList<String> result) {
+    /**
+     * RpcService fetches ArrayList from Server side class MyClimateServiceImpl
+     * and populates the Textbox's dropdown list
+     * The fetched data consists of the dates list for a given area.
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    void rpcService_getDateList(String area){
 
-                cities = result;
-
-                //method from display interface, implemented in TableContentsView
-                display.setInitCities(cities);
-
-            }
-            public void onFailure(Throwable caught) {
-                Window.alert("Error fetching contact details");
-            }
-        });
-
-        //RpcService fetches ArrayList from Server side class MyClimateServiceImpl
-        //and populates the Textbox's dropdown list
-        String area="Abidjan";
         rpcService.getDatesList(area, new AsyncCallback<ArrayList<String>>() {
             public void onSuccess(ArrayList<String> result) {
 
@@ -181,11 +197,12 @@ public class TablePresenter implements Presenter{
                 Window.alert("Error fetching contact details");
             }
         });
-
     }
+
 
     /**
      * This method adds click event to button which fetches table,
+     * by calling bind().
      * it clears body-tag of Html-Host-file
      * It is called from class AppController
      *
@@ -197,6 +214,8 @@ public class TablePresenter implements Presenter{
      */
     @Override
     public void go(HasWidgets container) {
+        //Information for Developer
+        GWT.log("TablePresenter:go()");
 
         //adds click event to button which fetches table
         bind();
@@ -233,13 +252,62 @@ public class TablePresenter implements Presenter{
      * @return
      */
     public void bind() {
+        //Information for Developer
+        GWT.log("TablePresenter:bind()");
+
+        //on click of LoadTable-Button method fetchTable() is called
         display.getLoadTableButton().addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 fetchTable();
             }
         });
-    }
 
+        //on change of Area-TextBox method rpcService_getDateList() is called
+        display.getAreaListBox().addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                currentArea = display.getSelectedArea();
+                rpcService_getDateList(currentArea);
+            }
+        });
+
+        //on change of Area-TextBox method rpcService_getDateList() is called
+        display.getDateFromListBox().addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                currentDateFrom = display.getSelectedDateFrom();
+                Integer currentDateFrom_=Integer.parseInt(currentDateFrom);
+
+                currentDateTo = display.getSelectedDateTo();
+                Integer currentDateTo_=Integer.parseInt(currentDateTo);
+
+                if (currentDateFrom_ > currentDateTo_){
+                    display.setSelectedDateTo (currentDateFrom);
+
+                }
+
+            }
+        });
+
+        //on change of Area-TextBox method rpcService_getDateList() is called
+        display.getDateToListBox().addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                currentDateFrom = display.getSelectedDateFrom();
+                Integer currentDateFrom_=Integer.parseInt(currentDateFrom);
+
+                currentDateTo = display.getSelectedDateTo();
+                Integer currentDateTo_=Integer.parseInt(currentDateTo);
+
+                if (currentDateFrom_ > currentDateTo_){
+                    display.setSelectedDateFrom (currentDateTo);
+
+                }
+
+            }
+        });
+
+    }
 
     /**
      * This method fetches the Table from Server side class MyClimateServiceImpl
@@ -250,6 +318,8 @@ public class TablePresenter implements Presenter{
      * @return
      */
     private void fetchTable() {
+        //Information for Developer
+        GWT.log("TablePresenter:fetchTable()");
 
         //gets the selected Area from the TextBox
         currentArea = display.getSelectedArea();

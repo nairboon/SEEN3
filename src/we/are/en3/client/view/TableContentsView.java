@@ -1,12 +1,16 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.user.cellview.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.HasData;
 import we.are.en3.client.model.DataPoint;
 import we.are.en3.client.presenter.TablePresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +44,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 * Constructor: Sets up the TableTab's panels, filtering widgets and static elements
 	 */
 	public TableContentsView(){
+		//Information for Developer
+		GWT.log("TableContentsView: TableContentsView()");
 
 		/**
 		 * Add Panels and Buttons
@@ -121,7 +127,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		// Set the range to display. In this case, our visible range is smaller than
 		// the data set. This is a functionality of CellTable<DataPoint> Widget.
-		table.setVisibleRange(0, 10);
+		table.setVisibleRange(0, 8);
 
 		//ToDo: what is this code doing
 		// Add a ColumnSortEvent.AsyncHandler to connect sorting to the
@@ -160,7 +166,59 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public HasClickHandlers getLoadTableButton() {
+		//Information for Developer
+		GWT.log("TableContentsView: getLoadTableButton()");
+
 		return loadTableButton;
+
+	}
+
+	/**
+	 * returns the Area TextBox
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public HasChangeHandlers getAreaListBox() {
+		//Information for Developer
+		GWT.log("TableContentsView: getAreaTextBox()");
+
+		return areaDB;
+	}
+
+	/**
+	 * returns the dateFrom TextBox
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public HasChangeHandlers getDateFromListBox() {
+		//Information for Developer
+		GWT.log("TableContentsView: getDateFromTextBox()");
+
+		return  dateFromDB;
+	}
+
+	/**
+	 * returns the dateTo TextBox
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public HasChangeHandlers getDateToListBox() {
+		//Information for Developer
+		GWT.log("TableContentsView: getDateToTextBox()");
+
+		return  dateToDB;
 	}
 
 	/**
@@ -171,6 +229,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 * @return
 	 */
 	public void setData(List<String> data) {
+		//Information for Developer
+		GWT.log("TableContentsView: setData()");
 
 	}
 
@@ -185,6 +245,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public void setInitAreas(List<String> areas) {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitAreas()");
+
 		areaDB.clear();
 
 		for (int i = 0; i < areas.size(); ++i) {
@@ -204,6 +267,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public void setInitCountries(List<String> countries) {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitCountries()");
+
 		countryDB.clear();
 
 		for (int i = 0; i < countries.size(); ++i) {
@@ -223,6 +289,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public void setInitCities(List<String> cities) {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitCities()");
 
 		cityDB.clear();
 
@@ -243,6 +311,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public void setInitDatesFrom(List<String> dateFrom) {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitDatesFrom()");
 
 		dateFromDB.clear();
 
@@ -263,6 +333,8 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public void setInitDatesTo(List<String> dateTo) {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitDatesTo()");
 
 		dateToDB.clear();
 
@@ -283,6 +355,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public String getSelectedArea() {
+		//Information for Developer
+		GWT.log("TableContentsView: getSelectedArea()");
+
 		return areaDB.getSelectedItemText();
 	}
 
@@ -297,6 +372,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public String getSelectedCountry() {
+		//Information for Developer
+		GWT.log("TableContentsView: getSelectedCountry()");
+
 		return countryDB.getSelectedItemText();
 	}
 
@@ -311,9 +389,11 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public String getSelectedCity() {
+		//Information for Developer
+		GWT.log("TableContentsView: getSelectedCity()");
+
 		return cityDB.getSelectedItemText();
 	}
-
 
 	/**
 	 * This method returns the selected dateFrom from ListBox dateFromDB.
@@ -326,6 +406,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public String getSelectedDateFrom() {
+		//Information for Developer
+		GWT.log("TableContentsView: getSelectedDateFrom()");
+
 		return dateFromDB.getSelectedItemText();
 	}
 
@@ -340,9 +423,79 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public String getSelectedDateTo() {
+		//Information for Developer
+		GWT.log("TableContentsView: getSelectedDateTo()");
+
 		return dateToDB.getSelectedItemText();
 	}
-	
+
+	/**
+	 * This method sets dateFrom in ListBox dateFromDB
+	 * equal to dateTo in ListBox dateToDB
+	 * It is called from class TablePresenter.
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@SuppressWarnings("Duplicates")
+	@Override
+	public void setSelectedDateFrom(String dateTo) {
+		//Information for Developer
+		GWT.log("TableContentsView: setSelectedDateTo()");
+
+		//Strange implementation because GWT doesn't offer indexOf()
+		//method for ListBoxes
+		ArrayList<String> listItems = new ArrayList<String>();
+		Integer index=0;
+
+		//Fill ArrayList to get index of item
+		for (int i=0; i<dateFromDB.getItemCount(); i++) {
+			listItems.add(dateFromDB.getItemText(i));
+		}
+
+		//get index of item
+		index = listItems.indexOf(dateTo);
+
+		//set index as selected
+		dateFromDB.setSelectedIndex(index);
+	}
+
+	/**
+	 * This method sets dateTo in ListBox dateToDB
+	 * equal to dateFrom in ListBox dateFromDB
+	 * It is called from class TablePresenter.
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@SuppressWarnings("Duplicates")
+	@Override
+	public void setSelectedDateTo(String dateFrom) {
+		//Information for Developer
+		GWT.log("TableContentsView: setSelectedDateTo()");
+
+		//Strange implementation because GWT doesn't offer indexOf()
+		//method for ListBoxes
+		ArrayList<String> listItems = new ArrayList<String>();
+		Integer index=0;
+
+		//Fill ArrayList to get index of item
+		for (int i=0; i<dateToDB.getItemCount(); i++) {
+			listItems.add(dateToDB.getItemText(i));
+		}
+
+		//get index of item
+		index = listItems.indexOf(dateFrom);
+
+		//set index as selected
+		dateToDB.setSelectedIndex(index);
+	}
+
+
 	/**
 	 * This method is necessary for GWT to provide its magic.
 	 * It returns this class as a Widget.
@@ -354,6 +507,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 * @return
 	 */
 	public Widget asWidget() {
+		//Information for Developer
+		GWT.log("TableContentsView: asWidget()");
+
 		return this;
 	}
 
@@ -368,6 +524,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public Widget getTableView() {
+		//Information for Developer
+		GWT.log("TableContentsView: getTableView()");
+
 		return vTablePanel;
 	}
 
@@ -382,6 +541,9 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 	 */
 	@Override
 	public HasData getCellTableDisplay() {
+		//Information for Developer
+		GWT.log("TableContentsView: getCellTableDisplay()");
+
 		return table;
 	}
 }

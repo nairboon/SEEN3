@@ -39,9 +39,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
      * Constructor method
      */
     public AppController(MyClimateServiceAsync rpcService, HandlerManager eventBus) {
+        //Information for Developer
+        GWT.log("AppController: AppController()");
+
         this.eventBus = eventBus;
         this.rpcService = rpcService;
         bind();
+
     }
 
     /**
@@ -53,7 +57,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
      * @return
      */
     private void bind() {
+        //Information for Developer
+        GWT.log("AppController: bind()");
+
+        //ToDo: What is this code doing
         History.addValueChangeHandler(this);
+
     }
 
     /**
@@ -65,6 +74,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
      * @return
      */
     public void go(final HasWidgets container) {
+        //Information for Developer
+        GWT.log("AppController: go()");
 
         // HTML-Host-File Body fetched with RootLayoutPanel.get()
         this.container = container;
@@ -90,6 +101,8 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
      * @return
      */
     public void onValueChange(ValueChangeEvent<String> event) {
+        //Information for Developer
+        GWT.log("AppController: onValueChange()");
 
         //returns the TabPanel names defined in class ContentsView
         String token = event.getValue();
@@ -97,18 +110,19 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         //no empty string
         if (token != null) {
 
-            //
+            //Presenter interface
             Presenter presenter = null;
 
-            //
+            //fired event token is TableTab
             if (token.equals("Table")) {
 
-                //
+                //create tablePresenter if non-existent,
+                // this starts rpc.requests and populates the dropdown lists of the TextBoxes
                 if(tablePresenter == null) {
                     tablePresenter = new TablePresenter(rpcService, eventBus, tableContentsView);
                 }
 
-                //
+                //execute
                 tablePresenter.go(contentsView.tableContentsPanel);
                 //tabPanelView.selectTab(1);
 
@@ -116,10 +130,10 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
                 return;
             }
 
-            //
+            //ToDo: why should presenter be not null?
             if (presenter != null) {
 
-                //
+                //ToDo: can that be called?
                 presenter.go(container);
             }
         }

@@ -1,5 +1,6 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.*;
@@ -39,6 +40,8 @@ public class ContentsView extends Composite {
 	 *
 	 */
 	public ContentsView() {
+		//Information for Developer
+		GWT.log("ContentsView:  ContentsView()");
 
         //Assemble tabPanel
 		tabPanelView.add(homeContentsView, tabTitles[0]);

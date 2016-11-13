@@ -1,5 +1,6 @@
 package we.are.en3.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 /**
@@ -12,6 +13,12 @@ import com.google.gwt.user.client.ui.HasWidgets;
  */
 public class ChartPresenter implements Presenter{
 
+    public ChartPresenter(){
+        //Information for Developer
+        GWT.log("ChartPresenter: ChartPresenter()");
+
+    }
+
     /**
      * ToDo: What is this code doing
      * @pre
@@ -21,6 +28,8 @@ public class ChartPresenter implements Presenter{
      */
     @Override
     public void go(HasWidgets container) {
+        //Information for Developer
+        GWT.log("ChartPresenter: go()");
 
         //Todo
 

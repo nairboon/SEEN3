@@ -1,5 +1,6 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -33,6 +34,8 @@ public class AppView {
      *
      */
     public AppView(HasWidgets container) {
+        //Information for Developer
+        GWT.log("AppView:  AppView()");
 
         //Header
         HTML text;

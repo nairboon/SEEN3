@@ -1,5 +1,6 @@
 package we.are.en3.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
 
 //two possible slider packages
@@ -39,6 +40,8 @@ public class MapContentsView extends Composite{
 	 *
 	 */
 	public MapContentsView(){
+		//Information for Developer
+		GWT.log("MapContentsView: MapContentsView()");
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
