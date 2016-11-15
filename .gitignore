@@ -4,3 +4,6 @@ out/*
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/uiDesigner.xml
+
+web/WEB-INF/appengine-web.xml
+MyClimate.iml

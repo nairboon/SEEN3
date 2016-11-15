@@ -27,7 +27,7 @@
     </facet>
     <facet type="google-app-engine" name="Google App Engine">
       <configuration>
-        <sdk-home-path>$MODULE_DIR$/sdk/appengine-java-sdk-1.9.42</sdk-home-path>
+        <sdk-home-path>$MODULE_DIR$/../jars_and_zips/appengine-java-sdk-1.9.46</sdk-home-path>
       </configuration>
     </facet>
   </component>
@@ -38,7 +38,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/sdk" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8 (1)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="AppEngine Dev 1.9.42" level="application_server_libraries" />
     <orderEntry type="library" name="gwt-user" level="project" />
