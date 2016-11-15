@@ -7,3 +7,4 @@ out/*
 
 web/WEB-INF/appengine-web.xml
 MyClimate.iml
+test/we/are/en3/data.csv
