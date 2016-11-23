@@ -265,4 +265,84 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         //
         return DataStore.getInstance().areaToYearMap.get(area);
     }
+
+    /**
+     * This method returns a list of cities and average temperatures taken from the DataStore
+     * for the requested year
+     *
+     *
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    @Override
+    public ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String year) {
+
+        //return data structure
+        ArrayList <String> cityAverageTemperatureList = new ArrayList<String>();
+        ArrayList<ArrayList <String>> citiesAverageTemperatureList = new ArrayList<ArrayList<String>>();
+
+        //cities in a list: used to iterate through
+        ArrayList<String> citiesList = DataStore.getInstance().citySortedList;
+
+        //indexes to be determined and used to provide the requested DataPoints
+        Integer firstIndex=0;
+
+        //iterate through all cities to fill the data structure
+        for (String city : citiesList) {
+
+            //returns an array of data points (one element for each date)
+            ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(city);
+
+            //used to calculate average yearly temperature
+            double averageYearlyTemperature = 0;
+            int counter=0;
+
+            //used to leave loop early
+            Boolean wasHere = false;
+
+            //iterate through all data points of a city and calculate the yearly average of the requested year
+            for(DataPoint dp : areaArray){
+
+                //find all data points of a year
+                //dp.getDate() has format xxxx-xx-xx
+                Boolean found = year.equals(dp.getDate().split("-")[0]);
+
+                if (found) {
+
+                    wasHere=true;
+                    averageYearlyTemperature+=dp.getAverageTemperature();
+                    counter++;
+
+                } else {
+
+                    //leave loop
+                    if (wasHere==true){
+                        break;
+                    }
+
+                }
+
+
+            }
+
+            //fill the inner data structure
+            cityAverageTemperatureList.add(city);
+            averageYearlyTemperature=averageYearlyTemperature/counter;
+            String averageYearlyTemperatureString = String.valueOf(averageYearlyTemperature);
+            cityAverageTemperatureList.add(averageYearlyTemperatureString);
+
+            //fill the outer data structure
+            citiesAverageTemperatureList.add(cityAverageTemperatureList);
+
+        }
+
+        return citiesAverageTemperatureList;
+
+    }
+
+
+
+
 }

@@ -83,6 +83,16 @@ public interface MyClimateService extends RemoteService {
     ArrayList<DataPoint> getResults(String area, String dateFrom, String dateTo, Integer seqStart, Integer seqEnd);
 
     /**
+     * ToDo: What is this code doing
+     *
+     * @param
+     * @return
+     * @pre
+     * @post
+     */
+    ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String Temperature);
+
+    /**
      * Utility/Convenience class.
      * Use MyClimateService.App.getInstance() to access static instance of MyClimateServiceAsync
      */

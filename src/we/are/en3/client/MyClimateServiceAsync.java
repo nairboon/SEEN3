@@ -79,4 +79,14 @@ public interface MyClimateServiceAsync {
      * @post
      */
     void getDatesList(String area, AsyncCallback<ArrayList<String>> async);
+
+    /**
+     * ToDo: What is this code doing
+     *
+     * @param
+     * @return
+     * @pre
+     * @post
+     */
+    void getCitiesAverageTemperatureList(String Temperature, AsyncCallback<ArrayList<ArrayList<String>>> async);
 }
