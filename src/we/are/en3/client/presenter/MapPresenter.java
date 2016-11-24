@@ -62,7 +62,7 @@ public class MapPresenter implements Presenter{
      * Constructor: sets instance variables rpcService, eventBus and view
      * and calls init()
      */
-    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, MapPresenter.Display view){
+    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, Display view){
         //Information for Developer
         GWT.log("MapPresenter: MapPresenter()");
 
