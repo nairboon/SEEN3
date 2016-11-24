@@ -3,16 +3,17 @@ package we.are.en3.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.*;
+import com.googlecode.gwt.charts.client.ChartLoader;
+import com.googlecode.gwt.charts.client.ChartPackage;
+import com.googlecode.gwt.charts.client.ColumnType;
+import com.googlecode.gwt.charts.client.DataTable;
+import com.googlecode.gwt.charts.client.geochart.GeoChart;
+import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
+import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import we.are.en3.client.presenter.MapPresenter;
 
 import java.util.ArrayList;
 
-//two possible slider packages
-//import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
-//import com.google.gwt.widgetideas.client.SliderBar;
-
-//a possible map package
-//import com.google.gwt.visualization.client.visualizations.GeoMap;
 
 /**
  * This class has the GUI Elements (Widgets)
@@ -24,21 +25,22 @@ import java.util.ArrayList;
  */
 public class MapContentsView extends Composite implements MapPresenter.Display{
 
+	private GeoChart geoChart;
+	SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20 ,"200px", true);
+
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
-	//Filter Panel with slider
-	FlowPanel selectionPanel = new FlowPanel();
+	//TextPanel
+	VerticalPanel vTextPanel = new VerticalPanel();
 
-	//ToDo: Choose a Slider Type (Whatever works best)
-	//SliderBarHorizontal slider = new SliderBarHorizontal();
-	//OR
-	//SliderBar slider = new SliderBar(1750,2016);
+	//Filter Panel with slider
+	VerticalPanel vSliderPanel = new VerticalPanel();
 
 	//Content Panel
-	VerticalPanel vchartPanel = new VerticalPanel();
-	ScrollPanel scrollPanel = new ScrollPanel();
+	VerticalPanel vMapPanel = new VerticalPanel();
 
+	//ToDo: decide if needed
 	Button loadMapButton = new Button("Load Map");
 
 
@@ -57,24 +59,83 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:10px;'>" +
 				"This Site shows a world Map with Temparature for your prefered date. </div>" );
 
-		vPanel.add(text);
+		vTextPanel.add(text);
+		vPanel.add(vTextPanel);
 
 		//Center: Filter
-		vPanel.add(selectionPanel);
 		//ToDo: Implement slider widget
+		vSliderPanel.setHeight("50px");
+		vSliderPanel.setWidth("500px");
+		vSliderPanel.add(slider);
 //		slider.setStepSize(1.0);
 //		slider.setCurrentValue(2000.0);
 //		slider.setNumTicks(28);
 //		slider.setNumLabels(14);
-		//selectionPanel.add(slider);
+		vPanel.add(vSliderPanel);
 
 		//Bottom: Content
-		vPanel.add(scrollPanel);
-		scrollPanel.setHeight("225px");
-		Image img = new Image("TempMap.jpg");
-		img.asWidget().setPixelSize(630,220);
-		scrollPanel.add(img);
+		vPanel.add(vMapPanel);
+		drawVisualization(vMapPanel);
 
+	}
+
+
+	/**
+	 Draws the initial visualization of the map
+	 @pre nothing
+	 @post nothing
+	 @param  container A Panel which contains the whole visualization
+	 **/
+	public void drawVisualization(final Panel container) {
+
+		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
+		chartLoader.loadApi(new Runnable() {
+
+
+			public void run() {
+				// Create and attach the chart to the panel
+				geoChart = new GeoChart();
+				container.add(geoChart);
+				updateVisualization(container);
+			}
+		});
+		//Set size constraints
+		container.setHeight("70vh");
+		container.setWidth("70vw");
+
+	}
+
+	/**
+	 Updates the visualization and displays the map and the requested data
+	 @pre nothing
+	 @post nothing
+	 @param  container A Panel which contains the whole visualization
+	 **/
+	public void updateVisualization(Panel container) {
+
+		// Prepare the datatable
+		DataTable dataTable = DataTable.create();
+
+		dataTable.addColumn(ColumnType.STRING, "Test");
+		dataTable.addColumn(ColumnType.NUMBER, "Test");
+
+		// Set options
+		GeoChartOptions options = GeoChartOptions.create();
+		options.setDatalessRegionColor("OliveDrab");
+
+		// Draw the chart
+		geoChart.draw(dataTable, options);
+
+	}
+
+	/**
+	 Returns the name respectively type of the visualization as String
+	 @pre nothing
+	 @post nothing
+	 @return Returns the name of the visualization
+	 **/
+	public String getName() {
+		return "Map Visualization";
 	}
 
 	/**
