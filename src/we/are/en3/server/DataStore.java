@@ -2,7 +2,6 @@ package we.are.en3.server;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import we.are.en3.client.model.DataPoint;

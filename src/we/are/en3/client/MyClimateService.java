@@ -6,7 +6,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * ToDo: What is this code doing
@@ -90,7 +89,7 @@ public interface MyClimateService extends RemoteService {
      * @pre
      * @post
      */
-    ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String Temperature);
+    ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String year);
 
     /**
      * Utility/Convenience class.

@@ -2,12 +2,7 @@ package we.are.en3.client.presenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.cellview.client.ColumnSortList;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -19,8 +14,6 @@ import we.are.en3.client.MyClimateServiceAsync;
 import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +66,7 @@ public class TablePresenter implements Presenter{
 
         //Returns the cellTable.
         HasData getCellTableDisplay();
+
     }
 
     //instance variables from constructor

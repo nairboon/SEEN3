@@ -3,7 +3,6 @@ package we.are.en3.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.user.cellview.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.view.client.HasData;
@@ -308,8 +307,6 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		return areaDB.getSelectedItemText();
 	}
-
-
 
 
 	/**

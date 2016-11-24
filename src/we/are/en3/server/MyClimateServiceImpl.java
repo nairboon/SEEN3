@@ -4,9 +4,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import we.are.en3.client.MyClimateService;
 import we.are.en3.client.model.DataPoint;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

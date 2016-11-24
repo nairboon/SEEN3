@@ -4,7 +4,6 @@ import we.are.en3.server.DataStore;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import java.io.*;
 
 /**

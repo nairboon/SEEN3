@@ -1,11 +1,8 @@
 package we.are.en3.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
+import we.are.en3.client.presenter.ChartPresenter;
 
 /**
  * This class has the GUI Elements (Widgets)
@@ -15,7 +12,7 @@ import com.google.gwt.user.client.ui.*;
  * @version 0.02
  *
  */
-public class ChartContentsView extends Composite{
+public class ChartContentsView extends Composite implements ChartPresenter.Display{
 
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();

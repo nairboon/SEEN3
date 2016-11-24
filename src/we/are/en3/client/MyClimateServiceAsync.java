@@ -4,7 +4,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * ToDo: What is this code doing
@@ -88,5 +87,5 @@ public interface MyClimateServiceAsync {
      * @pre
      * @post
      */
-    void getCitiesAverageTemperatureList(String Temperature, AsyncCallback<ArrayList<ArrayList<String>>> async);
+    void getCitiesAverageTemperatureList(String year, AsyncCallback<ArrayList<ArrayList<String>>> async);
 }

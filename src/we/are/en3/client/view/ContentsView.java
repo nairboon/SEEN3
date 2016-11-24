@@ -2,9 +2,7 @@ package we.are.en3.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.*;
-import we.are.en3.client.presenter.Presenter;
 
 /**
  * This class has the GUI Elements (Widgets)
@@ -28,9 +26,11 @@ public class ContentsView extends Composite {
 
     //Map Tab Panel
 	MapContentsView mapContentsView = new MapContentsView();
+	public ScrollPanel mapContentsPanel = new ScrollPanel();
 
     //Chart Tab Panel
-	ChartContentsView chartContentsView = new ChartContentsView();
+	public ChartContentsView chartContentsView = new ChartContentsView();
+	public ScrollPanel chartContentsPanel = new ScrollPanel();
 
 	//TabPanel Titles
 	public String[] tabTitles = {"Home", "Table", "Map", "Chart"};

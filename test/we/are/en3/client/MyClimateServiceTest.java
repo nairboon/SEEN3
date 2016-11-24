@@ -9,8 +9,6 @@ import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 /**
  * ToDo: What is this code doing
  * @author Team SE_EN3, University of Zurich

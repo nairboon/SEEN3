@@ -2,7 +2,6 @@ package we.are.en3.server;
 
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
