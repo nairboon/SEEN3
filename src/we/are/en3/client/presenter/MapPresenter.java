@@ -1,12 +1,19 @@
 package we.are.en3.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.gwt.charts.client.ChartLoader;
+import com.googlecode.gwt.charts.client.ChartPackage;
+import com.googlecode.gwt.charts.client.ColumnType;
+import com.googlecode.gwt.charts.client.DataTable;
+import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import we.are.en3.client.MyClimateServiceAsync;
 
 import java.util.ArrayList;
@@ -39,6 +46,8 @@ public class MapPresenter implements Presenter{
         //Returns View as Widget
         Widget asWidget();
 
+        void updateVisualization(GeoChart geoChart, DataTable dataTable);
+
         //ToDo: Needed? Returns the Content Panel with Map
         //Widget getMapView();
 
@@ -55,7 +64,10 @@ public class MapPresenter implements Presenter{
     private final Display display;
 
     //lists fetched by RPC from server side MyClimateServiceImpl
-    private ArrayList<ArrayList<String>> dataArray;
+    private ArrayList<ArrayList<String>> dataArray = new ArrayList<ArrayList<String>>();
+
+    //GeoChart
+    private GeoChart geoChart;
 
 
     /**
@@ -111,15 +123,67 @@ public class MapPresenter implements Presenter{
 
                 dataArray = result;
 
-                //method from display interface, implemented in TableContentsView
-                display.showMap(dataArray);
+                //prepare dataTable data structure
+                DataTable dataTable = prepareDataTable(dataArray);
 
+                //method from display interface, implemented in TableContentsView
+                loadGeoMap(dataTable);
 
             }
             public void onFailure(Throwable caught) {
                 Window.alert("Error fetching contact details");
             }
         });
+
+    }
+
+    /**
+     * ToDo: What is this code doing
+     * @pre
+     * @post
+     * @param
+     * @return
+     */
+    DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray){
+
+        // Prepare the data table
+        DataTable dataTable = DataTable.create();
+
+        dataTable.addColumn(ColumnType.STRING, "City");
+        dataTable.addColumn(ColumnType.STRING, "Label");
+
+        //fill dataTable
+        dataTable.addRows(dataArray.size());
+        int iter=0;
+        for (ArrayList<String> city_Temp : dataArray) {
+            dataTable.setValue(iter, 0, city_Temp.get(0));
+            String label = city_Temp.get(0) + "(" + city_Temp.get(1) + ")";
+            dataTable.setValue(iter, 1, label);
+            iter++;
+        }
+
+        return dataTable;
+    }
+
+    /**
+     Draws the initial visualization of the map
+     @pre nothing
+     @post nothing
+     @param
+     **/
+    public void loadGeoMap(final DataTable dataTable) {
+
+        ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
+        chartLoader.loadApi(new Runnable() {
+
+
+            public void run() {
+                // Create and attach the map to the panel
+                geoChart = new GeoChart();
+                display.updateVisualization(geoChart, dataTable);
+            }
+        });
+
 
     }
 
@@ -141,6 +205,9 @@ public class MapPresenter implements Presenter{
 
         //clears body-tag of Html-Host-file
         container.clear();
+
+        //
+        //init();
 
         //adds MapContentsView to the MapContentsPanel
         container.add(display.asWidget());

@@ -44,8 +44,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     private final HandlerManager eventBus;
     private final MyClimateServiceAsync rpcService;
 
-
-
     /**
      * Constructor method
      */

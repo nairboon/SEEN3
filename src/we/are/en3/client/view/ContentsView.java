@@ -26,7 +26,7 @@ public class ContentsView extends Composite {
 
     //Map Tab Panel
 	MapContentsView mapContentsView = new MapContentsView();
-	public ScrollPanel mapContentsPanel = new ScrollPanel();
+	public VerticalPanel mapContentsPanel = new VerticalPanel();
 
     //Chart Tab Panel
 	public ChartContentsView chartContentsView = new ChartContentsView();
@@ -46,8 +46,8 @@ public class ContentsView extends Composite {
         //Assemble tabPanel
 		tabPanelView.add(homeContentsView, tabTitles[0]);
 	    tabPanelView.add(tableContentsPanel, tabTitles[1]);
-	    tabPanelView.add(mapContentsView, tabTitles[2]);
-	    tabPanelView.add(chartContentsView, tabTitles[3]);
+	    tabPanelView.add(mapContentsPanel, tabTitles[2]);
+	    tabPanelView.add(chartContentsPanel, tabTitles[3]);
 	    
 	    //Give focus to first tab
 	    tabPanelView.selectTab(0);

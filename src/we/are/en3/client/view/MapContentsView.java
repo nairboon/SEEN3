@@ -3,9 +3,6 @@ package we.are.en3.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.*;
-import com.googlecode.gwt.charts.client.ChartLoader;
-import com.googlecode.gwt.charts.client.ChartPackage;
-import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
@@ -25,8 +22,6 @@ import java.util.ArrayList;
  */
 public class MapContentsView extends Composite implements MapPresenter.Display{
 
-	private GeoChart geoChart;
-	SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20 ,"200px", true);
 
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
@@ -42,6 +37,9 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 	//ToDo: decide if needed
 	Button loadMapButton = new Button("Load Map");
+
+	//Slider
+	SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20 ,"200px", true);
 
 
 	/**
@@ -62,6 +60,23 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		vTextPanel.add(text);
 		vPanel.add(vTextPanel);
 
+		//
+//		geoChart = new GeoChart();
+//		display.updateVisualization(geoChart, dataTable);
+//		vPanel.add(vMapPanel);
+//		updateVisualization(vMapPanel);
+
+	}
+
+	/**
+	 Updates the visualization and displays the map and the requested data
+	 @pre nothing
+	 @post nothing
+	 @param  geoChart todo
+	 **/
+	@Override
+	public void updateVisualization(GeoChart geoChart, DataTable dataTable) {
+
 		//Center: Filter
 		//ToDo: Implement slider widget
 		vSliderPanel.setHeight("50px");
@@ -73,51 +88,9 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 //		slider.setNumLabels(14);
 		vPanel.add(vSliderPanel);
 
-		//Bottom: Content
-		vPanel.add(vMapPanel);
-		drawVisualization(vMapPanel);
-
-	}
-
-
-	/**
-	 Draws the initial visualization of the map
-	 @pre nothing
-	 @post nothing
-	 @param  container A Panel which contains the whole visualization
-	 **/
-	public void drawVisualization(final Panel container) {
-
-		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
-		chartLoader.loadApi(new Runnable() {
-
-
-			public void run() {
-				// Create and attach the chart to the panel
-				geoChart = new GeoChart();
-				container.add(geoChart);
-				updateVisualization(container);
-			}
-		});
-		//Set size constraints
-		container.setHeight("70vh");
-		container.setWidth("70vw");
-
-	}
-
-	/**
-	 Updates the visualization and displays the map and the requested data
-	 @pre nothing
-	 @post nothing
-	 @param  container A Panel which contains the whole visualization
-	 **/
-	public void updateVisualization(Panel container) {
-
-		// Prepare the datatable
-		DataTable dataTable = DataTable.create();
-
-		dataTable.addColumn(ColumnType.STRING, "Test");
-		dataTable.addColumn(ColumnType.NUMBER, "Test");
+		//bottom: Map
+		vPanel.setHeight("70vh");
+		vPanel.setWidth("70vw");
 
 		// Set options
 		GeoChartOptions options = GeoChartOptions.create();
@@ -125,6 +98,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 		// Draw the chart
 		geoChart.draw(dataTable, options);
+		vPanel.add(geoChart);
 
 	}
 
