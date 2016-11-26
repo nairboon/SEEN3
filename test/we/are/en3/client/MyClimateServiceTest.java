@@ -88,6 +88,7 @@ public class MyClimateServiceTest extends GWTTestCase {
                         assertTrue(result.get(0).contains("Abidjan"));
                         assertEquals("26.9445",result.get(0).get(1));
                         assertEquals(100,result.size());
+                        assertEquals(2,result.get(0).size());
 
 
                         finishTest();
