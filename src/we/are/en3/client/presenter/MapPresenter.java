@@ -7,6 +7,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.gwt.charts.client.ColumnType;
+import com.googlecode.gwt.charts.client.DataTable;
 import we.are.en3.client.MyClimateServiceAsync;
 
 import java.util.ArrayList;
@@ -31,10 +33,10 @@ public class MapPresenter implements Presenter{
     public interface Display {
 
         //returns the slider from MapContentsView
-        HasClickHandlers getLoadMapButton();
+       // HasClickHandlers getLoadMapButton();
 
-        //shows map.
-        public void showMap(ArrayList<ArrayList<String>> dataArray);
+
+        public void updateMap(final ArrayList<ArrayList<String>> inp);
 
         //Returns View as Widget
         Widget asWidget();
@@ -54,27 +56,27 @@ public class MapPresenter implements Presenter{
     private final HandlerManager eventBus;
     private final Display display;
 
-    //lists fetched by RPC from server side MyClimateServiceImpl
-    private ArrayList<ArrayList<String>> dataArray;
 
+
+    private String currentYear;
 
     /**
      * Constructor: sets instance variables rpcService, eventBus and view
      * and calls init()
      */
-    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, MapPresenter.Display view){
+    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, Display view){
         //Information for Developer
         GWT.log("MapPresenter: MapPresenter()");
 
         this.rpcService = rpcService;
         this.eventBus = eventBus;
         this.display = view;
-        init();
 
+        init();
     }
 
     /**
-     * ToDo: What is this code doing
+     * Display the map for the first time
      *
      * @pre
      * @post
@@ -85,36 +87,25 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("TablePresenter:init()");
 
-        //rpc request is called
-        rpcService_getCitiesAverageTemperatureList();
+        // init map
+        this.currentYear = "2000";
+        updateMap();
     }
 
-
     /**
-     * ToDo: What is this code doing
+     * Updates the map in the view for the currently selected year
      *
-     * @pre
-     * @post
-     * @param
-     * @return
+     * @pre this.currentYear is valid
+     * @post -
+     * @param -
+     * @return void
      */
-    void rpcService_getCitiesAverageTemperatureList(){
-
-        //Information for Developer
-        GWT.log("MapPresenter:getCitiesAverageTemperatureList()");
-
-        //ToDo: get the selected Area from Slider Widget
-        String currentYear = "2008"; //display.getSelectedArea();
+    private void updateMap() {
 
         rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
             public void onSuccess(ArrayList<ArrayList<String>> result) {
-
-                dataArray = result;
-
-                //method from display interface, implemented in TableContentsView
-                display.showMap(dataArray);
-
-
+                GWT.log(result.toString());
+                display.updateMap(result);
             }
             public void onFailure(Throwable caught) {
                 Window.alert("Error fetching contact details");
@@ -145,7 +136,6 @@ public class MapPresenter implements Presenter{
         //adds MapContentsView to the MapContentsPanel
         container.add(display.asWidget());
 
-
     }
 
     /**
@@ -162,12 +152,12 @@ public class MapPresenter implements Presenter{
         GWT.log("TablePresenter:bind()");
 
         //on click of LoadTable-Button method fetchTable() is called
-        display.getLoadMapButton().addClickHandler(new ClickHandler() {
+       /* display.getLoadMapButton().addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 rpcService_getCitiesAverageTemperatureList();
             }
         });
-
+        */
 
 
     }

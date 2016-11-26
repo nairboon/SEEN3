@@ -330,7 +330,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
             //fill the inner data structure
             cityAverageTemperatureList.add(city);
             averageYearlyTemperature=averageYearlyTemperature/counter;
-            String averageYearlyTemperatureString = String.valueOf(averageYearlyTemperature);
+            String averageYearlyTemperatureString = String.format("%.2f°C",averageYearlyTemperature);
             cityAverageTemperatureList.add(averageYearlyTemperatureString);
 
             //fill the outer data structure

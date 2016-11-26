@@ -1,7 +1,22 @@
 package we.are.en3.client.view;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.*;
 import com.google.gwt.user.client.ui.*;
+import com.googlecode.gwt.charts.client.ColumnType;
+import com.googlecode.gwt.charts.client.DataTable;
+import com.googlecode.gwt.charts.client.geochart.GeoChart;
+import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
+import we.are.en3.client.presenter.MapPresenter;
+import we.are.en3.client.util.GeoChartLoader;
+import we.are.en3.client.util.OurGeoChartOptions;
+
+/*
+import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
+import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
+import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
+
+*/
+import java.util.ArrayList;
 
 //two possible slider packages
 //import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
@@ -18,7 +33,12 @@ import com.google.gwt.user.client.ui.*;
  * @version 0.02
  *
  */
-public class MapContentsView extends Composite{
+public class MapContentsView extends Composite implements MapPresenter.Display{
+
+	private GeoChart geoChart;
+	private boolean geoChartisLoaded = false;
+
+	OurGeoChartOptions mapOptions = null;
 
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
@@ -46,28 +66,101 @@ public class MapContentsView extends Composite{
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
 
-		//Top: Titel
-		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:10px;'>" +
-				"This Site shows a world Map with Temparature for your prefered date. </div>" );
 
-		vPanel.add(text);
-
-		//Center: Filter
-		vPanel.add(selectionPanel);
-		//ToDo: Implement slider widget
-//		slider.setStepSize(1.0);
-//		slider.setCurrentValue(2000.0);
-//		slider.setNumTicks(28);
-//		slider.setNumLabels(14);
-		//selectionPanel.add(slider);
-
-		//Bottom: Content
-		vPanel.add(scrollPanel);
-		scrollPanel.setHeight("225px");
-		Image img = new Image("TempMap.jpg");
-		img.asWidget().setPixelSize(630,220);
-		scrollPanel.add(img);
+		mapOptions = OurGeoChartOptions.create();
+		mapOptions.setDisplayMode("text");
+		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
+		//geoChartColorAxis.setColors(["green", "yellow", "red"]);
+		mapOptions.setColorAxis(geoChartColorAxis);
+		mapOptions.setDatalessRegionColor("gray");
 
 	}
+
+	/**
+	 * Laode the google geochart js code
+	 *
+	 * @pre geoChartisLoaded == false
+	 * @post geoChartisLoaded == true
+	 * @param done the callback after geocharts is loaded
+	 * @return -
+	 */
+
+    private void loadGeoChart(final Runnable done) {
+		GeoChartLoader gcloader = new GeoChartLoader("AIzaSyAoi_p3fThssrmv_xkdy5v2B5D6J5FsSR4");
+
+		gcloader.load(new Runnable() {
+			@Override
+			public void run() {
+				GWT.log("api loaded");
+				// Create and attach the chart
+				geoChart = new GeoChart();
+				vPanel.add(geoChart);
+				geoChartisLoaded = true;
+				done.run();
+			}
+		});
+	}
+
+	/**
+	 * Converts a String[][2] to a geochart.Datatable
+	 *
+	 * @pre geoChartisLoaded == true
+	 * @post -
+	 * @param input is a String[][2] array
+	 * @return the inputarray as a Datatable with columns City, Label
+	 */
+
+	public DataTable ArrayToDataTable(ArrayList<ArrayList<String>> input) {
+		DataTable dataTable = DataTable.create();
+		dataTable.addColumn(ColumnType.STRING, "City");
+		dataTable.addColumn(ColumnType.STRING, "Label");
+
+
+		for(ArrayList<String> city : input) {
+			GWT.log("add:" + city.toString());
+			dataTable.addRow(city.toArray());
+		}
+
+		return dataTable;
+	}
+
+
+	/**
+	 * Starts updating the map, loads geoCharts if it is not yet loaded
+	 *
+	 * @pre
+	 * @post -
+	 * @param input is a String[][2] array
+	 * @return void
+	 */
+
+    public void updateMap(final ArrayList<ArrayList<String>> inp) {
+
+    	if(geoChartisLoaded) {
+    		_drawMap(ArrayToDataTable(inp));
+		} else {
+    		loadGeoChart(new Runnable() {
+				@Override
+				public void run() {
+					_drawMap(ArrayToDataTable(inp));
+				}
+			});
+		}
+	}
+
+	/**
+	 * Actually draws the map
+	 *
+	 * @pre geoChartisLoaded == true
+	 * @post -
+	 * @param tbl the datatable to be displayed
+	 * @return void
+	 */
+	private void _drawMap(DataTable tbl) {
+    	GWT.log("drawMap");
+		geoChart.draw(tbl, mapOptions);
+		GWT.log("drawMap:done");
+	}
+
 
 }
