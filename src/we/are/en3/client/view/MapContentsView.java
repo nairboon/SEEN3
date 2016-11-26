@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class MapContentsView extends Composite implements MapPresenter.Display{
 
-
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
@@ -76,16 +75,14 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 **/
 	@Override
 	public void updateVisualization(GeoChart geoChart, DataTable dataTable) {
+		//Information for Developer
+		GWT.log("MapContentsView:updateVisualization()");
 
 		//Center: Filter
 		//ToDo: Implement slider widget
 		vSliderPanel.setHeight("50px");
 		vSliderPanel.setWidth("500px");
 		vSliderPanel.add(slider);
-//		slider.setStepSize(1.0);
-//		slider.setCurrentValue(2000.0);
-//		slider.setNumTicks(28);
-//		slider.setNumLabels(14);
 		vPanel.add(vSliderPanel);
 
 		//bottom: Map

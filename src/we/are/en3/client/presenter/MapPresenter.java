@@ -63,9 +63,6 @@ public class MapPresenter implements Presenter{
     private final HandlerManager eventBus;
     private final Display display;
 
-    //lists fetched by RPC from server side MyClimateServiceImpl
-    private ArrayList<ArrayList<String>> dataArray = new ArrayList<ArrayList<String>>();
-
     //GeoChart
     private GeoChart geoChart;
 
@@ -115,23 +112,49 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("MapPresenter:getCitiesAverageTemperatureList()");
 
+        //lists fetched by RPC from server side MyClimateServiceImpl
+        //ArrayList <ArrayList <String>> dataArray = new ArrayList <ArrayList <String>>();
+
         //ToDo: get the selected Area from Slider Widget
         String currentYear = "2008"; //display.getSelectedArea();
 
         rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
             public void onSuccess(ArrayList<ArrayList<String>> result) {
 
-                dataArray = result;
-
-                //prepare dataTable data structure
-                DataTable dataTable = prepareDataTable(dataArray);
+                //dataArray = result;
 
                 //method from display interface, implemented in TableContentsView
-                loadGeoMap(dataTable);
+                loadGeoMap(result);
 
             }
             public void onFailure(Throwable caught) {
                 Window.alert("Error fetching contact details");
+            }
+        });
+
+    }
+
+
+    /**
+     Draws the initial visualization of the map
+     @pre nothing
+     @post nothing
+     @param
+     **/
+    public void loadGeoMap(final ArrayList<ArrayList<String>> dataArray) {
+        //Information for Developer
+        GWT.log("MapPresenter:loadGeoMap()");
+
+        ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
+        chartLoader.loadApi(new Runnable() {
+
+
+            public void run() {
+                // Create and attach the map to the panel
+                geoChart = new GeoChart();
+                //prepare dataTable data structure
+                DataTable dataTable = prepareDataTable(dataArray);
+                display.updateVisualization(geoChart, dataTable);
             }
         });
 
@@ -144,7 +167,10 @@ public class MapPresenter implements Presenter{
      * @param
      * @return
      */
-    DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray){
+    public DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray){
+
+        //Information for Developer
+        GWT.log("MapPresenter:prepareDataTable()");
 
         // Prepare the data table
         DataTable dataTable = DataTable.create();
@@ -159,32 +185,11 @@ public class MapPresenter implements Presenter{
             dataTable.setValue(iter, 0, city_Temp.get(0));
             String label = city_Temp.get(0) + "(" + city_Temp.get(1) + ")";
             dataTable.setValue(iter, 1, label);
+            dataTable.setValue(iter,1,"Test");
             iter++;
         }
 
         return dataTable;
-    }
-
-    /**
-     Draws the initial visualization of the map
-     @pre nothing
-     @post nothing
-     @param
-     **/
-    public void loadGeoMap(final DataTable dataTable) {
-
-        ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
-        chartLoader.loadApi(new Runnable() {
-
-
-            public void run() {
-                // Create and attach the map to the panel
-                geoChart = new GeoChart();
-                display.updateVisualization(geoChart, dataTable);
-            }
-        });
-
-
     }
 
 
