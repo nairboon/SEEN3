@@ -3,6 +3,7 @@ package we.are.en3.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.*;
+import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
@@ -92,9 +93,28 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		// Set options
 		GeoChartOptions options = GeoChartOptions.create();
 		options.setDatalessRegionColor("OliveDrab");
+		geoChart.setPixelSize(500,200);
+
+		//Test DataTable
+		DataTable dataTable2 = DataTable.create();
+		dataTable2.addColumn(ColumnType.STRING, "Country");
+		dataTable2.addColumn(ColumnType.NUMBER, "Popularity");
+		dataTable2.addRows(6);
+		dataTable2.setValue(0, 0, "Germany");
+		dataTable2.setValue(0, 1, 200);
+		dataTable2.setValue(1, 0, "United States");
+		dataTable2.setValue(1, 1, 300);
+		dataTable2.setValue(2, 0, "Brazil");
+		dataTable2.setValue(2, 1, 400);
+		dataTable2.setValue(3, 0, "Canada");
+		dataTable2.setValue(3, 1, 500);
+		dataTable2.setValue(4, 0, "France");
+		dataTable2.setValue(4, 1, 600);
+		dataTable2.setValue(5, 0, "RU");
+		dataTable2.setValue(5, 1, 700);
 
 		// Draw the chart
-		geoChart.draw(dataTable, options);
+		geoChart.draw(dataTable2, options);
 		vPanel.add(geoChart);
 
 	}

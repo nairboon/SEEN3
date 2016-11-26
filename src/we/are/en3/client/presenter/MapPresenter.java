@@ -182,7 +182,9 @@ public class MapPresenter implements Presenter{
         dataTable.addRows(dataArray.size());
         int iter=0;
         for (ArrayList<String> city_Temp : dataArray) {
+            //city
             dataTable.setValue(iter, 0, city_Temp.get(0));
+            //label
             String label = city_Temp.get(0) + "(" + city_Temp.get(1) + ")";
             dataTable.setValue(iter, 1, label);
             dataTable.setValue(iter,1,"Test");
