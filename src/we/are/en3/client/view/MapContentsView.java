@@ -1,6 +1,7 @@
 package we.are.en3.client.view;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.*;
 import com.googlecode.gwt.charts.client.ChartLoader;
@@ -33,13 +34,15 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	VerticalPanel vTextPanel = new VerticalPanel();
 
 	//Filter Panel with slider
-	VerticalPanel vSliderPanel = new VerticalPanel();
+	HorizontalPanel hSliderPanel = new HorizontalPanel();
+	HorizontalPanel hSelectionPanel = new HorizontalPanel();
 
 	//Map Panel
 	VerticalPanel vMapPanel = new VerticalPanel();
 
 
 	//ToDo: decide if needed
+	ListBox dateDB = new ListBox();
 	Button loadMapButton = new Button("Load Map");
 
 	SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20, "200px", true);
@@ -55,18 +58,6 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 		initWidget(this.vPanel);
 
-	}
-
-	/**
-	 Draws the initial visualization of the map
-	 @pre nothing
-	 @post nothing
-	 @param
-	 **/
-	public void loadGeoMap(final ArrayList<ArrayList<String>> dataArray) {
-		//Information for Developer
-		GWT.log("MapPresenter:loadGeoMap()");
-
 		//Top: Titel
 		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:10px;'>" +
 				"This Site shows a world Map with Temparature for your prefered date. </div>" );
@@ -76,11 +67,32 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		vPanel.add(vTextPanel);
 
 		//Set size constraints
-		vSliderPanel.setHeight("5vh");
-		vSliderPanel.setWidth("40vw");
+		hSliderPanel.setHeight("5vh");
+		hSliderPanel.setWidth("40vw");
 
-		vSliderPanel.add(slider);
-		vPanel.add(vSliderPanel);
+		hSliderPanel.add(slider);
+		vPanel.add(hSliderPanel);
+
+		hSelectionPanel.setHeight("10vh");
+
+		hSelectionPanel.add(dateDB);
+
+		hSelectionPanel.add(new HTML("<div>==>></div>"));
+		hSelectionPanel.add(loadMapButton);
+
+		vPanel.add(hSelectionPanel);
+
+	}
+
+	/**
+	 Draws the initial visualization of the map
+	 @pre nothing
+	 @post nothing
+	 @param
+	 **/
+	public void loadGeoMap(final ArrayList<ArrayList<String>> dataArray, final String currentYear) {
+		//Information for Developer
+		GWT.log("MapPresenter:loadGeoMap()");
 
 
 		ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
@@ -92,7 +104,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 				GeoChart geoChart = new GeoChart();
 
 				//prepare dataTable data structure
-				DataTable dataTable = prepareDataTable(dataArray);
+				DataTable dataTable = prepareDataTable(dataArray, currentYear);
 				vMapPanel.add(geoChart);
 				vPanel.add(vMapPanel);
 				updateVisualization(geoChart, dataTable);
@@ -109,7 +121,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 * @param
 	 * @return
 	 */
-	public DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray){
+	public DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray, String currentYear){
 
 		//Information for Developer
 		GWT.log("MapPresenter:prepareDataTable()");
@@ -129,7 +141,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 			String city = city_Temp.get(0);
 			dataTable.setValue(iter, 0, city);
 			//label
-			String label = city_Temp.get(0) + "(" + city_Temp.get(1) + ")";
+			String label = city_Temp.get(0) + " ( " + city_Temp.get(1) + ", " + currentYear + " )";
 			dataTable.setValue(iter, 1, label);
 			iter++;
 		}
@@ -159,6 +171,81 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 	}
 
+	/**
+	 * returns the button
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public HasClickHandlers getLoadMapButton() {
+		//Information for Developer
+		GWT.log("MapContentsView: getLoadMapButton()");
+
+		return loadMapButton;
+
+	}
+
+
+	/**
+	 * returns the dateFrom TextBox
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public HasChangeHandlers getDateListBox() {
+		//Information for Developer
+		GWT.log("MapContentsView: getDateTextBox()");
+
+		return  dateDB;
+	}
+
+
+	/**
+	 * This method is filling the TextBox's dateTo dropdown lists in the filter panel.
+	 * It is called from class TablePresenter.
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public void setInitDates() {
+		//Information for Developer
+		GWT.log("TableContentsView: setInitDatesTo()");
+
+		dateDB.clear();
+
+		int min=1750;
+		int max=2013;
+
+		for (int i = min; i < max; ++i) {
+			dateDB.addItem(String.valueOf(i));
+		}
+
+		dateDB.setSelectedIndex(max-min-1);
+
+	}
+
+	/**
+	 * ToDo
+	 *
+	 * @pre
+	 * @post
+	 * @param
+	 * @return
+	 */
+	@Override
+	public String getSelectedDate() {
+		return dateDB.getSelectedItemText();
+	}
+
 
 	/**
 	 Returns the name respectively type of the visualization as String
@@ -167,6 +254,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 @return Returns the name of the visualization
 	 **/
 	public String getName() {
+
 		return "Map Visualization";
 	}
 
@@ -187,19 +275,6 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		return this;
 	}
 
-	/**
-	 * ToDo
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	public HasClickHandlers getLoadMapButton(){
-		//Information for Developer
-		GWT.log("MapContentsView: getLoadMapButton()");
 
-		return loadMapButton;
-	}
 
 }

@@ -3,6 +3,7 @@ package we.are.en3.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
@@ -12,6 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 import we.are.en3.client.MyClimateServiceAsync;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class handles the data flow
@@ -35,8 +37,18 @@ public class MapPresenter implements Presenter{
         //returns the slider from MapContentsView
         HasClickHandlers getLoadMapButton();
 
+        //returns the TextBoxes from TableContentsView
+        HasChangeHandlers getDateListBox();
+
+        //get the country, city, dateFrom or dateTo respectively
+        // which are selected in TextBoxes
+        String getSelectedDate();
+
+        //Fills the dropdown lists of the filter panel.
+        void setInitDates();
+
         //shows map.
-        public void loadGeoMap(ArrayList<ArrayList<String>> dataArray);
+        public void loadGeoMap(ArrayList<ArrayList<String>> dataArray, String currentYear);
 
         //Returns View as Widget
         Widget asWidget();
@@ -55,6 +67,9 @@ public class MapPresenter implements Presenter{
     private final MyClimateServiceAsync rpcService;
     private final HandlerManager eventBus;
     private final Display display;
+
+    //lists fetched by RPC from server side MyClimateServiceImpl
+    private List<String> dates;
 
 
     /**
@@ -84,9 +99,11 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("TablePresenter:init()");
 
+        //dropdown
+        display.setInitDates();
 
         //rpc request is called
-        rpcService_getCitiesAverageTemperatureList();
+        rpcService_getCitiesAverageTemperatureList("2012");
     }
 
 
@@ -98,19 +115,16 @@ public class MapPresenter implements Presenter{
      * @param
      * @return
      */
-    void rpcService_getCitiesAverageTemperatureList(){
+    void rpcService_getCitiesAverageTemperatureList(final String currentYear){
 
         //Information for Developer
         GWT.log("MapPresenter:getCitiesAverageTemperatureList()");
-
-        //ToDo: get the selected Area from Slider Widget
-        String currentYear = "2008"; //display.getSelectedArea();
 
         rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
             public void onSuccess(ArrayList<ArrayList<String>> result) {
 
                 //method from display interface, implemented in TableContentsView
-                display.loadGeoMap(result);
+                display.loadGeoMap(result, currentYear);
 
             }
             public void onFailure(Throwable caught) {
@@ -156,13 +170,16 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("MapPresenter:bind()");
 
+
+
         //on click
         display.getLoadMapButton().addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                rpcService_getCitiesAverageTemperatureList();
+
+                final String currentYear=display.getSelectedDate();
+                rpcService_getCitiesAverageTemperatureList(currentYear);
             }
         });
-
 
 
     }
