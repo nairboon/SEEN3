@@ -278,7 +278,6 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
     public ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String year) {
 
         //return data structure
-        ArrayList <String> cityAverageTemperatureList = new ArrayList<String>();
         ArrayList<ArrayList <String>> citiesAverageTemperatureList = new ArrayList<ArrayList<String>>();
 
         //cities in a list: used to iterate through
@@ -326,6 +325,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
             }
 
             //fill the inner data structure
+            ArrayList <String> cityAverageTemperatureList = new ArrayList<String>();
             cityAverageTemperatureList.add(city);
             averageYearlyTemperature=averageYearlyTemperature/counter;
             String averageYearlyTemperatureString = String.valueOf(averageYearlyTemperature);

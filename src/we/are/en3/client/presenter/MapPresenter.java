@@ -9,11 +9,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.gwt.charts.client.ChartLoader;
-import com.googlecode.gwt.charts.client.ChartPackage;
-import com.googlecode.gwt.charts.client.ColumnType;
-import com.googlecode.gwt.charts.client.DataTable;
-import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import we.are.en3.client.MyClimateServiceAsync;
 
 import java.util.ArrayList;
@@ -41,19 +36,17 @@ public class MapPresenter implements Presenter{
         HasClickHandlers getLoadMapButton();
 
         //shows map.
-        public void showMap(ArrayList<ArrayList<String>> dataArray);
+        public void loadGeoMap(ArrayList<ArrayList<String>> dataArray);
 
         //Returns View as Widget
         Widget asWidget();
 
-        void updateVisualization(GeoChart geoChart, DataTable dataTable);
 
         //ToDo: Needed? Returns the Content Panel with Map
         //Widget getMapView();
 
         //ToDo: Needed? Returns the cellTable.
         //HasData getMapDisplay();
-
 
     }
 
@@ -62,9 +55,6 @@ public class MapPresenter implements Presenter{
     private final MyClimateServiceAsync rpcService;
     private final HandlerManager eventBus;
     private final Display display;
-
-    //GeoChart
-    private GeoChart geoChart;
 
 
     /**
@@ -94,6 +84,7 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("TablePresenter:init()");
 
+
         //rpc request is called
         rpcService_getCitiesAverageTemperatureList();
     }
@@ -112,19 +103,14 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("MapPresenter:getCitiesAverageTemperatureList()");
 
-        //lists fetched by RPC from server side MyClimateServiceImpl
-        //ArrayList <ArrayList <String>> dataArray = new ArrayList <ArrayList <String>>();
-
         //ToDo: get the selected Area from Slider Widget
         String currentYear = "2008"; //display.getSelectedArea();
 
         rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
             public void onSuccess(ArrayList<ArrayList<String>> result) {
 
-                //dataArray = result;
-
                 //method from display interface, implemented in TableContentsView
-                loadGeoMap(result);
+                display.loadGeoMap(result);
 
             }
             public void onFailure(Throwable caught) {
@@ -133,67 +119,6 @@ public class MapPresenter implements Presenter{
         });
 
     }
-
-
-    /**
-     Draws the initial visualization of the map
-     @pre nothing
-     @post nothing
-     @param
-     **/
-    public void loadGeoMap(final ArrayList<ArrayList<String>> dataArray) {
-        //Information for Developer
-        GWT.log("MapPresenter:loadGeoMap()");
-
-        ChartLoader chartLoader = new ChartLoader(ChartPackage.GEOCHART);
-        chartLoader.loadApi(new Runnable() {
-
-
-            public void run() {
-                // Create and attach the map to the panel
-                geoChart = new GeoChart();
-                //prepare dataTable data structure
-                DataTable dataTable = prepareDataTable(dataArray);
-                display.updateVisualization(geoChart, dataTable);
-            }
-        });
-
-    }
-
-    /**
-     * ToDo: What is this code doing
-     * @pre
-     * @post
-     * @param
-     * @return
-     */
-    public DataTable prepareDataTable(ArrayList<ArrayList<String>> dataArray){
-
-        //Information for Developer
-        GWT.log("MapPresenter:prepareDataTable()");
-
-        // Prepare the data table
-        DataTable dataTable = DataTable.create();
-
-        dataTable.addColumn(ColumnType.STRING, "City");
-        dataTable.addColumn(ColumnType.STRING, "Label");
-
-        //fill dataTable
-        dataTable.addRows(dataArray.size());
-        int iter=0;
-        for (ArrayList<String> city_Temp : dataArray) {
-            //city
-            dataTable.setValue(iter, 0, city_Temp.get(0));
-            //label
-            String label = city_Temp.get(0) + "(" + city_Temp.get(1) + ")";
-            dataTable.setValue(iter, 1, label);
-            dataTable.setValue(iter,1,"Test");
-            iter++;
-        }
-
-        return dataTable;
-    }
-
 
     /**
      * ToDo: What is this code doing
@@ -213,9 +138,6 @@ public class MapPresenter implements Presenter{
         //clears body-tag of Html-Host-file
         container.clear();
 
-        //
-        //init();
-
         //adds MapContentsView to the MapContentsPanel
         container.add(display.asWidget());
 
@@ -223,8 +145,7 @@ public class MapPresenter implements Presenter{
     }
 
     /**
-     * This method adds a clickEvent to the Button
-     * to call method rpcService_getCitiesAverageTemperatureList()
+     * ToDo
      *
      * @pre
      * @post
@@ -233,9 +154,9 @@ public class MapPresenter implements Presenter{
      */
     public void bind() {
         //Information for Developer
-        GWT.log("TablePresenter:bind()");
+        GWT.log("MapPresenter:bind()");
 
-        //on click of LoadTable-Button method fetchTable() is called
+        //on click
         display.getLoadMapButton().addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 rpcService_getCitiesAverageTemperatureList();

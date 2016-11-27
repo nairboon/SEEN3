@@ -26,7 +26,7 @@ public class ContentsView extends Composite {
 
     //Map Tab Panel
 	MapContentsView mapContentsView = new MapContentsView();
-	public VerticalPanel mapContentsPanel = new VerticalPanel();
+	public ScrollPanel mapContentsPanel = new ScrollPanel();
 
     //Chart Tab Panel
 	public ChartContentsView chartContentsView = new ChartContentsView();
