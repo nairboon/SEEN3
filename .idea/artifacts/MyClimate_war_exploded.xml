@@ -17,6 +17,7 @@
         </element>
       </element>
       <element id="gwt-compiler-output" facet="MyClimate/gwt/GWT" />
+      <element id="library" level="project" name="gwt-charts-0.9.11-SNAPSHOT" />
     </root>
   </artifact>
 </component>

@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="gwt-slider-bar-1.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../jars_and_zips/gwt-slider-bar-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gwt-slider-bar-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../jars_and_zips/gwt-slider-bar-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gwt-slider-bar-1.0.jar!/" />
     </SOURCES>
   </library>
 </component>
