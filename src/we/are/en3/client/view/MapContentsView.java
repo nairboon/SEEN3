@@ -163,7 +163,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		// Set options
 		GeoChartOptions options = GeoChartOptions.create();
 		options.setDatalessRegionColor("OliveDrab");
-		geoChart.setPixelSize(650,320);
+		geoChart.setPixelSize(1140,550); //was 650,320
 		options.setDisplayMode(DisplayMode.findByName("markers"));
 
 		//bottom: Map
