@@ -9,8 +9,14 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import we.are.en3.client.MyClimateServiceAsync;
+
+import we.are.en3.client.widget.slider.SliderEvent;
+import we.are.en3.client.widget.slider.SliderListener;
+import we.are.en3.client.widget.slider.Slider;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +29,7 @@ import java.util.List;
  * @version 0.02
  *
  */
-public class MapPresenter implements Presenter{
+public class MapPresenter implements Presenter {
 
     /**
      * The class MapContentsView implements this interface Display.
@@ -34,24 +40,16 @@ public class MapPresenter implements Presenter{
      */
     public interface Display {
 
-        //returns the slider from MapContentsView
-        HasClickHandlers getLoadMapButton();
-
-        //returns the TextBoxes from TableContentsView
-        HasChangeHandlers getDateListBox();
-
-        //get the country, city, dateFrom or dateTo respectively
-        // which are selected in TextBoxes
-        String getSelectedDate();
-
-        //Fills the dropdown lists of the filter panel.
-        void setInitDates();
 
         //shows map.
         public void loadGeoMap(ArrayList<ArrayList<String>> dataArray, String currentYear);
 
         //Returns View as Widget
         Widget asWidget();
+
+        Slider getYearSlider();
+
+        Label getYearText();
 
 
         //ToDo: Needed? Returns the Content Panel with Map
@@ -99,8 +97,6 @@ public class MapPresenter implements Presenter{
         //Information for Developer
         GWT.log("TablePresenter:init()");
 
-        //dropdown
-        display.setInitDates();
 
         //rpc request is called
         rpcService_getCitiesAverageTemperatureList("2012");
@@ -171,13 +167,32 @@ public class MapPresenter implements Presenter{
         GWT.log("MapPresenter:bind()");
 
 
+        //This is needed for the slider
+        //Here are the reactions on a sliderevent implemented.
+        display.getYearSlider().addListener(new SliderListener(){
+            @Override
+            public void onStart(SliderEvent e) {
 
-        //on click
-        display.getLoadMapButton().addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
+            }
 
-                final String currentYear=display.getSelectedDate();
+            @Override
+            public boolean onSlide(SliderEvent e)
+            {
+
+                return true;
+            }
+
+            @Override
+            public void onChange(SliderEvent e) {
+                int year = e.getValues()[0];
+                display.getYearText().setText(String.valueOf(year));
+                final String currentYear = String.valueOf(year);
                 rpcService_getCitiesAverageTemperatureList(currentYear);
+            }
+
+            @Override
+            public void onStop(SliderEvent e) {
+
             }
         });
 
@@ -185,3 +200,4 @@ public class MapPresenter implements Presenter{
     }
 
 }
+

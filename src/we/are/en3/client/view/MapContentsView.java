@@ -13,6 +13,10 @@ import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 import com.googlecode.gwt.charts.client.options.DisplayMode;
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import we.are.en3.client.presenter.MapPresenter;
+import we.are.en3.client.widget.slider.Slider;
+
+
+
 
 import java.util.ArrayList;
 
@@ -41,12 +45,14 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	VerticalPanel vMapPanel = new VerticalPanel();
 
 
+
 	//ToDo: decide if needed
 	ListBox dateDB = new ListBox();
 	Button loadMapButton = new Button("Load Map");
 
-	SliderBarSimpleHorizontal slider = new SliderBarSimpleHorizontal(20, "200px", true);
+	private Slider yearSlider;
 
+	private Label yearText;
 
 	/**
 	 * Constructor: Sets up the Map Tab's panels, filtering widgets and static elements
@@ -70,17 +76,23 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		hSliderPanel.setHeight("5vh");
 		hSliderPanel.setWidth("40vw");
 
-		hSliderPanel.add(slider);
+
 		vPanel.add(hSliderPanel);
 
-		hSelectionPanel.setHeight("10vh");
 
-		hSelectionPanel.add(dateDB);
+		//New Slider
+		FlowPanel sliderWrapper = new FlowPanel();
+		sliderWrapper.getElement().setId("sliderwrapper");
+		int defaultYear = 2012;
+		yearSlider = new Slider("slider", 1743,2013,defaultYear);
 
-		hSelectionPanel.add(new HTML("<div>==>></div>"));
-		hSelectionPanel.add(loadMapButton);
 
-		vPanel.add(hSelectionPanel);
+		yearText = new Label();
+		yearText.setText(String.valueOf(defaultYear));
+		sliderWrapper.add(yearText);
+		sliderWrapper.add(yearSlider);
+
+		hSliderPanel.add(sliderWrapper);
 
 	}
 
@@ -171,80 +183,11 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 	}
 
-	/**
-	 * returns the button
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public HasClickHandlers getLoadMapButton() {
-		//Information for Developer
-		GWT.log("MapContentsView: getLoadMapButton()");
-
-		return loadMapButton;
-
-	}
+	public Label getYearText() { return this.yearText; }
+	public Slider getYearSlider() { return this.yearSlider; }
 
 
-	/**
-	 * returns the dateFrom TextBox
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public HasChangeHandlers getDateListBox() {
-		//Information for Developer
-		GWT.log("MapContentsView: getDateTextBox()");
 
-		return  dateDB;
-	}
-
-
-	/**
-	 * This method is filling the TextBox's dateTo dropdown lists in the filter panel.
-	 * It is called from class TablePresenter.
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public void setInitDates() {
-		//Information for Developer
-		GWT.log("TableContentsView: setInitDatesTo()");
-
-		dateDB.clear();
-
-		int min=1750;
-		int max=2013;
-
-		for (int i = min; i < max; ++i) {
-			dateDB.addItem(String.valueOf(i));
-		}
-
-		dateDB.setSelectedIndex(max-min-1);
-
-	}
-
-	/**
-	 * ToDo
-	 *
-	 * @pre
-	 * @post
-	 * @param
-	 * @return
-	 */
-	@Override
-	public String getSelectedDate() {
-		return dateDB.getSelectedItemText();
-	}
 
 
 	/**
