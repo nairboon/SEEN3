@@ -122,6 +122,7 @@ public class MapPresenter implements Presenter {
                 //method from display interface, implemented in TableContentsView
                 display.loadGeoMap(result, currentYear);
 
+
             }
             public void onFailure(Throwable caught) {
                 Window.alert("Error fetching contact details");

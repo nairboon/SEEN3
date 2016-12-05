@@ -179,6 +179,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		options.setDisplayMode(DisplayMode.findByName("markers"));
 
 		//bottom: Map
+
 		geoChart.draw(dataTable, options);
 
 	}

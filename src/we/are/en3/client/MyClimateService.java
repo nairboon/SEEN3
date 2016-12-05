@@ -95,6 +95,11 @@ public interface MyClimateService extends RemoteService {
      * Utility/Convenience class.
      * Use MyClimateService.App.getInstance() to access static instance of MyClimateServiceAsync
      */
+
+
+    ArrayList<ArrayList<String>> getCitiesAverageTempPerYearList(ArrayList<String> cities, String startYear, String endYear);
+
+
     public static class App {
 
         /**

@@ -2,8 +2,12 @@ package we.are.en3.client.presenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import we.are.en3.client.MyClimateServiceAsync;
+
+import java.util.ArrayList;
 
 /**
  * This class handles the data flow
@@ -24,6 +28,8 @@ public class ChartPresenter implements Presenter{
      */
     public interface Display {
 
+        void initialize(ArrayList<ArrayList<String>> dataArray);
+
 
     }
 
@@ -42,6 +48,26 @@ public class ChartPresenter implements Presenter{
         this.display = view;
         //init();
 
+
+    }
+
+    void rpcService_getCitiesAverageTempPerYearList(ArrayList<String> cities, String startYear, String endYear){
+
+        //Information for Developer
+        GWT.log("MapPresenter:getCitiesAverageTempPerYearList()");
+
+        rpcService.getCitiesAverageTempPerYearList(cities, startYear, endYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
+            public void onSuccess(ArrayList<ArrayList<String>> result) {
+
+                //method from display interface, implemented in TableContentsView
+                display.initialize(result);
+
+
+            }
+            public void onFailure(Throwable caught) {
+                Window.alert("Error fetching contact details");
+            }
+        });
 
     }
 
