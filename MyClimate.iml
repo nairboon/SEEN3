@@ -56,5 +56,8 @@
     <orderEntry type="library" name="gwt-charts-0.9.9" level="project" />
     <orderEntry type="library" name="gwt-visualization" level="project" />
     <orderEntry type="library" name="gwt-charts-0.9.11-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="gwt-servlet-1.7.0" level="project" />
+    <orderEntry type="library" name="gwt-user-1.7.1" level="project" />
+    <orderEntry type="library" name="jquery-2.2.4" level="application" />
   </component>
 </module>

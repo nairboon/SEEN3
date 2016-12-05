@@ -12,6 +12,7 @@
     <inherits name="com.google.gwt.visualization.Visualization"/>
     <inherits name="com.kiouri.sliderbar.SliderBarMVP"/>
     <inherits name="com.googlecode.gwt.charts.Charts"/>
+    <inherits name="com.google.gwt.json.JSON"/>
 
     <!-- Specify the app servlets.                   -->
     <servlet path='/MyClimateService' class='we.are.en3.server.MyClimateServiceImpl'/>
