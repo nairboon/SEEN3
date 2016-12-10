@@ -42,7 +42,11 @@ public class MapPresenter implements Presenter {
 
 
         //shows map.
-        public void loadGeoMap(ArrayList<ArrayList<String>> dataArray, String currentYear);
+        // void loadGeoMap(ArrayList<ArrayList<String>> dataArray, String currentYear);
+
+        // void loadGeoChart(final Runnable done);
+
+        void updateMap(final ArrayList<ArrayList<String>> inp, String currentYear);
 
         //Returns View as Widget
         Widget asWidget();
@@ -65,6 +69,7 @@ public class MapPresenter implements Presenter {
     private final MyClimateServiceAsync rpcService;
     private final HandlerManager eventBus;
     private final Display display;
+
 
     //lists fetched by RPC from server side MyClimateServiceImpl
     private List<String> dates;
@@ -99,7 +104,7 @@ public class MapPresenter implements Presenter {
 
 
         //rpc request is called
-        rpcService_getCitiesAverageTemperatureList("2012");
+        updateMap("2012");
     }
 
 
@@ -111,6 +116,24 @@ public class MapPresenter implements Presenter {
      * @param
      * @return
      */
+
+
+    private void updateMap(final String currentYear) {
+
+        rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
+            public void onSuccess(ArrayList<ArrayList<String>> result) {
+                GWT.log(result.toString());
+                display.updateMap(result,currentYear);
+            }
+            public void onFailure(Throwable caught) {
+                Window.alert("Error fetching contact details");
+            }
+        });
+
+    }
+
+    /**
+    // Rolands ursprüngliche Methode !!! Sollte noch aufgeräumt werden
     void rpcService_getCitiesAverageTemperatureList(final String currentYear){
 
         //Information for Developer
@@ -130,6 +153,9 @@ public class MapPresenter implements Presenter {
         });
 
     }
+**/
+
+
 
     /**
      * ToDo: What is this code doing
@@ -188,7 +214,7 @@ public class MapPresenter implements Presenter {
                 int year = e.getValues()[0];
                 display.getYearText().setText(String.valueOf(year));
                 final String currentYear = String.valueOf(year);
-                rpcService_getCitiesAverageTemperatureList(currentYear);
+                updateMap(currentYear);
             }
 
             @Override

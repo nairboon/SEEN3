@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="gwt-charts-0.9.11-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/gwt-charts-0.9.11-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/gwt-charts-0.9.11-SNAPSHOT.jar!/" />
+    </SOURCES>
+  </library>
+</component>

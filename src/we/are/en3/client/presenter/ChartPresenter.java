@@ -50,7 +50,7 @@ public class ChartPresenter implements Presenter{
 
 
     }
-
+    /**
     void rpcService_getCitiesAverageTempPerYearList(ArrayList<String> cities, String startYear, String endYear){
 
         //Information for Developer
@@ -70,6 +70,8 @@ public class ChartPresenter implements Presenter{
         });
 
     }
+
+     **/
 
     /**
      * ToDo: What is this code doing

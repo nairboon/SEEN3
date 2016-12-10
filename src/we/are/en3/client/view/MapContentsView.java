@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.*;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
@@ -13,6 +14,9 @@ import com.googlecode.gwt.charts.client.geochart.GeoChartOptions;
 import com.googlecode.gwt.charts.client.options.DisplayMode;
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import we.are.en3.client.presenter.MapPresenter;
+import we.are.en3.client.util.GeoChartLoader;
+import we.are.en3.client.util.OurGeoChartOptions;
+import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import we.are.en3.client.widget.slider.Slider;
 
 
@@ -30,6 +34,11 @@ import java.util.ArrayList;
  *
  */
 public class MapContentsView extends Composite implements MapPresenter.Display{
+
+	private GeoChart geoChart;
+	private boolean geoChartIsLoaded = false;
+
+	OurGeoChartOptions mapOptions = null;
 
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
@@ -94,6 +103,14 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 		hSliderPanel.add(sliderWrapper);
 
+		mapOptions = OurGeoChartOptions.create();
+		mapOptions.setDisplayMode("markers");
+		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
+		//geoChartColorAxis.setColors(["green", "yellow", "red"]);
+		mapOptions.setColorAxis(geoChartColorAxis);
+		mapOptions.setDatalessRegionColor("gray");
+
+
 	}
 
 	/**
@@ -102,6 +119,24 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 @post nothing
 	 @param
 	 **/
+//	AIzaSyAoi_p3fThssrmv_xkdy5v2B5D6J5FsSR4
+
+	private void loadGeoChart(final Runnable done) {
+		GeoChartLoader gcloader = new GeoChartLoader("AIzaSyC5bRUsAWLBxt-xnJriy7uVXTsLikTmGGQ");
+
+		gcloader.load(new Runnable() {
+			@Override
+			public void run() {
+				GWT.log("api loaded");
+				// Create and attach the chart
+				geoChart = new GeoChart();
+				vPanel.add(geoChart);
+				geoChartIsLoaded = true;
+				done.run();
+			}
+		});
+	}
+	/**
 	public void loadGeoMap(final ArrayList<ArrayList<String>> dataArray, final String currentYear) {
 		//Information for Developer
 		GWT.log("MapPresenter:loadGeoMap()");
@@ -125,7 +160,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		});
 
 	}
-
+**/
 	/**
 	 * ToDo: What is this code doing
 	 * @pre
@@ -168,6 +203,21 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 @post nothing
 	 @param  geoChart todo
 	 **/
+
+	public void updateMap(final ArrayList<ArrayList<String>> inp, final String currentYear) {
+
+		if(geoChartIsLoaded) {
+			drawMap(prepareDataTable(inp,currentYear));
+		} else {
+			loadGeoChart(new Runnable() {
+				@Override
+				public void run() {
+					drawMap(prepareDataTable(inp,currentYear));
+				}
+			});
+		}
+	}
+/**
 	public void updateVisualization(GeoChart geoChart, DataTable dataTable) {
 		//Information for Developer
 		GWT.log("MapContentsView:updateVisualization()");
@@ -183,10 +233,10 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		geoChart.draw(dataTable, options);
 
 	}
+ **/
 
 	public Label getYearText() { return this.yearText; }
 	public Slider getYearSlider() { return this.yearSlider; }
-
 
 
 
@@ -219,6 +269,11 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		return this;
 	}
 
+	private void drawMap(DataTable tbl) {
+		GWT.log("drawMap");
+		geoChart.draw(tbl, mapOptions);
+		GWT.log("drawMap:done");
+	}
 
 
 }

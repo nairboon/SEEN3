@@ -29,18 +29,54 @@ public class ChartContentsView extends Composite implements ChartPresenter.Displ
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
+	 public void initialize(ArrayList<ArrayList<String>> dataArray) {
+	 ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
+	 chartLoader.loadApi(new Runnable() {
+
+	@Override
+	public void run() {
+	// Create and attach the chart
+	lineChart = new LineChart();
+	vchartPanel.add(lineChart);
+	// draw(dataArray);
+	}
+	});
+	 }
+
+
+	private void draw(final ArrayList<ArrayList<String>> dataArray) {
+
+		DataTable dataTable = this.prepareDataTable(dataArray);
+
+		// Set options
+		LineChartOptions options = LineChartOptions.create();
+		options.setBackgroundColor("#f0f0f0");
+		options.setFontName("Tahoma");
+		options.setTitle("Yearly Coffee Consumption by Country");
+		options.setHAxis(HAxis.create("Year"));
+		options.setVAxis(VAxis.create("Cups"));
+
+
+		// Draw the chart
+		lineChart.draw(dataTable, options);
+
+	}
+
+
+
+
 	//Filter Panel
 	FlowPanel selectionPanel = new FlowPanel();
 	ListBox countryDB = new ListBox();
 	ListBox cityDB = new ListBox();
+
 	Button loadChartButton = new Button("Load Chart");
 
 	//Content Panel
 	VerticalPanel vchartPanel = new VerticalPanel();
 
+
 	LineChart lineChart;
-
-
 	/**
 	 * Constructor: Sets up the Chart Tab's panels, filtering widgets and static elements
 	 *
@@ -72,38 +108,6 @@ public class ChartContentsView extends Composite implements ChartPresenter.Displ
 
 
 
-
-	}
-
-	public void initialize(ArrayList<ArrayList<String>> dataArray) {
-		ChartLoader chartLoader = new ChartLoader(ChartPackage.CORECHART);
-		chartLoader.loadApi(new Runnable() {
-
-			@Override
-			public void run() {
-				// Create and attach the chart
-				lineChart = new LineChart();
-				vchartPanel.add(lineChart);
-				draw(dataArray);
-			}
-		});
-	}
-
-	private void draw(ArrayList<ArrayList<String>> dataArray) {
-
-		DataTable dataTable = this.prepareDataTable(dataArray);
-
-		// Set options
-		LineChartOptions options = LineChartOptions.create();
-		options.setBackgroundColor("#f0f0f0");
-		options.setFontName("Tahoma");
-		options.setTitle("Yearly Coffee Consumption by Country");
-		options.setHAxis(HAxis.create("Year"));
-		options.setVAxis(VAxis.create("Cups"));
-
-
-		// Draw the chart
-		lineChart.draw(dataTable, options);
 
 	}
 
