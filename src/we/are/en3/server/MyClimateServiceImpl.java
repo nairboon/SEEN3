@@ -330,6 +330,10 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
             }
 
+            // only calculate avg if there is actual data, otherwise avg= NaN
+            if(counter == 0)
+                continue;
+
             String latitude = areaArray.get(0).getLatitude();
             String longitude = areaArray.get(0).getLongitude();
             cityAverageTemperatureList.add( DataStore.StrPosToFloatPos(latitude));
