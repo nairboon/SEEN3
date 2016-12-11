@@ -89,7 +89,7 @@ public interface MyClimateService extends RemoteService {
      * @pre
      * @post
      */
-    ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String year);
+    ArrayList<ArrayList> getCitiesAverageTemperatureList(String year);
 
     /**
      * Utility/Convenience class.

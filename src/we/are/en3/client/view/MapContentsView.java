@@ -6,6 +6,7 @@ import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
+import com.googlecode.gwt.charts.client.options.DisplayMode;
 import com.googlecode.gwt.charts.client.util.ArrayHelper;
 import we.are.en3.client.presenter.MapPresenter;
 import we.are.en3.client.util.GeoChartLoader;
@@ -19,6 +20,7 @@ import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 
 */
+import java.awt.peer.ChoicePeer;
 import java.util.ArrayList;
 
 //two possible slider packages
@@ -117,9 +119,11 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 
 		mapOptions = OurGeoChartOptions.create();
-		mapOptions.setDisplayMode("text");
+		//mapOptions.setDisplayMode("markers");
+		mapOptions.setDisplayMode(DisplayMode.findByName("markers"));
+
 		GeoChartColorAxis geoChartColorAxis = GeoChartColorAxis.create();
-		//geoChartColorAxis.setColors(["green", "yellow", "red"]);
+		geoChartColorAxis.setColors("blue", "red");
 		mapOptions.setColorAxis(geoChartColorAxis);
 		mapOptions.setDatalessRegionColor("gray");
 
@@ -159,10 +163,13 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 * @return the inputarray as a Datatable with columns City, Label
 	 */
 
-	public DataTable ArrayToDataTable(ArrayList<ArrayList<String>> input) {
+	public DataTable ArrayToDataTable(ArrayList<ArrayList> input) {
 		DataTable dataTable = DataTable.create();
-		dataTable.addColumn(ColumnType.STRING, "City");
+		dataTable.addColumn(ColumnType.NUMBER, "Lat");
+		dataTable.addColumn(ColumnType.NUMBER, "Long");
+
 		dataTable.addColumn(ColumnType.STRING, "Label");
+		dataTable.addColumn(ColumnType.NUMBER, "Temperature");
 
 
 
@@ -184,7 +191,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	 * @return void
 	 */
 
-    public void updateMap(final ArrayList<ArrayList<String>> inp) {
+    public void updateMap(final ArrayList<ArrayList> inp) {
 
     	if(geoChartisLoaded) {
     		_drawMap(ArrayToDataTable(inp));

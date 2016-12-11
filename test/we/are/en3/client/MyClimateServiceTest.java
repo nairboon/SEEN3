@@ -69,7 +69,7 @@ public class MyClimateServiceTest extends GWTTestCase {
      * @param
      * @return
      */
-
+/*
     public void testgetCitiesAverageTemperatureList() throws Exception {
         MyClimateServiceAsync MyClimateService = GWT.create(MyClimateService.class);
         MyClimateService.getCitiesAverageTemperatureList("2008",
@@ -96,7 +96,7 @@ public class MyClimateServiceTest extends GWTTestCase {
                 });
         delayTestFinish(1000);
 
-    }
+    } */
 
     /**
      * ToDo: What is this code doing

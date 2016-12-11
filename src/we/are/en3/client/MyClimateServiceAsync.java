@@ -87,7 +87,7 @@ public interface MyClimateServiceAsync {
      * @pre
      * @post
      */
-    void getCitiesAverageTemperatureList(String year, AsyncCallback<ArrayList<ArrayList<String>>> async);
+    void getCitiesAverageTemperatureList(String year, AsyncCallback<ArrayList<ArrayList>> async);
 
     void getCitiesAverageTempPerYearList(ArrayList<String> cities, String startYear, String endYear,
                                             AsyncCallback<ArrayList<ArrayList<String>>> async);

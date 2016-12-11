@@ -6,6 +6,7 @@ import we.are.en3.client.model.DataPoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * This class extends a RemoteServiceServlet that implements the MyClimateService interface.
@@ -264,6 +265,8 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         return DataStore.getInstance().areaToYearMap.get(area);
     }
 
+
+
     /**
      * This method returns a list of cities and average temperatures taken from the DataStore
      * for the requested year
@@ -275,10 +278,10 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
      * @return
      */
     @Override
-    public ArrayList<ArrayList<String>> getCitiesAverageTemperatureList(String year) {
+    public ArrayList<ArrayList> getCitiesAverageTemperatureList(String year) {
 
         //return data structure
-        ArrayList<ArrayList <String>> citiesAverageTemperatureList = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList > citiesAverageTemperatureList = new ArrayList<ArrayList>();
 
         //cities in a list: used to iterate through
         ArrayList<String> citiesList = DataStore.getInstance().citySortedList;
@@ -290,7 +293,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         for (String city : citiesList) {
 
             // new inner array for each city, otherwise this grows for each city
-            ArrayList <String> cityAverageTemperatureList = new ArrayList<String>();
+            ArrayList cityAverageTemperatureList = new ArrayList();
 
             //returns an array of data points (one element for each date)
             ArrayList<DataPoint> areaArray = DataStore.getInstance().areaMap.get(city);
@@ -327,11 +330,17 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
 
             }
 
+            String latitude = areaArray.get(0).getLatitude();
+            String longitude = areaArray.get(0).getLongitude();
+            cityAverageTemperatureList.add( DataStore.StrPosToFloatPos(latitude));
+            cityAverageTemperatureList.add( DataStore.StrPosToFloatPos(longitude));
+
             //fill the inner data structure
             cityAverageTemperatureList.add(city);
             averageYearlyTemperature=averageYearlyTemperature/counter;
-            String averageYearlyTemperatureString = String.format("%.2f°C",averageYearlyTemperature);
-            cityAverageTemperatureList.add(averageYearlyTemperatureString);
+            String averageYearlyTemperatureString = String.format("%s: %.2f°C",city, averageYearlyTemperature);
+          //  cityAverageTemperatureList.add(averageYearlyTemperatureString);
+            cityAverageTemperatureList.add(averageYearlyTemperature);
 
             //fill the outer data structure
             citiesAverageTemperatureList.add(cityAverageTemperatureList);

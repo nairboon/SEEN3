@@ -1,6 +1,8 @@
 package we.are.en3.server;
 
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -14,6 +16,21 @@ import java.io.InputStream;
  *
  */
 public class DataStoreTest {
+
+
+
+    @Test
+    public void strPosToFloatPos() throws Exception {
+
+        double r1 = DataStore.StrPosToFloatPos("18.48N");
+
+        double sydnedL = DataStore.StrPosToFloatPos("34.56S");
+        assertEquals(-34.56, sydnedL,0.01);
+
+        assertEquals(18.48, r1,0.01);
+    }
+
+
 
     /**
      * test method loads csv-file and lists JUnit-assert statements
@@ -37,5 +54,6 @@ public class DataStoreTest {
         assertEquals("Côte D'Ivoire", testStore.areaMap.get("Abidjan").get(0).getCountry());
 
     }
+
 
 }

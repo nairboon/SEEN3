@@ -39,7 +39,7 @@ public class MapPresenter implements Presenter {
 
 
 
-        public void updateMap(final ArrayList<ArrayList<String>> inp);
+        public void updateMap(final ArrayList<ArrayList> inp);
 
         //Returns View as Widget
         Widget asWidget();
@@ -113,8 +113,8 @@ public class MapPresenter implements Presenter {
      */
     private void updateMap() {
 
-        rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList<String>>>() {
-            public void onSuccess(ArrayList<ArrayList<String>> result) {
+        rpcService.getCitiesAverageTemperatureList(currentYear, new AsyncCallback<ArrayList<ArrayList>>() {
+            public void onSuccess(ArrayList<ArrayList> result) {
                 GWT.log(result.toString());
                 display.updateMap(result);
             }

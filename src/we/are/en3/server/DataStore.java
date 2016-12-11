@@ -29,6 +29,17 @@ public class DataStore {
     ArrayList<String> countrySortedList;
     HashMap<String,ArrayList<String>> areaToYearMap = new HashMap<String,ArrayList<String>>();
 
+    static public double StrPosToFloatPos(String i) {
+        String number = i.substring(0, i.length()-1);
+        double pos = Double.parseDouble(number);
+        String orientation = i.substring(i.length()-1);
+
+        if(orientation.equals("S") || orientation.equals("W")) {
+            pos *= -1.0d;
+        }
+        return pos;
+    }
+
     /**
      * Method that loads the CSV file from tha app's web folder
      * @pre
