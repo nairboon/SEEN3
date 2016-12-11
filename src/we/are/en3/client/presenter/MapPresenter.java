@@ -6,12 +6,15 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.gwt.charts.client.ColumnType;
-import com.googlecode.gwt.charts.client.DataTable;
 import we.are.en3.client.MyClimateServiceAsync;
+import we.are.en3.client.widget.slider.Slider;
+import we.are.en3.client.widget.slider.SliderEvent;
+import we.are.en3.client.widget.slider.SliderListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class handles the data flow
@@ -21,7 +24,7 @@ import java.util.ArrayList;
  * @version 0.02
  *
  */
-public class MapPresenter implements Presenter{
+public class MapPresenter implements Presenter {
 
     /**
      * The class MapContentsView implements this interface Display.
@@ -33,13 +36,18 @@ public class MapPresenter implements Presenter{
     public interface Display {
 
         //returns the slider from MapContentsView
-       // HasClickHandlers getLoadMapButton();
+
 
 
         public void updateMap(final ArrayList<ArrayList<String>> inp);
 
         //Returns View as Widget
         Widget asWidget();
+
+        Slider getYearSlider();
+
+       Label getYearText();
+
 
         //ToDo: Needed? Returns the Content Panel with Map
         //Widget getMapView();
@@ -56,6 +64,8 @@ public class MapPresenter implements Presenter{
     private final HandlerManager eventBus;
     private final Display display;
 
+    //lists fetched by RPC from server side MyClimateServiceImpl
+    private List<String> dates;
 
 
     private String currentYear;
@@ -64,15 +74,15 @@ public class MapPresenter implements Presenter{
      * Constructor: sets instance variables rpcService, eventBus and view
      * and calls init()
      */
-    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, Display view){
+    public MapPresenter(MyClimateServiceAsync rpcService, HandlerManager eventBus, MapPresenter.Display view){
         //Information for Developer
         GWT.log("MapPresenter: MapPresenter()");
 
         this.rpcService = rpcService;
         this.eventBus = eventBus;
         this.display = view;
-
         init();
+
     }
 
     /**
@@ -91,6 +101,7 @@ public class MapPresenter implements Presenter{
         this.currentYear = "2000";
         updateMap();
     }
+
 
     /**
      * Updates the map in the view for the currently selected year
@@ -136,6 +147,7 @@ public class MapPresenter implements Presenter{
         //adds MapContentsView to the MapContentsPanel
         container.add(display.asWidget());
 
+
     }
 
     /**
@@ -149,15 +161,40 @@ public class MapPresenter implements Presenter{
      */
     public void bind() {
         //Information for Developer
-        GWT.log("TablePresenter:bind()");
+        GWT.log("MapPresenter:bind()");
 
-        //on click of LoadTable-Button method fetchTable() is called
-       /* display.getLoadMapButton().addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                rpcService_getCitiesAverageTemperatureList();
+
+
+        //This is needed for the slider
+        //Here are the reactions on a sliderevent implemented.
+        display.getYearSlider().addListener(new SliderListener(){
+
+            @Override
+            public void onStart(SliderEvent e) {
+
+            }
+
+            @Override
+            public boolean onSlide(SliderEvent e)
+            {
+
+                return true;
+            }
+
+            @Override
+            public void onChange(SliderEvent e) {
+                int year = e.getValues()[0];
+                display.getYearText().setText(String.valueOf(year));
+                MapPresenter.this.currentYear = String.valueOf(year);
+                updateMap();
+            }
+
+            @Override
+            public void onStop(SliderEvent e) {
+
             }
         });
-        */
+
 
 
     }

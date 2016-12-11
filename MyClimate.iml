@@ -31,17 +31,16 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/sdk" />
     </content>
-    <orderEntry type="jdk" jdkName="1.8 (1)" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="AppEngine Dev 1.9.42" level="application_server_libraries" />
-    <orderEntry type="library" name="gwt-user" level="project" />
     <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
@@ -52,8 +51,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gwt-slider-bar-1.0" level="project" />
-    <orderEntry type="library" name="gwt-charts-0.9.9" level="project" />
-    <orderEntry type="library" name="gwt-visualization" level="project" />
+    <orderEntry type="library" name="gwt-servlet-1.7.0" level="project" />
+    <orderEntry type="library" name="gwt-charts" level="project" />
+    <orderEntry type="library" name="gwt-user" level="project" />
   </component>
 </module>

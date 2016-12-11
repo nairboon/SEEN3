@@ -6,9 +6,12 @@ import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.geochart.GeoChart;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
+import com.googlecode.gwt.charts.client.util.ArrayHelper;
 import we.are.en3.client.presenter.MapPresenter;
 import we.are.en3.client.util.GeoChartLoader;
 import we.are.en3.client.util.OurGeoChartOptions;
+import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
+import we.are.en3.client.widget.slider.Slider;
 
 /*
 import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
@@ -43,17 +46,25 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	//Main Panel
 	VerticalPanel vPanel = new VerticalPanel();
 
+	//TextPanel
+	VerticalPanel vTextPanel = new VerticalPanel();
+
 	//Filter Panel with slider
-	FlowPanel selectionPanel = new FlowPanel();
+	HorizontalPanel hSliderPanel = new HorizontalPanel();
+	HorizontalPanel hSelectionPanel = new HorizontalPanel();
 
-	//ToDo: Choose a Slider Type (Whatever works best)
-	//SliderBarHorizontal slider = new SliderBarHorizontal();
-	//OR
-	//SliderBar slider = new SliderBar(1750,2016);
+	//Map Panel
+	VerticalPanel vMapPanel = new VerticalPanel();
 
-	//Content Panel
-	VerticalPanel vchartPanel = new VerticalPanel();
-	ScrollPanel scrollPanel = new ScrollPanel();
+
+
+	//ToDo: decide if needed
+	ListBox dateDB = new ListBox();
+	Button loadMapButton = new Button("Load Map");
+
+	private Slider yearSlider;
+
+	private Label yearText;
 
 	/**
 	 * Constructor: Sets up the Map Tab's panels, filtering widgets and static elements
@@ -65,6 +76,44 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 		//Initialize parent widget to be wrapped
 		initWidget(this.vPanel);
+
+		//Top: Titel
+		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:10px;'>" +
+				"This Site shows a world Map with Temparature for your prefered date. </div>" );
+
+		vTextPanel.add(text);
+		vTextPanel.setHeight("5vh");
+
+
+
+		//Set size constraints
+		hSliderPanel.setHeight("5vh");
+		hSliderPanel.setWidth("40vw");
+
+
+
+
+
+
+		//New Slider
+		FlowPanel sliderWrapper = new FlowPanel();
+		sliderWrapper.getElement().setId("sliderwrapper");
+		int defaultYear = 2012;
+		yearSlider = new Slider("slider", 1743,2013,defaultYear);
+
+
+
+		yearText = new Label();
+		yearText.setText(String.valueOf(defaultYear));
+		sliderWrapper.add(yearText);
+		sliderWrapper.add(yearSlider);
+
+		hSliderPanel.add(sliderWrapper);
+
+		vPanel.add(vTextPanel);
+
+		vPanel.add(hSliderPanel);
+
 
 
 		mapOptions = OurGeoChartOptions.create();
@@ -116,6 +165,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		dataTable.addColumn(ColumnType.STRING, "Label");
 
 
+
 		for(ArrayList<String> city : input) {
 			GWT.log("add:" + city.toString());
 			dataTable.addRow(city.toArray());
@@ -147,6 +197,9 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 			});
 		}
 	}
+
+	public Label getYearText() { return this.yearText; }
+	public Slider getYearSlider() { return this.yearSlider; }
 
 	/**
 	 * Actually draws the map
