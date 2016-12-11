@@ -29,6 +29,10 @@ public class DataStore {
     ArrayList<String> countrySortedList;
     HashMap<String,ArrayList<String>> areaToYearMap = new HashMap<String,ArrayList<String>>();
 
+
+    /**
+     * Converts lat/longs from the format in the csv: 7.23S to the one geochart expects: -7.23
+     */
     static public double StrPosToFloatPos(String i) {
         String number = i.substring(0, i.length()-1);
         double pos = Double.parseDouble(number);

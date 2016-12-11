@@ -1,7 +1,6 @@
 package we.are.en3.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -35,11 +34,8 @@ public class MapPresenter implements Presenter {
      */
     public interface Display {
 
-        //returns the slider from MapContentsView
 
-
-
-        public void updateMap(final ArrayList<ArrayList> inp);
+        void updateMap(final ArrayList<ArrayList> inp);
 
         //Returns View as Widget
         Widget asWidget();

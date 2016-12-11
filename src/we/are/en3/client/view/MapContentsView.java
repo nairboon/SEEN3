@@ -13,22 +13,7 @@ import we.are.en3.client.util.GeoChartLoader;
 import we.are.en3.client.util.OurGeoChartOptions;
 import com.googlecode.gwt.charts.client.geochart.GeoChartColorAxis;
 import we.are.en3.client.widget.slider.Slider;
-
-/*
-import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
-import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
-import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
-
-*/
-import java.awt.peer.ChoicePeer;
 import java.util.ArrayList;
-
-//two possible slider packages
-//import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
-//import com.google.gwt.widgetideas.client.SliderBar;
-
-//a possible map package
-//import com.google.gwt.visualization.client.visualizations.GeoMap;
 
 /**
  * This class has the GUI Elements (Widgets)
