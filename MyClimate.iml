@@ -27,7 +27,7 @@
     </facet>
     <facet type="google-app-engine" name="Google App Engine">
       <configuration>
-        <sdk-home-path>$MODULE_DIR$/../jars_and_zips/appengine-java-sdk-1.9.46</sdk-home-path>
+        <sdk-home-path>$MODULE_DIR$/sdk/appengine-java-sdk-1.9.42</sdk-home-path>
       </configuration>
     </facet>
   </component>
@@ -51,8 +51,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gwt-servlet-1.7.0" level="project" />
     <orderEntry type="library" name="gwt-charts" level="project" />
     <orderEntry type="library" name="gwt-user" level="project" />
+    <orderEntry type="library" name="validation-api-1.0.0.GA" level="project" />
   </component>
 </module>
