@@ -238,6 +238,7 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
         //populates cities
         ArrayList<String> areas = new ArrayList<String>(getCityList());
 
+        //areas.add("All");
         //populates countries
         areas.addAll(getCountryList());
 
@@ -415,11 +416,12 @@ public class MyClimateServiceImpl extends RemoteServiceServlet implements MyClim
                 String averageYearlyTemperatureString = String.valueOf(averageYearlyTemperature);
                 cityAverageTempPerYearList.add(averageYearlyTemperatureString);
 
-                //fill the outer data structure
-                citiesAverageTempPerYearList.add(cityAverageTempPerYearList);
+
 
             }
 
+            //fill the outer data structure
+            citiesAverageTempPerYearList.add(cityAverageTempPerYearList);
 
         }
 

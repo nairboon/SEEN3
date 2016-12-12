@@ -169,7 +169,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
                 }
 
                 //execute
-                mapPresenter.go(contentsView.chartContentsPanel);
+                chartPresenter.go(contentsView.chartContentsPanel);
                 //tabPanelView.selectTab(1);
 
                 //
