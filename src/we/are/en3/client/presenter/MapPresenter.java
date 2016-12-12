@@ -94,7 +94,7 @@ public class MapPresenter implements Presenter {
         GWT.log("TablePresenter:init()");
 
         // init map
-        this.currentYear = "2000";
+        this.currentYear = "2013";
         updateMap();
     }
 

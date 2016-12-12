@@ -2,6 +2,7 @@ package we.are.en3.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.Window;
 
 /**
  * This class has the GUI Elements (Widgets)
@@ -42,9 +43,14 @@ public class HomeContentsView extends Composite {
 
 		//Center: Image
 		vPanel.add(scrollPanel);
-		scrollPanel.setHeight("225px");
+
+		int clientWidth = Window.getClientWidth()-10;
+		int clientHeight = Window.getClientHeight()-100;
+		String clientHeightString = String.valueOf(clientHeight)+"px";
+		scrollPanel.setHeight(clientHeightString);
 		Image img = new Image("climate-change.jpg");
-		img.asWidget().setPixelSize(657,220);
+
+		img.asWidget().setPixelSize(clientWidth,clientWidth*220/657);
 		scrollPanel.add(img);
 
 	}

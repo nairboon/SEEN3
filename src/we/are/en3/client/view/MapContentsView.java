@@ -1,6 +1,7 @@
 package we.are.en3.client.view;
 
 import com.google.gwt.core.client.*;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.*;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
@@ -37,7 +38,7 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 	VerticalPanel vTextPanel = new VerticalPanel();
 
 	//Filter Panel with slider
-	HorizontalPanel hSliderPanel = new HorizontalPanel();
+	VerticalPanel hSliderPanel = new VerticalPanel();
 	HorizontalPanel hSelectionPanel = new HorizontalPanel();
 
 	//Map Panel
@@ -62,11 +63,13 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		GWT.log("MapContentsView: MapContentsView()");
 
 		//Initialize parent widget to be wrapped
+		vPanel.setWidth("97%");
+		// vPanel.getElement().getStyle().setMarginLeft(, Style.Unit.PCT);
 		initWidget(this.vPanel);
 
 		//Top: Titel
-		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:10px;'>" +
-				"This Site shows a world Map with Temparature for your prefered date. </div>" );
+		HTML text = new HTML("<div style='color:blue;text-align:justify;padding:0px;'>" +
+				"This site shows a world map with the temperatures for your preferred date. </div>" );
 
 		vTextPanel.add(text);
 		vTextPanel.setHeight("5vh");
@@ -74,8 +77,8 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 
 
 		//Set size constraints
-		hSliderPanel.setHeight("5vh");
-		hSliderPanel.setWidth("40vw");
+		hSliderPanel.setHeight("3vh"); // 5vh
+		hSliderPanel.setWidth("100%"); // 40vw
 
 
 
@@ -85,16 +88,30 @@ public class MapContentsView extends Composite implements MapPresenter.Display{
 		//New Slider
 		FlowPanel sliderWrapper = new FlowPanel();
 		sliderWrapper.getElement().setId("sliderwrapper");
-		int defaultYear = 2012;
+		int defaultYear = 2013;
 		yearSlider = new Slider("slider", 1743,2013,defaultYear);
 
 
-
+		//Label minYearText = new Label("1743");
+		// Label maxYearText = new Label("2013");
+		// minYearText.setWidth("45%");
+		Label currentYearLabel = new Label("current Year:");
 		yearText = new Label();
+		// yearText.setWidth("45%");
+		// maxYearText.setWidth("10%");
+
+		// yearText.getElement().getStyle().setMarginLeft(49, Style.Unit.PCT);
+		// currentYearLabel.getElement().getStyle().setMarginLeft(48, Style.Unit.PCT);
 		yearText.setText(String.valueOf(defaultYear));
-		sliderWrapper.add(yearText);
+
 		sliderWrapper.add(yearSlider);
 
+		// HorizontalPanel yearPanel = new HorizontalPanel();
+		// yearPanel.add(minYearText);
+		// yearPanel.add(yearText);
+		// yearPanel.add(maxYearText);
+		hSliderPanel.add(currentYearLabel);
+		hSliderPanel.add(yearText);
 		hSliderPanel.add(sliderWrapper);
 
 		vPanel.add(vTextPanel);

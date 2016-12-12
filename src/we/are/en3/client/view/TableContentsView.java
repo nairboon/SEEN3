@@ -27,6 +27,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 	//Filter Panel
 	FlowPanel selectionPanel = new FlowPanel();
+	Label cityAndCountry = new Label("Filter for City or Country: ");
 	ListBox areaDB = new ListBox();
 	ListBox countryDB = new ListBox();
 	ListBox cityDB = new ListBox();
@@ -58,6 +59,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 		vPanel.add(scrollPanel);
 
 		//Add filtering elements
+		selectionPanel.add(cityAndCountry);
 		selectionPanel.add(areaDB);
 		//selectionPanel.add(countryDB);
 		//selectionPanel.add(cityDB);
@@ -126,7 +128,7 @@ public class TableContentsView extends Composite implements TablePresenter.Displ
 
 		// Set the range to display. In this case, our visible range is smaller than
 		// the data set. This is a functionality of CellTable<DataPoint> Widget.
-		table.setVisibleRange(0, 10);
+		table.setVisibleRange(0, 24);
 
 		//ToDo: what is this code doing
 		// Add a ColumnSortEvent.AsyncHandler to connect sorting to the
