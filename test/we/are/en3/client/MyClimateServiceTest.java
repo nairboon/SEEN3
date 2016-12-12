@@ -244,4 +244,30 @@ public class MyClimateServiceTest extends GWTTestCase {
 
     }
 
+    public void testGetCitiesAverageTempPerYearList() throws Exception {
+        ArrayList<String> city = new ArrayList<>();
+        city.add("Abidjan");
+        MyClimateServiceAsync MyClimateService = GWT.create(MyClimateService.class);
+        MyClimateService.getCitiesAverageTempPerYearList(city, "2012", "2012",
+            new AsyncCallback<ArrayList<ArrayList<String>> >() {
+                public void onFailure(Throwable caught) {
+                    System.out.println(caught);
+                    fail("failure");
+                    finishTest();
+                }
+
+                public void onSuccess(ArrayList<ArrayList<String>> result) {
+                    System.out.println("success");
+
+                    assertEquals(result.size(), 1);
+                    assertEquals(result.get(0).size(), 2);
+                    assertEquals(result.get(0).get(0), "Abidjan");
+                    assertEquals(result.get(0).get(1), "26.766333333333336");
+                    finishTest();
+                }
+            });
+            delayTestFinish(1000);
+
+    }
+
 }
