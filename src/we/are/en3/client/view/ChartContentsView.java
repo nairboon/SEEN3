@@ -50,7 +50,7 @@ public class ChartContentsView extends Composite implements ChartPresenter.Displ
 
 	LineChart lineChart;
 
-	public int startYear = 1800;
+	public int startYear = 1743;
 	public int endYear = 2013;
 	/**
 	 * Constructor: Sets up the Chart Tab's panels, filtering widgets and static elements
@@ -89,6 +89,7 @@ public class ChartContentsView extends Composite implements ChartPresenter.Displ
 				GWT.log("linechart loaded");
 				// Create and attach the chart
 				lineChart = new LineChart();
+				vchartPanel.clear();
 				vchartPanel.add(lineChart);
 				 draw(dataArray);
 			}
