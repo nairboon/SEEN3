@@ -69,26 +69,27 @@ public class MyClimateServiceTest extends GWTTestCase {
      * @param
      * @return
      */
-/*
     public void testgetCitiesAverageTemperatureList() throws Exception {
         MyClimateServiceAsync MyClimateService = GWT.create(MyClimateService.class);
         MyClimateService.getCitiesAverageTemperatureList("2008",
-                new AsyncCallback<ArrayList<ArrayList<String>>>() {
+                new AsyncCallback<ArrayList<ArrayList>>() {
                     public void onFailure(Throwable caught) {
                         System.out.println(caught);
                         fail("failure");
                         finishTest();
                     }
 
-                    public void onSuccess(ArrayList<ArrayList<String>> result) {
+                    public void onSuccess(ArrayList<ArrayList> result) {
                         System.out.println("success");
 
 
 
                         assertTrue(result.get(0).contains("Abidjan"));
-                        assertEquals("26.94°C",result.get(0).get(1));
+                        assertEquals(-3.23,result.get(0).get(1));
+                        assertEquals("Abidjan",result.get(0).get(2));
+                        assertEquals(26.9445,result.get(0).get(3));
                         assertEquals(100,result.size());
-                        assertEquals(2,result.get(0).size());
+                        assertEquals(4,result.get(0).size());
 
 
                         finishTest();
@@ -96,7 +97,7 @@ public class MyClimateServiceTest extends GWTTestCase {
                 });
         delayTestFinish(1000);
 
-    } */
+    }
 
     /**
      * ToDo: What is this code doing
